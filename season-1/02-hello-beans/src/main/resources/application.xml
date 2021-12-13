@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:annotation-config></context:annotation-config>
+	
+	<bean id="stateDao" 
+		class="com.jdc.spring.locations.model.dao.impl.StateDaoImpl" autowire="byType" >
+		<qualifier value="TestObject"></qualifier>	
+	</bean>
+	
+	<bean id="anotherBean"
+		class="com.jdc.spring.locations.model.dao.impl.StateDaoImpl" autowire="byName" >
+		<qualifier value="ActualObject"></qualifier>
+	</bean>
+
+	<bean id="source" class="com.jdc.spring.locations.model.PropertyDataSourceFactory" 
+		factory-method="getPropsDataSource">
+		<constructor-arg>
+			<props>
+				<prop key="url">jdbc:mysql://localhost:3306/location_db</prop>
+				<prop key="user">root</prop>
+				<prop key="password">admin</prop>
+			</props>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="url" class="java.lang.String" >
+		<constructor-arg value="jdbc:mysql://localhost:3306/location_db"></constructor-arg>
+	</bean>
+		
+
+	
+</beans>
