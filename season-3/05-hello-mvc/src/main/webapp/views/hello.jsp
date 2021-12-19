@@ -15,6 +15,18 @@
 	<p>
 		<c:out value="${message}"></c:out>
 	</p>
+	
+	<ul>
+		<li>
+			<c:url value="/legacy" var="legacyLink"></c:url>
+			<a href="${legacyLink}">Legacy Controller</a>
+		</li>
+		
+		<li>
+			<c:url value="/router-demo" var="routerDemo"></c:url>
+			<a href="${routerDemo}">Router Function</a>
+		</li>
+	</ul>
 
 </body>
 </html>
