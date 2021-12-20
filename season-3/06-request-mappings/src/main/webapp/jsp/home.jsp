@@ -14,5 +14,9 @@
 		<li><a href="multi">Multi Actions</a></li>
 	</ul>
 
+	<ul>
+		<li><a href="inputs">User Input</a></li>
+	</ul>
+
 </body>
 </html>

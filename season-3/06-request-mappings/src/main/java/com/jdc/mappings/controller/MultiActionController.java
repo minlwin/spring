@@ -61,4 +61,5 @@ public class MultiActionController {
 		model.put("message", "Digit");
 		return "multi";
 	}
+	
 }
