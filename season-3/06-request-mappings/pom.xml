@@ -35,6 +35,7 @@
 					<scan>1</scan>
 				</configuration>
 			</plugin>
+
 		</plugins>
 
 	</build>
@@ -56,6 +57,11 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>5.3.13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
