@@ -6,9 +6,20 @@ public class Course {
 
 	private int id;
 	private String name;
-	private String duration;
-	private String level;
-	private String fees;
+	private Level level;
+	private int duration;
+	private int fees;
+
+	public Course(String name, Level level, int duration, int fees) {
+		super();
+		this.name = name;
+		this.level = level;
+		this.duration = duration;
+		this.fees = fees;
+	}
+
+	public Course() {
+	}
 
 	public int getId() {
 		return id;
@@ -26,27 +37,27 @@ public class Course {
 		this.name = name;
 	}
 
-	public String getDuration() {
-		return duration;
-	}
-
-	public void setDuration(String duration) {
-		this.duration = duration;
-	}
-
-	public String getLevel() {
+	public Level getLevel() {
 		return level;
 	}
 
-	public void setLevel(String level) {
+	public void setLevel(Level level) {
 		this.level = level;
 	}
 
-	public String getFees() {
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public int getFees() {
 		return fees;
 	}
 
-	public void setFees(String fees) {
+	public void setFees(int fees) {
 		this.fees = fees;
 	}
 
@@ -64,8 +75,8 @@ public class Course {
 		if (getClass() != obj.getClass())
 			return false;
 		Course other = (Course) obj;
-		return Objects.equals(duration, other.duration) && Objects.equals(fees, other.fees) && id == other.id
-				&& Objects.equals(level, other.level) && Objects.equals(name, other.name);
+		return duration == other.duration && fees == other.fees && id == other.id && level == other.level
+				&& Objects.equals(name, other.name);
 	}
 
 }

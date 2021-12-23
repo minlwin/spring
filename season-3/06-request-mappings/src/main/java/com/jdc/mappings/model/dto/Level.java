@@ -1,4 +1,4 @@
-package com.jdc.mappings.controller;
+package com.jdc.mappings.model.dto;
 
 public enum Level {
 
