@@ -6,5 +6,18 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:component-scan base-package="com.jdc.mappings.model"></context:component-scan>
+	
+	<bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/course_db"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="admin"></property>
+	</bean>
+	
+	<bean name="courseInsert" class="org.springframework.jdbc.core.simple.SimpleJdbcInsert">
+		<constructor-arg ref="dataSource"></constructor-arg>
+		<property name="tableName" value="course"></property>
+		<property name="generatedKeyName" value="id"></property>
+	</bean>
 
 </beans>
