@@ -56,6 +56,16 @@
 						<input id="fees" name="fees" type="number" value="${course.fees}" readonly="readonly" class="form-control" />
 					</div>
 					
+					<div>
+						
+						<c:url value="/course/edit" var="editLink">
+							<c:param name="id" value="${course.id}"></c:param>
+						</c:url>
+						
+						<a href="${editLink}" class="btn btn-danger">Edit Course</a>
+					
+					</div>
+					
 				</form>
 			
 			
