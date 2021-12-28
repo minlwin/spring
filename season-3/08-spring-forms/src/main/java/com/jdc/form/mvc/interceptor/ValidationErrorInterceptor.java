@@ -17,7 +17,7 @@ public class ValidationErrorInterceptor implements HandlerInterceptor{
 		
 		var errors = modelAndView.getModel().entrySet()
 			.stream().filter(a -> a.getKey().startsWith(BINDING_KEY))
-			.map(a -> a.getValue()).filter(a -> a instanceof BindingResult result)
+			.map(a -> a.getValue()).filter(a -> a instanceof BindingResult)
 			.map(a -> (BindingResult)a)
 			.flatMap(a -> a.getAllErrors().stream())
 			.map(a -> a.getDefaultMessage()).toList();

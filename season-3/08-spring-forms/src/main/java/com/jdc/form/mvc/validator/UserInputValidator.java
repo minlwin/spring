@@ -19,13 +19,6 @@ public class UserInputValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		
 		if(target instanceof UserInput input) {
-			if(!StringUtils.hasLength(input.getName())) {
-				errors.rejectValue("name", "empty", "Enter User Name.");
-			}
-			
-			if(null == input.getCourse()) {
-				errors.rejectValue("course", "not_select", "Please select course.");
-			}
 			
 			if(!StringUtils.hasLength(input.getPhone()) && 
 					!StringUtils.hasLength(input.getEmail())) {
