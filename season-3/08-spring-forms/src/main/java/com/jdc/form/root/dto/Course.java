@@ -1,4 +1,4 @@
-package com.jdc.form.model.dto;
+package com.jdc.form.root.dto;
 
 import lombok.Data;
 import lombok.NonNull;

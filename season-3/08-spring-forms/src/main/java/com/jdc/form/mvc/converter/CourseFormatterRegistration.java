@@ -1,4 +1,4 @@
-package com.jdc.form.converter;
+package com.jdc.form.mvc.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

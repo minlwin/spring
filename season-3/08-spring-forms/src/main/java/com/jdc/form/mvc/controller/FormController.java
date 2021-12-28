@@ -1,9 +1,11 @@
-package com.jdc.form.controller;
+package com.jdc.form.mvc.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -11,11 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.jdc.form.model.dto.Course;
-import com.jdc.form.model.dto.UserInput;
-import com.jdc.form.model.dto.UserInput.Gender;
-import com.jdc.form.model.service.CourseRepository;
-import com.jdc.form.model.service.DataHolder;
+import com.jdc.form.mvc.validator.UserInputValidator;
+import com.jdc.form.root.dto.Course;
+import com.jdc.form.root.dto.UserInput;
+import com.jdc.form.root.dto.UserInput.Gender;
+import com.jdc.form.root.service.CourseRepository;
+import com.jdc.form.root.service.DataHolder;
 
 @Controller
 @RequestMapping("form")
@@ -27,9 +30,12 @@ public class FormController {
 	@Autowired
 	private CourseRepository courseRepo;
 	
+	@Autowired
+	private UserInputValidator userInputValidator;
+
 	@InitBinder
 	void initWebBinder(WebDataBinder binder) {
-		System.out.println(binder.getConversionService().canConvert(String.class, Course.class));
+		binder.addValidators(userInputValidator);
 	}
 		
 	@GetMapping
@@ -37,7 +43,12 @@ public class FormController {
 	}
 	
 	@PostMapping
-	String create(@ModelAttribute("userInput") UserInput data) {
+	String create(@Validated @ModelAttribute("userInput") UserInput data, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "form";
+		}
+		
 		repo.add(data);
 		return "redirect:/form";
 	}

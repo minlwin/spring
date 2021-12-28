@@ -33,24 +33,45 @@
 	
 		<h3>Spring Forms</h3>
 		
-		<sf:form modelAttribute="userInput">
+		<c:if test="${ not empty allErrors }">
+			
+			<div class="alert alert-warning">
+				
+				<c:forEach var="e" items="${allErrors}" varStatus="sts">
+					
+					<span>${e}</span>
+					
+					<c:if test="${not sts.last}">
+						<br/>
+					</c:if>				
+				</c:forEach>
+			
+			</div>
 		
+		</c:if>
+		
+		
+		<sf:form modelAttribute="userInput">
+							
 			<sf:hidden path="id"/>
 		
 			<div class="row">
 				<div class="col">
 					<sf:label path="name">Student Name</sf:label>
 					<sf:input path="name" cssClass="form-control" placeholder="Enter Student Name"/>
+					<sf:errors path="name" cssClass="text-danger"></sf:errors>
 				</div>
 			
 				<div class="col">
 					<sf:label path="phone">Phone</sf:label>
 					<sf:input type="tel" path="phone" cssClass="form-control" placeholder="Enter Phone Number"/>
+					<sf:errors path="phone" cssClass="text-danger"></sf:errors>
 				</div>
 	
 				<div class="col">
 					<sf:label path="email">Email Address</sf:label>
 					<sf:input type="email" path="email" cssClass="form-control" placeholder="Enter Email Address"/>
+					<sf:errors path="email" cssClass="text-danger"></sf:errors>
 				</div>
 			
 			</div>
@@ -67,6 +88,7 @@
 						<sf:option value="">Select Course</sf:option>
 						<sf:options items="${courses}" itemValue="id"  />
 					</sf:select>
+					<sf:errors path="course" cssClass="text-danger"></sf:errors>
 				</div>
 
 				<div class="col">

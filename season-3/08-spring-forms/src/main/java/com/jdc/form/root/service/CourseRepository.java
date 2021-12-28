@@ -1,11 +1,11 @@
-package com.jdc.form.model.service;
+package com.jdc.form.root.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
 
-import com.jdc.form.model.dto.Course;
+import com.jdc.form.root.dto.Course;
 
 @Service
 @ApplicationScope

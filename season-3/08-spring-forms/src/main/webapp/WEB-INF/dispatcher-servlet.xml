@@ -7,8 +7,8 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<mvc:annotation-driven ></mvc:annotation-driven>
-	<context:component-scan base-package="com.jdc.form.controller, com.jdc.form.converter"></context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<context:component-scan base-package="com.jdc.form.mvc"></context:component-scan>
 	
 	<mvc:redirect-view-controller redirect-url="/form" path="/"/>
 	
@@ -16,5 +16,8 @@
 		<mvc:jsp prefix="/" suffix=".jsp"/>
 	</mvc:view-resolvers>
 	
+	<mvc:interceptors>
+		<bean class="com.jdc.form.mvc.interceptor.ValidationErrorInterceptor"></bean>
+	</mvc:interceptors>
 	
 </beans>

@@ -1,4 +1,4 @@
-package com.jdc.form.converter;
+package com.jdc.form.mvc.converter;
 
 import java.text.ParseException;
 import java.util.Locale;
@@ -8,8 +8,8 @@ import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.jdc.form.model.dto.Course;
-import com.jdc.form.model.service.CourseRepository;
+import com.jdc.form.root.dto.Course;
+import com.jdc.form.root.service.CourseRepository;
 
 @Component("courseFormatter")
 public class CourseFormatter implements Formatter<Course> {
