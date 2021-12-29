@@ -18,10 +18,10 @@ public class UserInput {
 
 	private int id;
 	
-	@NotBlank(message = "Please Enter Name.")
+	@NotBlank(message = "{empty.employee.name}")
 	private String name;
 	
-	@Phone(message = "Invalid Phone Number", pattern = "09\\d([- ,]\\d{4}){2}")
+	@Phone(message = "{invalid.phone}", pattern = "09\\d([- ,]\\d{4}){2}")
 	private String phone;
 	@Email(message = "Invalid Email Address")
 	private String email;

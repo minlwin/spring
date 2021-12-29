@@ -31,7 +31,7 @@
 
 	<div class="container pt-4">
 	
-		<h3>Spring Forms</h3>
+		<h3><sp:message code="app.title"></sp:message></h3>
 		
 		<c:if test="${ not empty allErrors }">
 			

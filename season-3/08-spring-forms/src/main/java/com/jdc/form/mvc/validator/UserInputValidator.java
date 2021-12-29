@@ -19,11 +19,11 @@ public class UserInputValidator implements Validator{
 	public void validate(Object target, Errors errors) {
 		
 		if(target instanceof UserInput input) {
-			
+						
 			if(!StringUtils.hasLength(input.getPhone()) && 
 					!StringUtils.hasLength(input.getEmail())) {
-				errors.rejectValue("phone", "empty", "Enter Phone or Email.");
-				errors.rejectValue("email", "empty", "Enter Phone or Email.");
+				errors.rejectValue("phone", "empty", "Enter Phone Number if you don't have email address.");
+				errors.rejectValue("email", "empty", "Enter Email if you don't have phone number.");
 			}
 		}
 		

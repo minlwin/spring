@@ -7,7 +7,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven validator="validator"></mvc:annotation-driven>
 	<context:component-scan base-package="com.jdc.form.mvc"></context:component-scan>
 	
 	<mvc:redirect-view-controller redirect-url="/form" path="/"/>
@@ -19,5 +19,14 @@
 	<mvc:interceptors>
 		<bean class="com.jdc.form.mvc.interceptor.ValidationErrorInterceptor"></bean>
 	</mvc:interceptors>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages"></property>
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource"></property>
+	</bean>
 	
 </beans>
