@@ -24,16 +24,71 @@
 
 	<div class="container">
 	
-		<h1 class="mt-4">
+		<h1 class="mt-4 mb-4">
 			<sp:message code="app.title"></sp:message>
 		</h1>
 		
-		<div class="card">
-			<div class="card-header">Edit Book</div>
+		<div class="row">
+			<div class="col-9">
+				<div class="card">
+					<div class="card-header">Edit Book</div>
+					
 			
-	
-			<form:form cssClass="card-body"></form:form>
+					<form:form action="/book" cssClass="card-body" modelAttribute="book">
+					
+						<form:hidden path="id"/>
+						
+						<div class="row mb-4">
+						
+							<div class="col">
+								<label>Category</label>
+								<form:select path="category" cssClass="form-select">
+									<option value="">Select One</option>
+									<form:options items="${categories}" itemLabel="name"/> 
+								</form:select>
+							</div>
+							<div class="col">
+								<label>Book Title</label>
+								<form:input path="title" cssClass="form-control" placeholder="Enter Book Title" />
+							</div>
+						
+							<div class="col">
+								<label>Author</label>
+								<form:input path="title" cssClass="form-control" placeholder="Enter Book Title" />
+							</div>
+						</div>
+						
+						<div class="row mb-4">
+							
+							<div class="col-4">
+								<label>Price</label>
+								<form:input path="price" type="number" cssClass="form-control" placeholder="Enter Price"/>
+							</div>
+						
+							<div class="col">
+								<label>Remark</label>
+								<form:input path="remark" cssClass="form-control" placeholder="Enter Remark"/>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col">
+								<button class="btn btn-primary">Save Book</button>
+							</div>
+						</div>
+					
+					</form:form>
+				</div>
+			
+			</div>
+			
+			<div class="col">
+				<c:url value="/views/imports/left-bar.jsp" var="importJsp"></c:url>
+				<c:import url="${importJsp}"></c:import>
+			</div>
+			
 		</div>
+		
 		
 	
 	</div>

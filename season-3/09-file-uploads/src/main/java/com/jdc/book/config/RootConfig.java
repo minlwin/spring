@@ -17,7 +17,7 @@ public class RootConfig {
 	@Bean
 	public DataSource dataSource() {
 		var ds = new BasicDataSource();
-		ds.setUrl("jdbc:mysql://locahost:3306/books_db");
+		ds.setUrl("jdbc:mysql://localhost:3306/books_db");
 		ds.setUsername("root");
 		ds.setPassword("admin");
 		return ds;

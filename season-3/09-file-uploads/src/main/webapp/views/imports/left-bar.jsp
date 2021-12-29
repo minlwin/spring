@@ -12,6 +12,9 @@
 			<label class="form-label" for="category">Category</label>
 			<select id="category" name="category" class="form-select">
 				<option value="">Search Category</option>
+				<c:forEach var="c" items="${categories}">
+					<option value="${c.id}">${c.name}</option>
+				</c:forEach>
 			</select>
 		</div>
 		
