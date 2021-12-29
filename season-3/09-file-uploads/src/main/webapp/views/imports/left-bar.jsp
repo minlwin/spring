@@ -5,7 +5,8 @@
 <div class="card">
 	<div class="card-header">Book Search</div>
 	
-	<form action="#" class="card-body">
+	<c:url value="/book" var="searchUrl"></c:url>
+	<form action="${ searchUrl }" class="card-body">
 	
 		<div class="mb-4">
 			<label class="form-label" for="category">Category</label>
@@ -16,7 +17,7 @@
 		
 		<div class="mb-4">
 			<label class="form-label" for="keyword">Keyword</label>
-			<input type="text" class="form-control" id="keyword" placeholder="Search Keyword" />
+			<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search Keyword" />
 		</div>		
 		
 		<c:url value="/book/edit" var="editUrl"></c:url>

@@ -28,13 +28,6 @@
 		
 		<div class="row">
 			
-			<div class="col">
-				
-				<c:url value="/views/imports/left-bar.jsp" var="importJsp"></c:url>
-				<c:import url="${importJsp}"></c:import>
-			
-			</div>
-			
 			<div class="col-9">
 				
 				<div class="card">
@@ -62,6 +55,12 @@
 					</div>
 				</div>
 							
+			</div>
+			
+
+			<div class="col">
+				<c:url value="/views/imports/left-bar.jsp" var="importJsp"></c:url>
+				<c:import url="${importJsp}"></c:import>
 			</div>
 		
 		</div>
