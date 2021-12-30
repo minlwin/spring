@@ -31,7 +31,7 @@
 		<div class="row">
 			<div class="col-9">
 				<div class="card">
-					<div class="card-header">Edit Book</div>
+					<div class="card-header">${ book.id eq 0 ? 'Add New' : 'Edit' } Book</div>
 					
 			
 					<form:form action="/book" cssClass="card-body" modelAttribute="book">
@@ -44,17 +44,20 @@
 								<label>Category</label>
 								<form:select path="category" cssClass="form-select">
 									<option value="">Select One</option>
-									<form:options items="${categories}" itemLabel="name"/> 
+									<form:options items="${categories}" itemValue="id" itemLabel="name"/> 
 								</form:select>
+								<form:errors path="category" cssClass="text-secondary"></form:errors>
 							</div>
 							<div class="col">
 								<label>Book Title</label>
 								<form:input path="title" cssClass="form-control" placeholder="Enter Book Title" />
+								<form:errors path="title" cssClass="text-secondary"></form:errors>
 							</div>
 						
 							<div class="col">
 								<label>Author</label>
-								<form:input path="title" cssClass="form-control" placeholder="Enter Book Title" />
+								<form:input path="author" cssClass="form-control" placeholder="Enter Book Title" />
+								<form:errors path="author" cssClass="text-secondary"></form:errors>
 							</div>
 						</div>
 						
@@ -63,6 +66,7 @@
 							<div class="col-4">
 								<label>Price</label>
 								<form:input path="price" type="number" cssClass="form-control" placeholder="Enter Price"/>
+								<form:errors path="price" cssClass="text-secondary"></form:errors>
 							</div>
 						
 							<div class="col">

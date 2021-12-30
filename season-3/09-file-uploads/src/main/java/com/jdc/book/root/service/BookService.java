@@ -5,10 +5,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jdc.book.root.dto.Book;
@@ -25,6 +28,12 @@ public class BookService {
 	
 	@Autowired
 	private BookRowMapper rowMapper;
+	
+	@PostConstruct
+	private void init() {
+		bookInsert.setTableName("book");
+		bookInsert.setGeneratedKeyName("id");
+	}
 	
 	private static final String SELECT = """
 			select b.id, b.title, b.author, b.price, b.remark, 
@@ -51,7 +60,7 @@ public class BookService {
 		if(StringUtils.hasLength(keyword)) {
 			sb.append("""
 					 and (
-					lower(b.name) like :keyword 
+					lower(b.title) like :keyword 
 					or lower(b.author) like :keyword 
 					or lower(c.name) like :keyword
 					)""");
@@ -68,6 +77,7 @@ public class BookService {
 				rowMapper).findFirst();
 	}
 
+	@Transactional
 	public int save(Book book) {
 		
 		if(book.getId() == 0) {
