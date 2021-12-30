@@ -9,4 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.getElementById('uploadInput').addEventListener('change', () => {
 		document.getElementById('uploadForm').submit()
 	})
+	
+	// Show Upload Modal Dialog
+	var modalDialog = document.getElementById('uploadMessageModel')
+	
+	if(modalDialog) {
+		var modal = new bootstrap.Modal(modalDialog)
+		modal.show()
+	}
 })

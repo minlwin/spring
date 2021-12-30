@@ -26,6 +26,10 @@
 			<sp:message code="app.title"></sp:message>
 		</h1>
 		
+		<c:url value="/views/imports/upload-result.jsp" var="uploadMessageJsp"></c:url>
+		<c:import url="${uploadMessageJsp}"></c:import>
+
+		
 		<div class="row">
 			
 			<div class="col-9">
@@ -86,13 +90,8 @@
 			</div>
 		
 		</div>
-		
-
-		
 	
 	</div>
-
-
 
 </body>
 </html>

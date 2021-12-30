@@ -33,4 +33,9 @@ public class CategoryService {
 				Map.of("id", id), rowMapper).findFirst();
 	}
 
+	public Category getCategory(String trim) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
