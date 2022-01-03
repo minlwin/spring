@@ -7,8 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.jdc.book.root.dto.Book;
@@ -21,7 +25,11 @@ public class FileUploadService {
 	private CategoryService categories;
 	@Autowired
 	private BookService books;
+	
+	@Autowired
+	private Validator validator;
 
+	@Transactional
 	public String upload(MultipartFile file) {
 
 		var uploadBooks = readLines(file);
@@ -35,12 +43,21 @@ public class FileUploadService {
 			
 			for(var book : entry.getValue()) {
 				book.setCategory(category);
+				var result = new BeanPropertyBindingResult(book, "target");
+				
+				validator.validate(book, result);
+				
+				if(result.hasErrors()) {
+					var message = result.getFieldErrors().stream().map(a -> a.getDefaultMessage()).findAny().get();
+					throw new FileUploadAppException(message);
+				}
+				
 				books.save(book);
 			}
 			
 		}
 
-		return "% books has been uploaded!".formatted(uploadBooks.size());
+		return "%d books has been uploaded!".formatted(uploadBooks.size());
 	}
 
 	private List<Book> readLines(MultipartFile file) {
