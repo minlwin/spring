@@ -1,7 +1,5 @@
 package com.jdc.book.mvc.controller;
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,10 +20,10 @@ public class BookUploadController {
 	@PostMapping
 	String upload(
 			@RequestParam("uploadFile") MultipartFile partFile,
-			RedirectAttributes redirect) throws IOException {
+			RedirectAttributes redirect) {
 		
 		if(null != partFile && !partFile.isEmpty()) {
-			var message = service.upload(partFile.getInputStream());
+			var message = service.upload(partFile);
 			redirect.addFlashAttribute("uploadMessage", message);
 			return "redirect:/home";
 		}
