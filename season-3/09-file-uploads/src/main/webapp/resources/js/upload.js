@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Fetch Event to Upload Button
 	document.getElementById('uploadBtn').addEventListener('click', () => {
 		document.getElementById('uploadInput').click()
+		return false
 	})
 	
 	// Submit Form when file input value changes
