@@ -25,9 +25,6 @@ public class UserInputValidator implements Validator{
 				errors.rejectValue("phone", "empty", "Enter Phone Number if you don't have email address.");
 				errors.rejectValue("email", "empty", "Enter Email if you don't have phone number.");
 			}
-		}
-		
-	}
-
-	
+		}	
+	}	
 }

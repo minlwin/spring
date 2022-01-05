@@ -2,6 +2,7 @@ package com.jdc.form.mvc.converter;
 
 import java.text.ParseException;
 import java.util.Locale;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.Formatter;
@@ -19,20 +20,12 @@ public class CourseFormatter implements Formatter<Course> {
 	
 	@Override
 	public String print(Course object, Locale locale) {
-		
-		if(null != object) {
-			return object.getName();
-		}
-		return null;
+		return Optional.ofNullable(object).map(Course::getName).orElse("");
 	}
 
 	@Override
 	public Course parse(String value, Locale locale) throws ParseException {
-		if(StringUtils.hasLength(value)) {
-			var id = Integer.parseInt(value);
-			return repo.findByid(id);
-		}
-		return null;
+		return Optional.ofNullable(value).filter(StringUtils::hasLength)
+				.map(Integer::parseInt).map(repo::findByid).orElse(null);
 	}
-
 }

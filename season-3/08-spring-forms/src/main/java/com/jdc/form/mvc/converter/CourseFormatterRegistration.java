@@ -12,9 +12,7 @@ public class CourseFormatterRegistration {
 
 	@Autowired
 	void addConverter(FormatterRegistry registory) {
-		System.out.println("Register Converter");
 		registory.addFormatter(formatter);
 	}
-	
 
 }
