@@ -22,7 +22,14 @@ public class HelloAsync extends HttpServlet{
 		var out = resp.getWriter();
 		
 		var async = req.startAsync();
-		async.setTimeout(5000);
+		
+		async.setTimeout(2000);
+		
+		async.addListener(new HelloAsyncListener());
+		
+		if(null != req.getParameter("error")) {
+			throw new RuntimeException("Error parameter error.");
+		}
 		
 		out.append("""
 				<html>
@@ -34,7 +41,7 @@ public class HelloAsync extends HttpServlet{
 				""");
 		
 		async.start(getTask("Job 1"));
-		async.complete();
+
 		
 		out.append("""
 				<p>This is heavy weight Process</p>
@@ -48,7 +55,7 @@ public class HelloAsync extends HttpServlet{
 		return () -> {
 			try {
 				System.out.println("Heavy Weight work %s start!".formatted(name));
-				Thread.sleep(5000);
+				Thread.sleep(10000);
 				System.out.println("Heavy Weight work %s end.".formatted(name));
 			} catch (InterruptedException e) {
 				e.printStackTrace();
