@@ -3,11 +3,15 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:annotation-driven>
+		<mvc:async-support task-executor="mvcTaskExecutor" default-timeout="3000"></mvc:async-support>
+	</mvc:annotation-driven>
 	<context:component-scan base-package="com.jdc.async.controller"></context:component-scan>
 	
 	<mvc:view-controller path="/" view-name="home"/>
@@ -15,4 +19,7 @@
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/views/" suffix=".jsp"/>
 	</mvc:view-resolvers>
+	
+	<task:executor id="mvcTaskExecutor" pool-size="10"/>
+	
 </beans>
