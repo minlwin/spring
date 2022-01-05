@@ -21,7 +21,8 @@ public class HelloAsync extends HttpServlet{
 		
 		var out = resp.getWriter();
 		
-		var asyncContext = req.startAsync();
+		var async = req.startAsync();
+		async.setTimeout(5000);
 		
 		out.append("""
 				<html>
@@ -31,17 +32,9 @@ public class HelloAsync extends HttpServlet{
 				<body>
 				<h1>Hello Async Servlet</h1>
 				""");
-		asyncContext.start(() -> {
-			try {
-				System.out.println("Heavy Weight work start!");
-				Thread.sleep(5000);
-				System.out.println("Heavy Weight work end.");
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		});
 		
-		asyncContext.complete();
+		async.start(getTask("Job 1"));
+		async.complete();
 		
 		out.append("""
 				<p>This is heavy weight Process</p>
@@ -49,5 +42,17 @@ public class HelloAsync extends HttpServlet{
 				</body>
 				</html>
 				""");
+	}
+	
+	private Runnable getTask(String name) {
+		return () -> {
+			try {
+				System.out.println("Heavy Weight work %s start!".formatted(name));
+				Thread.sleep(5000);
+				System.out.println("Heavy Weight work %s end.".formatted(name));
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		};
 	}
 }
