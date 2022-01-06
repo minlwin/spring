@@ -12,6 +12,7 @@
 	<mvc:annotation-driven>
 		<mvc:async-support task-executor="mvcTaskExecutor" default-timeout="3000"></mvc:async-support>
 	</mvc:annotation-driven>
+	
 	<context:component-scan base-package="com.jdc.async.controller"></context:component-scan>
 	
 	<mvc:view-controller path="/" view-name="home"/>
