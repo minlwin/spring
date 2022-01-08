@@ -9,21 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.async.DeferredResult;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.jdc.async.controller.task.CallabeTask;
 
 @Controller
 @RequestMapping("async")
 public class AsyncController {
 
 	@GetMapping("callable")
-	public Callable<String> callableExecution(ModelMap model) {
-		return new Callable<String>() {
-
-			@Override
-			public String call() throws Exception {
-				model.put("message", "Hello From Callable Result");
-				return "async-result";
-			}
-		};
+	public Callable<ModelAndView> callableExecution() {
+		return new CallabeTask();
 	}
 	
 	@GetMapping("deferred")
@@ -67,4 +63,5 @@ public class AsyncController {
 		
 		return result;
 	}
+	
 }

@@ -18,6 +18,13 @@
 	<c:url value="/" var="home"></c:url>
 	<a href="${home}">Home</a>
 	
+	<h3>Intercepter Messages</h3>
+	
+	<ul>
+		<c:forEach var="m" items="${interceptorsMessages}">
+			<li>${m}</li>
+		</c:forEach>
+	</ul>
 	
 </body>
 </html>

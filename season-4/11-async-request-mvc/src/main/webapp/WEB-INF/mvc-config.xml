@@ -10,7 +10,11 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<mvc:annotation-driven>
-		<mvc:async-support task-executor="mvcTaskExecutor" default-timeout="3000"></mvc:async-support>
+		<mvc:async-support task-executor="mvcTaskExecutor" default-timeout="3000">
+			<mvc:callable-interceptors>
+				<bean class="com.jdc.async.controller.interceptors.CustomCallableInterceptor"></bean>
+			</mvc:callable-interceptors>
+		</mvc:async-support>
 	</mvc:annotation-driven>
 	
 	<context:component-scan base-package="com.jdc.async.controller"></context:component-scan>
@@ -22,5 +26,6 @@
 	</mvc:view-resolvers>
 	
 	<task:executor id="mvcTaskExecutor" pool-size="10"/>
+	
 	
 </beans>
