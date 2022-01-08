@@ -4,6 +4,7 @@ import java.util.concurrent.Callable;
 
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.async.CallableProcessingInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.jdc.async.controller.task.CallabeTask;
 
@@ -64,7 +65,15 @@ public class CustomCallableInterceptor implements CallableProcessingInterceptor{
 		System.out.println("=================================");
 		System.out.println("=====handleTimeout====");
 		System.out.println("=================================");
-		return RESULT_NONE;
+		
+		var mv = new ModelAndView("async-result");
+		mv.getModel().put("message", "Timeout int Callable Processing.");
+		
+		if(task instanceof CallabeTask custom) {
+			custom.add("Message from Timeout Handler.");
+			mv.getModel().put("interceptorsMessages",  custom.getMessages());
+		}
+		return mv;
 	}
 	
 }
