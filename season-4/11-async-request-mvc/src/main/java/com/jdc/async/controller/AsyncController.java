@@ -5,6 +5,7 @@ import java.util.concurrent.Executors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,6 +63,13 @@ public class AsyncController {
 		});
 		
 		return result;
+	}
+	
+	@ExceptionHandler
+	ModelAndView handle(IllegalStateException e) {
+		var mv = new ModelAndView("error-result");
+		mv.getModel().put("message", e.getMessage());
+		return mv;
 	}
 	
 }

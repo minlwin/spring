@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<mvc:annotation-driven>
-		<mvc:async-support task-executor="mvcTaskExecutor" default-timeout="1000">
+		<mvc:async-support task-executor="mvcTaskExecutor" default-timeout="1000000">
 			<mvc:callable-interceptors>
 				<bean class="com.jdc.async.controller.interceptors.CustomCallableInterceptor"></bean>
 			</mvc:callable-interceptors>

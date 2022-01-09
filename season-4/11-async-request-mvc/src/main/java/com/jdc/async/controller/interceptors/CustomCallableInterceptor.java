@@ -29,6 +29,7 @@ public class CustomCallableInterceptor implements CallableProcessingInterceptor{
 		
 		if(task instanceof CallabeTask custom) {
 			custom.add("Message from Pre Processing.");
+			custom.setError(request.getParameter("error"));
 		}
 	}
 	

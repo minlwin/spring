@@ -11,6 +11,12 @@ public class CallabeTask implements Callable<ModelAndView>{
 	
 	private List<String> messages;
 	
+	private String error;
+	
+	public void setError(String error) {
+		this.error = error;
+	}
+	
 	public CallabeTask() {
 		messages = Collections.synchronizedList(new ArrayList<String>());
 	}
@@ -26,7 +32,13 @@ public class CallabeTask implements Callable<ModelAndView>{
 	@Override
 	public ModelAndView call() throws Exception {
 		var mv = new ModelAndView("async-result");
+		
+		if(null != error) {
+			throw new IllegalStateException(error);
+		}
+		
 		Thread.sleep(1500);
+		
 		mv.getModel().put("message", "Callable Processing is Done Successfully.");
 		mv.getModel().put("interceptorsMessages", messages);
 		return mv;
