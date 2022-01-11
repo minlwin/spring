@@ -14,6 +14,11 @@
 			<mvc:callable-interceptors>
 				<bean class="com.jdc.async.controller.interceptors.CustomCallableInterceptor"></bean>
 			</mvc:callable-interceptors>
+			
+			<mvc:deferred-result-interceptors>
+				<bean class="com.jdc.async.controller.interceptors.DeferredTimeoutInterceptor"></bean>
+				<bean class="com.jdc.async.controller.interceptors.CustomDeferredInterceptor"></bean>
+			</mvc:deferred-result-interceptors>
 		</mvc:async-support>
 	</mvc:annotation-driven>
 	

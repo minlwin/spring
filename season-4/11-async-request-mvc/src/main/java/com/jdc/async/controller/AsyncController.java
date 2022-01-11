@@ -1,22 +1,25 @@
 package com.jdc.async.controller;
 
 import java.util.concurrent.Callable;
-import java.util.concurrent.Executors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jdc.async.controller.task.CallabeTask;
+import com.jdc.async.controller.task.DeferredTask;
+import com.jdc.async.service.MyDelayService;
 
 @Controller
 @RequestMapping("async")
 public class AsyncController {
+	
+	@Autowired
+	private MyDelayService service;
 
 	@GetMapping("callable")
 	public Callable<ModelAndView> callableExecution() {
@@ -24,49 +27,30 @@ public class AsyncController {
 	}
 	
 	@GetMapping("deferred")
-	public DeferredResult<String> deferredExecution(
-			@RequestParam(required = false) String error,
-			ModelMap model) {
-		var result = new DeferredResult<String>(1500L);
+	public DeferredResult<ModelAndView> deferredExecution() {
 		
-		result.onTimeout(() -> {
-			model.put("message", "Request has been timeout.");
-			result.setErrorResult("error-result");
-		});
+		var result = new DeferredTask(3000L);
 		
 		result.onCompletion(()-> {
 			System.out.println("Request has been completed.");
 		});
 		
 		result.onError(e -> {
-			e.printStackTrace();
+			System.out.println("""
+					========> Exception : From Handler Method
+					""");
 		});
 		
-		result.setResultHandler(value -> {
-			System.out.println("Result is %s".formatted(value));
-		});
-		
-		Executors.newSingleThreadExecutor().execute(() -> {
-			try {
-				if(null != error) {
-					model.put("message", "Error Message : %s".formatted(error));
-					result.setErrorResult("error-result");
-				}
-				
-				Thread.sleep(1000L);
-				
-				model.put("message", "Hello From Deferred Result");
-				result.setResult("async-result");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
+		service.execute(result);
 		
 		return result;
 	}
 	
-	@ExceptionHandler
-	ModelAndView handle(IllegalStateException e) {
+	@ExceptionHandler({
+		RuntimeException.class,
+		IllegalStateException.class
+	})
+	ModelAndView handle(Exception e) {
 		var mv = new ModelAndView("error-result");
 		mv.getModel().put("message", e.getMessage());
 		return mv;
