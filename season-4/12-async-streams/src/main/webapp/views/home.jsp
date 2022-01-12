@@ -18,6 +18,7 @@
 	
 	<div>
 		<button id="streamTrigger">Load Stream</button>
+		<button id="sseTrigger">Connect SSE Source</button>
 	</div>
 	
 	<c:url value="/resources/js/client.js" var="clientJS"></c:url>

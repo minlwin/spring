@@ -26,4 +26,25 @@ window.addEventListener('load', () => {
 			output.appendChild(item)
 		}
 	})
+	
+	document.getElementById('sseTrigger').addEventListener('click', () => {
+		console.log('Connect Event Source ...')
+		
+		const output = document.getElementById('output')
+		output.innerText = ''
+		
+		var eventSource = new EventSource('http://localhost:8080/sse')
+		eventSource.onmessage = message => {
+			let item = document.createElement('li')
+			item.innerText = message.data
+			
+			output.appendChild(item)
+		}
+		
+		eventSource.onerror = error => {
+			console.log(error)
+			eventSource.close()
+		}
+		
+	})
 })
