@@ -17,7 +17,7 @@ public class SseResultController {
 
 	@GetMapping
 	public SseEmitter stream() {
-		var emitter = new SseEmitter();
+		var emitter = new SseEmitter(3000L);
 		provider.stream(emitter);
 		return emitter;
 	}

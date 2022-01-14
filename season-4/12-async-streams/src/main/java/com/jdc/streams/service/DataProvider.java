@@ -12,6 +12,7 @@ public class DataProvider {
 
 	private final List<String> data;
 	
+	
 	public DataProvider() {
 		data = List.of(
 				"Java Basic",
@@ -32,13 +33,36 @@ public class DataProvider {
 	@Async
 	public void stream(ResponseBodyEmitter emitter) {
 		
+		var state = new StreamState();
+		
+		emitter.onTimeout(() -> {
+			System.out.println("Overriide Timeout Handler");
+			synchronized (state) {
+				state.setComplete();
+			}
+		});
+		
+		emitter.onError(ex -> {
+			if(ex instanceof LostConnectionException) {
+				System.out.println("Connection is lost. FROM Provider");
+			}
+		});
+		
 		try {
 			for(var data : this.data) {
+				
 				Thread.sleep(1000L);
+				
+				synchronized (this) {
+					if(state.isComplete()) {
+						break;
+					}
+				}
 				emitter.send(data);
 			}
 		} catch (InterruptedException | IOException e) {
-			e.printStackTrace();
+			// Never write like this
+			throw new LostConnectionException();
 		} finally {
 			emitter.complete();
 		}
