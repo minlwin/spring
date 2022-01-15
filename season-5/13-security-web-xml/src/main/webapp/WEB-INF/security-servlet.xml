@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+	
+	<security:authentication-manager id="authManager">
+		
+		<security:authentication-provider>
+			
+			<security:user-service>
+				
+				<security:user name="admin" authorities="ADMIN" password="{noop}admin"/>
+				<security:user name="member" authorities="MEMBER" password="{noop}admin"/>
+			
+			</security:user-service>
+		
+		</security:authentication-provider>
+	
+	</security:authentication-manager>
+
+	<security:http authentication-manager-ref="authManager">
+	
+		<security:csrf disabled="true"/>
+
+		<security:intercept-url pattern="/admin/**" access="hasAuthority('ADMIN')"/>
+		<security:intercept-url pattern="/member/**" access="hasAnyAuthority('MEMBER', 'ADMIN')"/>
+				
+		<security:form-login 
+			login-page="/views/login.jsp" 
+			login-processing-url="/login" 
+			username-parameter="loginId" 
+			password-parameter="password" />
+			
+		<security:logout logout-url="/logout" invalidate-session="true" logout-success-url="/"/>	
+		
+		<security:access-denied-handler error-page="/forbidden"/>	
+		
+	</security:http>
+</beans>
