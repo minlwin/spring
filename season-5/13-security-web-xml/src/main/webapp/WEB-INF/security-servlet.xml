@@ -8,18 +8,12 @@
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 	
 	<security:authentication-manager id="authManager">
-		
 		<security:authentication-provider>
-			
 			<security:user-service>
-				
 				<security:user name="admin" authorities="ADMIN" password="{noop}admin"/>
 				<security:user name="member" authorities="MEMBER" password="{noop}admin"/>
-			
 			</security:user-service>
-		
 		</security:authentication-provider>
-	
 	</security:authentication-manager>
 
 	<security:http authentication-manager-ref="authManager">
