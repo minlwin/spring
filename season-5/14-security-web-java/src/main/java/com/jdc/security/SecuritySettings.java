@@ -32,7 +32,6 @@ public class SecuritySettings extends WebSecurityConfigurerAdapter {
 			.passwordParameter("password");
 		
 		http.logout()
-			.logoutUrl("/logout")
 			.logoutSuccessUrl("/")
 			.invalidateHttpSession(true);
 		
