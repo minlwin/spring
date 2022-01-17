@@ -21,35 +21,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @ComponentScan("com.jdc.security.services")
 public class RootConfig extends WebSecurityConfigurerAdapter{
 
-	@Bean
-	DataSource dataSource() {
-		var bean = new BasicDataSource();
-		bean.setUrl("jdbc:mysql://localhost:3306/auth_db");
-		bean.setUsername("root");
-		bean.setPassword("admin");
-		return bean;
-	}
-	
-	@Bean
-	SimpleJdbcInsert userInsert(DataSource dataSource) {
-		var bean = new SimpleJdbcInsert(dataSource);
-		bean.setTableName("user");
-		bean.setColumnNames(List.of("login", "password", "name"));
-		return bean;
-	}
-	
-	@Bean
-	PasswordEncoder bcryptEncoder() {
-		return new BCryptPasswordEncoder();
-	}
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
 		auth.inMemoryAuthentication()
-			.withUser(User.builder().username("admin").authorities("Admin").password(bcryptEncoder().encode("admin")));
+			.withUser(User.builder().username("admin").authorities("Admin").password(passwordEncoder().encode("admin")));
 		
 		auth.jdbcAuthentication()
-			.passwordEncoder(bcryptEncoder())
+			.passwordEncoder(passwordEncoder())
 			.dataSource(dataSource())
 			.usersByUsernameQuery("select login, password, valid from user where login = ?")
 			.authoritiesByUsernameQuery("select login, role from user where login = ?");
@@ -57,11 +37,11 @@ public class RootConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		
 		http.csrf().disable();
 		
-		http.authorizeRequests()
-			.antMatchers("/admin/**").hasAuthority("Admin")
-			.antMatchers("/member/**").hasAnyAuthority("Member", "Admin");
+		http.authorizeRequests().antMatchers("/admin/**").hasAuthority("Admin");
+		http.authorizeRequests().antMatchers("/member/**").hasAnyAuthority("Member", "Admin");
 		
 		http.formLogin()
 			.loginPage("/login").loginProcessingUrl("/login")
@@ -71,7 +51,29 @@ public class RootConfig extends WebSecurityConfigurerAdapter{
 			.logoutUrl("/logout").logoutSuccessUrl("/");
 	}
 	
-	@Bean("authManager")
+	@Bean
+	DataSource dataSource() {
+		var ds = new BasicDataSource();
+		ds.setUrl("jdbc:mysql://localhost:3306/auth_db");
+		ds.setUsername("root");
+		ds.setPassword("admin");
+		return ds;
+	}
+	
+	@Bean
+	SimpleJdbcInsert userInsert(DataSource dataSource)  {
+		var insert = new SimpleJdbcInsert(dataSource);
+		insert.setTableName("user");
+		insert.setColumnNames(List.of("name", "login", "password"));
+		return insert;
+	}
+	
+	@Bean
+	PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
 	@Override
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();

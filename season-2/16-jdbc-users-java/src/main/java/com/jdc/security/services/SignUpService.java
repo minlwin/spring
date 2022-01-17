@@ -3,7 +3,6 @@ package com.jdc.security.services;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +16,6 @@ import com.jdc.security.services.model.SignUpDto;
 public class SignUpService {
 	
 	@Autowired
-	@Qualifier("authManager")
 	private AuthenticationManager auth;
 	
 	@Autowired
