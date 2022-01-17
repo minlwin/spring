@@ -21,21 +21,23 @@
 				
 				<h3>Member Sign Up</h3>
 				
-				<form method="post" action="/signup">
-					
+				<sf:form action="/signup" modelAttribute="dto">
 					<div class="mb-3">
 						<label for="name">Name</label>
-						<input type="text" name="name" placeholder="Enter Name" class="form-control" />
+						<sf:input path="name" placeholder="Enter Name" class="form-control"/>
+						<sf:errors path="name" ></sf:errors>
 					</div>
 
 					<div class="mb-3">
 						<label for="loginId">Login Id</label>
-						<input type="text" name="loginId" placeholder="Enter Login Id" class="form-control" />
+						<sf:input path="loginId" placeholder="Enter Login Id" class="form-control"/>
+						<sf:errors path="loginId"></sf:errors>
 					</div>
 					
 					<div class="mb-3">
 						<label for="password">Password</label>
-						<input type="password" name="password" placeholder="Enter Password" class="form-control" />
+						<sf:password path="password" placeholder="Enter Password" class="form-control" />
+						<sf:errors path="password"></sf:errors>
 					</div>
 					
 					<div>
@@ -44,9 +46,9 @@
 						
 						<a href="/" class="btn btn-secondary">Home</a>
 					
-					</div>
-					
-				</form>
+					</div>				
+				</sf:form>
+
 				
 			</div>
 		
