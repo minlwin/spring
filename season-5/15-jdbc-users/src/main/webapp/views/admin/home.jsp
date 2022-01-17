@@ -12,5 +12,20 @@
 </head>
 <body>
 
+	<div class="container pt-4">
+	
+		<h3>Admin Home</h3>
+		
+		<div>
+			<a href="/" class="btn btn-primary">Home</a>
+			<a href="/logout" class="btn btn-secondary">Sign Out</a>
+		</div>
+		
+		<div class="card mt-4">
+			<img src="/resources/img/cover.png" alt="Cover Image" />
+		</div>
+		
+	</div>
+
 </body>
 </html>

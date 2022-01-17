@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +16,30 @@
 	<div class="container pt-4">
 		
 		<h3>Security Demo</h3>
+		
+		<div>
+			
+			<a href="/" class="btn btn-primary">Home</a>
+			
+			<a href="/admin/home" class="btn btn-danger">Admin</a>
+		
+			<a href="/member/home" class="btn btn-info">Member</a>
+			
+			<sec:authorize access="isAnonymous()">
+				<a href="/signup" class="btn btn-secondary">Sign Up</a>
+			</sec:authorize>
+			
+			<sec:authorize access="isAuthenticated()">
+				<a href="/logout" class="btn btn-secondary">Sign Out</a>
+			</sec:authorize>
+		</div>
 	
+		<div class="card mt-4">
+			<img src="/resources/img/cover.png" alt="Cover Image" />
+		</div>
+
 	</div>
+	
 
 </body>
 </html>
