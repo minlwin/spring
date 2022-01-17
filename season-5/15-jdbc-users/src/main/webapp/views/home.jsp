@@ -21,7 +21,9 @@
 			
 			<a href="/" class="btn btn-primary">Home</a>
 			
-			<a href="/admin/home" class="btn btn-danger">Admin</a>
+			<sec:authorize access="hasAuthority('Admin')">
+				<a href="/admin/home" class="btn btn-danger">Admin</a>
+			</sec:authorize>
 		
 			<a href="/member/home" class="btn btn-info">Member</a>
 			

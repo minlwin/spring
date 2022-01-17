@@ -18,12 +18,19 @@
 	<bean id="userInsert" class="org.springframework.jdbc.core.simple.SimpleJdbcInsert">
 		<constructor-arg ref="dataSource"></constructor-arg>
 		<property name="tableName" value="user"></property>
+		<property name="columnNames">
+			<list>
+				<value>login</value>
+				<value>name</value>
+				<value>password</value>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
 	
 	<security:authentication-manager alias="authManager">
-		<security:authentication-provider>
+		<security:authentication-provider >
 			<security:user-service>
 				<security:user name="admin" authorities="Admin" password="{noop}admin"/>
 			</security:user-service>

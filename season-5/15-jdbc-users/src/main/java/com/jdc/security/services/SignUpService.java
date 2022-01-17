@@ -30,7 +30,7 @@ public class SignUpService {
 		// insert into db
 		var params = new HashMap<String, Object>();
 		params.put("name", dto.getName());
-		params.put("loginId", dto.getLoginId());
+		params.put("login", dto.getLoginId());
 		params.put("password", bcryptEncoder.encode(dto.getPassword()));
 		
 		var result = insert.execute(params);

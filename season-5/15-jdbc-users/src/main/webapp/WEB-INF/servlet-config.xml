@@ -17,7 +17,6 @@
 	
 	<mvc:view-controller path="/" view-name="home"/>
 	<mvc:view-controller path="/login" view-name="security/signin"/>
-	<mvc:view-controller path="/signup" view-name="security/signup"/>
 	
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 </beans>

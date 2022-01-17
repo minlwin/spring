@@ -1,6 +1,6 @@
 package com.jdc.security.services.model;
 
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 public class SignUpDto {
 
