@@ -5,6 +5,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -16,10 +17,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+
+import com.jdc.security.services.filter.CustomSecurityFilter;
 
 @EnableWebSecurity
 @ComponentScan("com.jdc.security.services")
 public class RootConfig extends WebSecurityConfigurerAdapter{
+	
+	@Autowired
+	private CustomSecurityFilter customFilter;
 
 	
 	@Override
@@ -49,6 +56,9 @@ public class RootConfig extends WebSecurityConfigurerAdapter{
 		
 		http.logout()
 			.logoutUrl("/logout").logoutSuccessUrl("/");
+		
+		
+		http.addFilterAfter(customFilter, LogoutFilter.class);
 	}
 	
 	@Bean
@@ -65,6 +75,14 @@ public class RootConfig extends WebSecurityConfigurerAdapter{
 		var insert = new SimpleJdbcInsert(dataSource);
 		insert.setTableName("user");
 		insert.setColumnNames(List.of("name", "login", "password"));
+		return insert;
+	}
+	
+	@Bean
+	SimpleJdbcInsert accessInfoInsert(DataSource dataSource) {
+		var insert = new SimpleJdbcInsert(dataSource);
+		insert.setTableName("access_info");
+		insert.setColumnNames(List.of("login_id", "type"));
 		return insert;
 	}
 	

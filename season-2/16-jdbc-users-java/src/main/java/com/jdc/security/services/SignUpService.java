@@ -19,7 +19,7 @@ public class SignUpService {
 	private AuthenticationManager auth;
 	
 	@Autowired
-	private SimpleJdbcInsert insert;
+	private SimpleJdbcInsert userInsert;
 	
 	@Autowired
 	private PasswordEncoder bcryptEncoder;
@@ -31,7 +31,7 @@ public class SignUpService {
 		params.put("login", dto.getLoginId());
 		params.put("password", bcryptEncoder.encode(dto.getPassword()));
 		
-		var result = insert.execute(params);
+		var result = userInsert.execute(params);
 		
 		// programmatic login
 		if(result == 1) {

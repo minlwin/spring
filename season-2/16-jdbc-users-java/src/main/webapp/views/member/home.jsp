@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,40 @@
 		</div>
 		
 		<div class="card mt-4">
-			<img src="/resources/img/cover.png" alt="Cover Image" />
+			<h5 class="card-header">Access Log</h5>
+			
+			<div class="card-body">
+				
+				<table class="table table-striped">
+					
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Login ID</th>
+							<th>User Name</th>
+							<th>Access Type</th>
+							<th>Access At</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						
+						<c:forEach items="${accessList}" var="dto">
+						<tr>
+							<td>${dto.id}</td>
+							<td>${dto.loginId}</td>
+							<td>${dto.userName}</td>
+							<td>${dto.type}</td>
+							<td>${dto.accessTime}</td>
+						</tr>
+						</c:forEach>
+					
+					</tbody>
+				
+				
+				</table>
+			
+			</div>
 		</div>
 		
 	</div>
