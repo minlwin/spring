@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,42 +23,7 @@
 			<a href="/logout" class="btn btn-secondary">Sign Out</a>
 		</div>
 		
-		<div class="card mt-4">
-			<h5 class="card-header">Access Log</h5>
-			
-			<div class="card-body">
-				
-				<table class="table table-striped">
-					
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Login ID</th>
-							<th>User Name</th>
-							<th>Access Type</th>
-							<th>Access At</th>
-						</tr>
-					</thead>
-					
-					<tbody>
-						
-						<c:forEach items="${accessList}" var="dto">
-						<tr>
-							<td>${dto.id}</td>
-							<td>${dto.loginId}</td>
-							<td>${dto.userName}</td>
-							<td>${dto.type}</td>
-							<td>${dto.accessTime}</td>
-						</tr>
-						</c:forEach>
-					
-					</tbody>
-				
-				
-				</table>
-			
-			</div>
-		</div>
+		<app:access-info list="${accessList}"></app:access-info>
 		
 	</div>
 

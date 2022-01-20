@@ -1,5 +1,6 @@
 package com.jdc.security.services.model;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class AccessInfo {
@@ -40,6 +41,12 @@ public class AccessInfo {
 
 	public void setAccessTime(LocalDateTime accessTime) {
 		this.accessTime = accessTime;
+	}
+
+	public void setAccessTimeStamp(Timestamp accessTime) {
+		if(null != accessTime) {
+			this.accessTime = accessTime.toLocalDateTime();
+		}
 	}
 
 	public Type getType() {

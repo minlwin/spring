@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,9 +22,7 @@
 			<a href="/logout" class="btn btn-secondary">Sign Out</a>
 		</div>
 		
-		<div class="card mt-4">
-			<img src="/resources/img/cover.png" alt="Cover Image" />
-		</div>
+		<app:access-info list="${list}"></app:access-info>
 		
 	</div>
 
