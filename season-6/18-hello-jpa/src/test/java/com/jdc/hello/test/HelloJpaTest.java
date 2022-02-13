@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.jdc.hello.Message;
+import com.jdc.hello.sec.One;
+import com.jdc.hello.sec.Two;
 
 public class HelloJpaTest {
 	
@@ -41,5 +43,19 @@ public class HelloJpaTest {
 		
 		Assertions.assertEquals(1, message.getId());
 		
+	}
+	
+	@Test
+	void test2() {
+		var em = EMF.createEntityManager();
+		em.getTransaction().begin();
+		
+		for(var i = 1; i <= 5; i ++) {
+			
+			em.persist(new One("Value " + i));
+			em.persist(new Two("Value " + i));
+		}
+		
+		em.getTransaction().commit();
 	}
 }
