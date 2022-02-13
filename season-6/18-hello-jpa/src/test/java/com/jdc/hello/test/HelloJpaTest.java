@@ -1,7 +1,5 @@
 package com.jdc.hello.test;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -36,7 +34,6 @@ public class HelloJpaTest {
 		var message = new Message();
 		message.setUser("Min Lwin");
 		message.setMessage("Hello Hibernate JPA.");
-		message.setCreation(LocalDateTime.now());
 		
 		em.persist(message);
 		

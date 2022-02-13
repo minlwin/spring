@@ -10,6 +10,7 @@ import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
@@ -18,6 +19,8 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
 import javax.persistence.Temporal;
 import javax.persistence.Transient;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 
 @Entity
 @SecondaryTables({ @SecondaryTable(name = "contact"), @SecondaryTable(name = "facebook") })
@@ -31,6 +34,22 @@ public class Member implements Serializable {
 	@Basic(fetch = LAZY, optional = true)
 	private String password;
 	private LocalDate startDate;
+	
+	@Embedded
+	@AttributeOverrides({ 
+		@AttributeOverride(name = "name", column = @Column(name = "father_name", table = "Member")),
+		@AttributeOverride(name = "phone", column = @Column(name = "father_phone", table = "Member")),
+		@AttributeOverride(name = "job", column = @Column(name = "father_job", table = "Member")) 
+	})
+	private Parent father;
+
+	@Embedded
+	@AttributeOverrides({ 
+		@AttributeOverride(name = "name", column = @Column(name = "mother_name", table = "Member")),
+		@AttributeOverride(name = "phone", column = @Column(name = "mother_phone", table = "Member")),
+		@AttributeOverride(name = "job", column = @Column(table = "Member", name = "mother_job")) 
+	})
+	private Parent mother;
 
 	@Lob
 	private String greeting;
@@ -56,6 +75,8 @@ public class Member implements Serializable {
 	private String fbAccountName;
 	@Column(table = "contact")
 	private String profileUrl;
+	
+	private SecurityInfo security = new SecurityInfo();
 
 	public enum Role {
 		Admin, Member
@@ -163,6 +184,30 @@ public class Member implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public SecurityInfo getSecurity() {
+		return security;
+	}
+
+	public void setSecurity(SecurityInfo security) {
+		this.security = security;
+	}
+
+	public Parent getFather() {
+		return father;
+	}
+
+	public void setFather(Parent father) {
+		this.father = father;
+	}
+
+	public Parent getMother() {
+		return mother;
+	}
+
+	public void setMother(Parent mother) {
+		this.mother = mother;
 	}
 
 }
