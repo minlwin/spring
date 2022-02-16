@@ -4,9 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.persistence.OneToOne;
-import static javax.persistence.FetchType.LAZY;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "student")
@@ -20,7 +19,7 @@ public class Student implements Serializable {
 	private String phone;
 	private String email;
 
-	@OneToOne(mappedBy = "student", fetch = LAZY)
+	@OneToOne(mappedBy = "student")
 	private Address address;
 	
 	public Address getAddress() {

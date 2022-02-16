@@ -2,10 +2,8 @@ package com.jdc.registration;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,11 +14,9 @@ public class Address implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name = "student_id")
-	private int studentId;
+	private int id;
 
 	@OneToOne
-	@JoinColumn(updatable = false, insertable = false)
 	private Student student;
 
 	private String address;
@@ -35,12 +31,12 @@ public class Address implements Serializable {
 		this.student = student;
 	}
 
-	public int getStudentId() {
-		return studentId;
+	public int getId() {
+		return id;
 	}
 
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getAddress() {
