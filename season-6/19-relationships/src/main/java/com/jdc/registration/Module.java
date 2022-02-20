@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Module implements Serializable{
+public class Module implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,9 +15,17 @@ public class Module implements Serializable{
 	private int id;
 	private String name;
 	private String description;
-	
+
 	@ManyToOne
 	private Course course;
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
+	}
 
 	public int getId() {
 		return id;
@@ -41,14 +49,6 @@ public class Module implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
 	}
 
 }
