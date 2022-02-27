@@ -54,7 +54,7 @@ public class CascadeTest {
 		student.setContact(contact);
 		
 		em.persist(student);
-		
+
 		em.getTransaction().commit();
 		
 	}

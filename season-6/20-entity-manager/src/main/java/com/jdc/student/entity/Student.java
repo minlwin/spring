@@ -1,7 +1,6 @@
 package com.jdc.student.entity;
 
-import static javax.persistence.CascadeType.MERGE;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +15,7 @@ public class Student {
 	private int id;
 	private String name;
 	
-	@OneToOne(cascade = MERGE)
+	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "student")
 	private Contact contact;
 
 	public int getId() {
