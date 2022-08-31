@@ -16,4 +16,8 @@
 	</mvc:view-resolvers>
 	
 	<mvc:redirect-view-controller redirect-url="/home" path="/"/>
+	
+	<mvc:view-controller path="/signout" view-name="signin"/>
+	
+	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 </beans>

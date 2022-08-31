@@ -13,7 +13,9 @@
 </head>
 <body>
 
-	<c:import url="/jsp/include/navbar.jsp"></c:import>
+	<c:import url="/jsp/include/navbar.jsp">
+		<c:param name="view" value="teachers"></c:param>
+	</c:import>
 
 
 </body>
