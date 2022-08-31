@@ -2,6 +2,8 @@ package com.jdc.leaves.model.dto.output;
 
 import java.time.LocalDate;
 
+import com.jdc.leaves.model.dto.input.TeacherForm;
+
 public class TeacherListVO {
 
 	public TeacherListVO() {
@@ -18,6 +20,10 @@ public class TeacherListVO {
 	private LocalDate assignDate;
 
 	private long classCount;
+	
+	public TeacherForm form() {
+		return new TeacherForm(id, name, phone, email, assignDate);
+	}
 
 	public int getId() {
 		return id;

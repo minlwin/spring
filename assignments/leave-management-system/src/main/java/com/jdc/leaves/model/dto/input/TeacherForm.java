@@ -2,9 +2,20 @@ package com.jdc.leaves.model.dto.input;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class TeacherForm {
 
 	public TeacherForm() {
+	}
+	
+	public TeacherForm(int id, String name, String phone, String email, LocalDate assignDate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.assignDate = assignDate;
 	}
 
 	private int id;
@@ -15,6 +26,7 @@ public class TeacherForm {
 
 	private String email;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate assignDate;
 
 	public int getId() {

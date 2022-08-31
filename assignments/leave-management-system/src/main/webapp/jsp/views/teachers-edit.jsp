@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +19,47 @@
 		<c:param name="view" value="teachers"></c:param>
 	</c:import>
 
+
+	<div class="container">
+	
+		<h3 class="my-4">${ empty param.id ? 'Add New' : 'Edit' } Teacher</h3>
+		
+		<div class="row">
+			<c:url value="/teachers" var="save"></c:url>
+			<sf:form method="post" action="${ save }" modelAttribute="form" cssClass="col-lg-6 col-md-9 col-sm-12" >
+				
+				<sf:hidden path="id" />
+				
+				<div class="mb-3">
+					<label class="form-label">Name</label>
+					<sf:input path="name" placeholder="Enter Teacher Name" cssClass="form-control"/>
+				</div>
+			
+				<div class="mb-3">
+					<label class="form-label">Phone</label>
+					<sf:input type="tel" path="phone" placeholder="Enter Phone Number" cssClass="form-control"/>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label">Email</label>
+					<sf:input type="email" path="email" placeholder="Enter Email Address" cssClass="form-control"/>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label">Assign Date</label>
+					<sf:input path="assignDate" type="date" cssClass="form-control"/>
+				</div>
+				
+				<div>
+					<button class="btn btn-outline-danger" type="submit">
+						Save
+					</button>
+				</div>
+			</sf:form>
+		
+		</div>
+		
+	</div>
 
 </body>
 </html>
