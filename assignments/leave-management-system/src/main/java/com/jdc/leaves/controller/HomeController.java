@@ -16,7 +16,7 @@ public class HomeController {
 	@GetMapping
 	public String index(@RequestParam Optional<LocalDate> targetDate, ModelMap model) {
 
-		return "";
+		return "home";
 	}
 
 }

@@ -22,13 +22,13 @@ public class TeacherController {
 			@RequestParam Optional<String> email,
 			ModelMap model) {
 		// TODO implement here
-		return "";
+		return "teachers";
 	}
 
 	@GetMapping("edit")
 	public String edit(@RequestParam Optional<Integer> id, ModelMap model) {
 		// TODO implement here
-		return "";
+		return "teachers-edit";
 	}
 
 	@PostMapping

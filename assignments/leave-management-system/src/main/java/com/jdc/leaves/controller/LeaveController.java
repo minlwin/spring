@@ -24,13 +24,13 @@ public class LeaveController {
 			@RequestParam Optional<LocalDate> to,
 			ModelMap model) {
 		// TODO implement here
-		return "";
+		return "leaves";
 	}
 
 	@GetMapping("edit")
 	public String edit(@RequestParam Optional<Integer> id, ModelMap model) {
 		// TODO implement here
-		return "";
+		return "leaves-edit";
 	}
 
 	@PostMapping

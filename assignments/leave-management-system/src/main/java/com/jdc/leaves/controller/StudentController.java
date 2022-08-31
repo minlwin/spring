@@ -19,7 +19,7 @@ public class StudentController {
 			@RequestParam Optional<String> email,
 			ModelMap model) {
 		// TODO implement here
-		return "";
+		return "students";
 	}
 
 }

@@ -8,7 +8,12 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
-
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<context:component-scan base-package="com.jdc.leaves.controller"></context:component-scan>
+	
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/jsp/views/" suffix=".jsp"/>
+	</mvc:view-resolvers>
+	
+	<mvc:redirect-view-controller redirect-url="/home" path="/"/>
 </beans>
