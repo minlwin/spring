@@ -4,18 +4,18 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.jdc.leaves.model.dto.input.LeaveForm;
 import com.jdc.leaves.model.dto.output.LeaveListVO;
 import com.jdc.leaves.model.dto.output.LeaveSummaryVO;
 
+@Service
 public class LeaveService {
-
-	public LeaveService() {
-	}
 
 	public List<LeaveListVO> search(Optional<Integer> classId, Optional<String> studentName, Optional<LocalDate> from, Optional<LocalDate> to) {
 		// TODO implement here
-		return null;
+		return List.of();
 	}
 
 	public LeaveForm findById(int id) {
