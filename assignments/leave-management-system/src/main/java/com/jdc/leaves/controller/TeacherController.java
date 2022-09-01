@@ -28,19 +28,19 @@ public class TeacherController {
 			@RequestParam Optional<String> phone, 
 			@RequestParam Optional<String> email,
 			ModelMap model) {
-		// TODO implement here
+		var result = service.search(name, phone, email);
+		model.put("list", result);
 		return "teachers";
 	}
 
 	@GetMapping("edit")
 	public String edit(@RequestParam Optional<Integer> id, ModelMap model) {
-		// TODO implement here
 		return "teachers-edit";
 	}
 
 	@PostMapping
 	public String save(@ModelAttribute(name = "form") TeacherForm form) {
-		// TODO implement here
+		service.save(form);
 		return "redirect:/teachers";
 	}
 	
