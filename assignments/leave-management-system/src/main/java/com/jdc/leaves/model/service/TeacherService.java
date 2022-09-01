@@ -33,6 +33,9 @@ public class TeacherService {
 		accountInsert = new SimpleJdbcInsert(dataSource);
 		accountInsert.setTableName("account");
 		accountInsert.setGeneratedKeyName("id");
+		accountInsert.setColumnNames(List.of(
+				"name", "role", "email", "password"
+		));
 		
 		teacherInsert = new SimpleJdbcInsert(dataSource);
 		teacherInsert.setTableName("teacher");
