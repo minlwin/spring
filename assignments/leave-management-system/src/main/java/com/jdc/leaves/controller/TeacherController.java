@@ -34,7 +34,7 @@ public class TeacherController {
 	}
 
 	@GetMapping("edit")
-	public String edit(@RequestParam Optional<Integer> id, ModelMap model) {
+	public String edit(@RequestParam Optional<Integer> id) {
 		return "teachers-edit";
 	}
 

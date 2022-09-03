@@ -2,15 +2,15 @@ package com.jdc.leaves.model.dto.input;
 
 import java.time.LocalDate;
 
-public class ClassForm {
+import org.springframework.format.annotation.DateTimeFormat;
 
-	public ClassForm() {
-	}
+public class ClassForm {
 
 	private int id;
 
 	private int teacher;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate start;
 
 	private int months;

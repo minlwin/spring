@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jdc.leaves.model.dto.input.TeacherForm;
+import com.jdc.leaves.model.dto.output.IdWithName;
 import com.jdc.leaves.model.dto.output.TeacherListVO;
 
 @Service
@@ -134,6 +135,12 @@ public class TeacherService {
 				));
 		
 		return form.getId();
+	}
+
+	public List<IdWithName> getAvailableTeachers() {
+		return template.query("select t.id, a.name from teacher t join account a on t.id = a.id where a.deleted = :del", 
+				Map.of("del", false), 
+				new BeanPropertyRowMapper<>(IdWithName.class));
 	}
 
 }
