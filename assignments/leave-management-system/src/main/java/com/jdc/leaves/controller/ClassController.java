@@ -69,8 +69,9 @@ public class ClassController {
 
 	@GetMapping("registration")
 	public String editRegistration(
-			@RequestParam(required = false, defaultValue = "0") int id, 
+			@RequestParam(required = false, defaultValue = "0") int registId, 
 			@RequestParam(required = false, defaultValue = "0") int classId) {
+		
 		return "registrations-edit";
 	}
 
@@ -98,12 +99,12 @@ public class ClassController {
 	
 	@ModelAttribute(name = "registForm")
 	RegistrationForm registForm(
-			@RequestParam(required = false, defaultValue = "0") int id, 
+			@RequestParam(required = false, defaultValue = "0") int registId, 
 			@RequestParam(required = false, defaultValue = "0") int classId) {
 		
 		// Edit
-		if(id > 0) {
-			return regService.getFormById(id);
+		if(registId > 0) {
+			return regService.getFormById(registId);
 		}
 		
 		var form = new RegistrationForm();

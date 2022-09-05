@@ -9,6 +9,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 <c:url var="commonCss" value="/resources/application.css"></c:url>
 <link rel="stylesheet" href="${commonCss}" />
@@ -40,10 +41,10 @@
 			</div>
 			
 			<div class="col btn-wrapper">
-				<button class="btn btn-outline-success me-2">Search</button>
+				<button class="btn btn-outline-success me-2"><i class="bi bi-search"></i> Search</button>
 				
 				<c:url var="addNew" value="/teachers/edit"></c:url>
-				<a href="${ addNew }" class="btn btn-outline-danger">Add new</a>
+				<a href="${ addNew }" class="btn btn-outline-danger"><i class="bi bi-plus-lg"></i> Add new</a>
 			</div>
 		</form>
 		
@@ -73,7 +74,9 @@
 						<c:url var="edit" value="/teachers/edit">
 							<c:param name="id" value="1"></c:param>
 						</c:url>
-						<a href="${ edit }">Edit</a>
+						<a href="${ edit }">
+							<i class="bi bi-pencil"></i>
+						</a>
 					</td>
 				</tr>
 			</tbody>

@@ -27,8 +27,9 @@ public class RegistrationService {
 	}
 
 	public RegistrationForm getFormById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		var form = new RegistrationForm();
+		form.setId(id);
+		return form;
 	}
 
 }

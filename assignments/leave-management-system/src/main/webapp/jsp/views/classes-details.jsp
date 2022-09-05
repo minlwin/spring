@@ -9,6 +9,7 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 </head>
 <body>
@@ -56,11 +57,15 @@
 			<ul class="nav nav-pills">
 				
 				<li class="nav-item">
-					<button class="nav-link active" data-bs-toggle="pill" data-bs-target="#registrations">Registrations</button>
+					<button class="nav-link active" data-bs-toggle="pill" data-bs-target="#registrations">
+						<i class="bi bi-people-fill"></i> Registrations
+					</button>
 				</li>
 				
 				<li class="nav-item">
-					<button class="nav-link" data-bs-toggle="pill" data-bs-target="#leaves">Leave Applications</button>
+					<button class="nav-link" data-bs-toggle="pill" data-bs-target="#leaves">
+						<i class="bi bi-person-x"></i> Leave Applications
+					</button>
 				</li>
 				
 			</ul>	
@@ -72,7 +77,7 @@
 				</c:url>
 			
 				<a href="${ editClass }" class="btn btn-outline-danger">
-					Edit Class
+					<i class="bi bi-pencil"></i> Edit Class
 				</a>	
 			
 				<c:url var="addRegistration" value="/classes/registration">
@@ -80,7 +85,7 @@
 				</c:url>
 
 				<a href="${ addRegistration }" class="btn btn-outline-primary">
-					Add New Registration
+					<i class="bi bi-plus-lg"></i> Add New Registration
 				</a>								
 			</div>			
 		</div>

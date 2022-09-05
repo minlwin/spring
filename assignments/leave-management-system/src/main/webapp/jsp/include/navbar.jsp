@@ -16,19 +16,29 @@
 
 		<ul class="navbar-nav">
 			<li class="nav-item">
-				<a href="${ teachers }" class="nav-link ${ param.view eq 'teachers' ? 'active' : '' }">Teachers</a>
+				<a href="${ teachers }" class="nav-link ${ param.view eq 'teachers' ? 'active' : '' }">
+					<i class="bi bi-people"></i> Teachers
+				</a>
 			</li>
 			<li class="nav-item">
-				<a href="${ classes }" class="nav-link ${ param.view eq 'classes' ? 'active' : '' }">Classes</a>
+				<a href="${ classes }" class="nav-link ${ param.view eq 'classes' ? 'active' : '' }">
+					<i class="bi bi-mortarboard"></i> Classes
+				</a>
 			</li>
 			<li class="nav-item">
-				<a href="${ students }" class="nav-link ${ param.view eq 'students' ? 'active' : '' }">Students</a>
+				<a href="${ students }" class="nav-link ${ param.view eq 'students' ? 'active' : '' }">
+					<i class="bi bi-people-fill"></i> Students
+				</a>
 			</li>
 			<li class="nav-item">
-				<a href="${ leaves }" class="nav-link ${ param.view eq 'leaves' ? 'active' : '' }">Leaves</a>
+				<a href="${ leaves }" class="nav-link ${ param.view eq 'leaves' ? 'active' : '' }">
+					<i class="bi bi-inbox"></i> Leaves
+				</a>
 			</li>
 			<li class="nav-item">
-				<a href="${ signout }" class="nav-link">Sign Out</a>
+				<a href="${ signout }" class="nav-link">
+					<i class="bi bi-lock"></i> Sign Out
+				</a>
 			</li>
 		</ul>
 
