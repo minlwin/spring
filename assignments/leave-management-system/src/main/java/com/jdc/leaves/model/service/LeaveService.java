@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.leaves.model.dto.input.LeaveForm;
 import com.jdc.leaves.model.dto.output.LeaveListVO;
@@ -18,14 +19,14 @@ public class LeaveService {
 		return List.of();
 	}
 
-	public LeaveForm findById(int id) {
+	public LeaveForm findById(LocalDate applyDate, int classId, int studentId) {
 		// TODO implement here
 		return null;
 	}
 
-	public int save(LeaveForm form) {
+	@Transactional
+	public void save(LeaveForm form) {
 		// TODO implement here
-		return 0;
 	}
 
 	public List<LeaveSummaryVO> searchSummary(Optional<LocalDate> target) {

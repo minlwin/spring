@@ -10,9 +10,11 @@ import java.util.Optional;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jdc.leaves.model.dto.input.ClassForm;
@@ -29,7 +31,7 @@ public class ClassService {
 		c.start_date startDate, c.months, c.description, count(r.id) studentCount
 		from classes c join teacher t on t.id = c.teacher_id 
 		join account a on a.id = t.id
-		left join registration r on c.id = r.classes_id where 1 = 1 
+		left join registration r on c.id = r.classes_id
 		""";
 	private static final String SELECT_GROUPBY = "group by c.id, t.id, a.name, t.phone, c.start_date, c.month, c.description";
 	
@@ -53,6 +55,7 @@ public class ClassService {
 	public List<ClassListVO> search(Optional<String> teacher, Optional<LocalDate> from, Optional<LocalDate> to) {
 		
 		var sb = new StringBuffer(SELECT_PROJECTION);
+		sb.append(" where 1 = 1");
 		
 		var param = new HashMap<String, Object>();
 		
@@ -80,6 +83,11 @@ public class ClassService {
 		return template.queryForObject("select * from classes where id = :id", Map.of("id", id), new ClassFormRowMapper());
 	}
 
+	public ClassListVO findInfoById(int classId) {
+		var sql = "%s where c.id = :id %s".formatted(SELECT_PROJECTION, SELECT_GROUPBY);
+		return template.queryForObject(sql, Map.of("id", classId), new BeanPropertyRowMapper<>());
+	}
+
 	public ClassDetailsVO findDetailsById(int id) {
 		
 		var result = new ClassDetailsVO();
@@ -99,6 +107,7 @@ public class ClassService {
 	}
 
 
+	@Transactional
 	public int save(ClassForm form) {
 		if(form.getId() == 0) {
 			return insert(form);
@@ -129,4 +138,6 @@ public class ClassService {
 				"description", form.getDescription()
 		));
 		return generatedId.intValue();
-	}}
+	}
+
+}

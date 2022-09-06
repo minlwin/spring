@@ -23,13 +23,14 @@
 			<td>0987789999</td>
 			<td>
 				<c:url var="edit" value="/classes/registration">
-					<c:param name="registId" value="1"></c:param>
+					<c:param name="classId" value="1"></c:param>
+					<c:param name="studentId" value="1"></c:param>
 				</c:url>
 				<a href="${ edit }">
 					<i class="bi bi-pencil me-2"></i>
 				</a>			
 
-				<c:url var="details" value="/classes/registration/1"></c:url>
+				<c:url var="details" value="/classes/registration/1/1"></c:url>
 				<a href="${ details }">
 					<i class="bi bi-cursor"></i>
 				</a>			

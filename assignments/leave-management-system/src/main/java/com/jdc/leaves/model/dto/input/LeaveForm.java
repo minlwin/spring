@@ -2,15 +2,18 @@ package com.jdc.leaves.model.dto.input;
 
 import java.time.LocalDate;
 
-public class LeaveForm {
+import org.springframework.format.annotation.DateTimeFormat;
 
-	public LeaveForm() {
-	}
+public class LeaveForm {
 
 	private int classId;
 
 	private int student;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate applyDate;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
 
 	private int days;
@@ -57,4 +60,11 @@ public class LeaveForm {
 		this.reason = reason;
 	}
 
+	public LocalDate getApplyDate() {
+		return applyDate;
+	}
+
+	public void setApplyDate(LocalDate applyDate) {
+		this.applyDate = applyDate;
+	}	
 }

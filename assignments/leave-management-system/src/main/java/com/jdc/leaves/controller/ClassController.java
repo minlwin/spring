@@ -79,14 +79,14 @@ public class ClassController {
 	@PostMapping("registration")
 	public String saveRegistration(@ModelAttribute(name = "registForm") RegistrationForm form) {
 		
-		var id = regService.save(form);
+		regService.save(form);
 		
-		return "redirect:/classes/registration/%d".formatted(id);
+		return "redirect:/classes/registration/%d/%d".formatted(form.getClassId(), form.getStudentId());
 	}
 
-	@GetMapping("registration/{id}")
-	public String showRegistrationDetails(@PathVariable int id, ModelMap model) {
-		var result = regService.findDetailsById(id);
+	@GetMapping("registration/{classId}/{studentId}")
+	public String showRegistrationDetails(@PathVariable int classId, @PathVariable int studentId, ModelMap model) {
+		var result = regService.findDetailsById(classId, studentId);
 		model.put("dto", result);
 		return "registrations-details";
 	}
@@ -99,12 +99,12 @@ public class ClassController {
 	
 	@ModelAttribute(name = "registForm")
 	RegistrationForm registForm(
-			@RequestParam(required = false, defaultValue = "0") int registId, 
+			@RequestParam(required = false, defaultValue = "0") int studentId, 
 			@RequestParam(required = false, defaultValue = "0") int classId) {
 		
 		// Edit
-		if(registId > 0) {
-			return regService.getFormById(registId);
+		if(studentId > 0) {
+			return regService.getFormById(classId, studentId);
 		}
 		
 		var form = new RegistrationForm();

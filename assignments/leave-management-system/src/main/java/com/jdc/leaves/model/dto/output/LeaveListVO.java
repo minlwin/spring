@@ -7,9 +7,9 @@ public class LeaveListVO {
 	public LeaveListVO() {
 	}
 
-	private int id;
-
 	private LocalDate applyDate;
+
+	private int classId;
 
 	private int studentId;
 
@@ -27,12 +27,12 @@ public class LeaveListVO {
 
 	private String reason;
 
-	public int getId() {
-		return id;
+	public int getClassId() {
+		return classId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setClassId(int classId) {
+		this.classId = classId;
 	}
 
 	public LocalDate getApplyDate() {

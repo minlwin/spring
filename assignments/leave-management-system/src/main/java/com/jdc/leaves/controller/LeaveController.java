@@ -28,7 +28,7 @@ public class LeaveController {
 	}
 
 	@GetMapping("edit")
-	public String edit(@RequestParam Optional<Integer> id, ModelMap model) {
+	public String edit(@RequestParam Optional<Integer> classId, @RequestParam Optional<Integer> studentId, ModelMap model) {
 		// TODO implement here
 		return "leaves-edit";
 	}

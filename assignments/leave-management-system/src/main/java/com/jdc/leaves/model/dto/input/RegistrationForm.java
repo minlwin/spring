@@ -1,11 +1,15 @@
 package com.jdc.leaves.model.dto.input;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class RegistrationForm {
 
-	private int id;
-	
 	private int classId;
-
+	private int studentId;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate registDate;
 	private String studentName;
 
 	private String email;
@@ -54,11 +58,19 @@ public class RegistrationForm {
 		this.education = education;
 	}
 
-	public int getId() {
-		return id;
+	public int getStudentId() {
+		return studentId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
+	}
+
+	public LocalDate getRegistDate() {
+		return registDate;
+	}
+
+	public void setRegistDate(LocalDate registDate) {
+		this.registDate = registDate;
 	}
 }

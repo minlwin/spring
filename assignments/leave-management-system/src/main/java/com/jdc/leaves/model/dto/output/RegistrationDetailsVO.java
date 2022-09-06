@@ -1,10 +1,11 @@
 package com.jdc.leaves.model.dto.output;
 
+import java.time.LocalDate;
+
 public class RegistrationDetailsVO {
 
-	public RegistrationDetailsVO() {
-	}
-
+	private LocalDate registDate;
+	
 	private ClassListVO classInfo;
 
 	private StudentListVO student;
@@ -25,4 +26,11 @@ public class RegistrationDetailsVO {
 		this.student = student;
 	}
 
+	public LocalDate getRegistDate() {
+		return registDate;
+	}
+
+	public void setRegistDate(LocalDate registDate) {
+		this.registDate = registDate;
+	}
 }
