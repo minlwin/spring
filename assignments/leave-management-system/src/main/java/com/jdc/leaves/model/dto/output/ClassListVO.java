@@ -1,12 +1,26 @@
 package com.jdc.leaves.model.dto.output;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class ClassListVO {
 
 	public ClassListVO() {
+	}
+	
+	public ClassListVO(int id, int teacherId, String teacherName, String teacherPhone, LocalDate startDate, int moths,
+			String description, long studentCount) {
+		super();
+		this.id = id;
+		this.teacherId = teacherId;
+		this.teacherName = teacherName;
+		this.teacherPhone = teacherPhone;
+		this.startDate = startDate;
+		this.moths = moths;
+		this.description = description;
+		this.studentCount = studentCount;
 	}
 
 	private int id;
@@ -88,6 +102,26 @@ public class ClassListVO {
 
 	public void setStudentCount(long studentCount) {
 		this.studentCount = studentCount;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description, id, moths, startDate, studentCount, teacherId, teacherName, teacherPhone);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClassListVO other = (ClassListVO) obj;
+		return Objects.equals(description, other.description) && id == other.id && moths == other.moths
+				&& Objects.equals(startDate, other.startDate) && studentCount == other.studentCount
+				&& teacherId == other.teacherId && Objects.equals(teacherName, other.teacherName)
+				&& Objects.equals(teacherPhone, other.teacherPhone);
 	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.jdc.leaves.model.dto.input.RegistrationForm;
 import com.jdc.leaves.model.dto.output.StudentListVO;
@@ -23,14 +24,14 @@ import com.jdc.leaves.model.dto.output.StudentListVO;
 public class StudentService {
 	
 	private static final String SELECT_PROJECTION = """
-			select s.id, a.name, s.phone, a.email, s.education, count(r.class_id) classCount 
+			select s.id, a.name, s.phone, a.email, s.education, count(r.classes_id) classCount 
 			from student s 
 			join account a on s.id = a.id 
 			left join registration r on s.id = r.student_id 
 			""";
 	
 	private static final String SELECT_GROUPBY = """
-			select s.id, a.name, s.phone, a.email, s.education
+			group by s.id, a.name, s.phone, a.email, s.education
 			""";
 	
 	private NamedParameterJdbcTemplate template;
@@ -60,20 +61,34 @@ public class StudentService {
 		sb.append(" where 1 = 1");
 		var params = new HashMap<String, Object>();
 		
+		sb.append(email.filter(StringUtils::hasLength).map(a -> {
+			params.put("email", a.toLowerCase().concat("%"));
+			return " and lower(a.email) like :email";
+		}).orElse(""));
+
+		sb.append(name.filter(StringUtils::hasLength).map(a -> {
+			params.put("name", a.toLowerCase().concat("%"));
+			return " and lower(a.name) like :name";
+		}).orElse(""));
 		
-		sb.append(SELECT_GROUPBY).append(" order by a.name");
-		return template.query(sb.toString(), params, new BeanPropertyRowMapper<>());
+		sb.append(phone.filter(StringUtils::hasLength).map(a -> {
+			params.put("phone", a.toLowerCase().concat("%"));
+			return " and lower(s.phone) like :phone";
+		}).orElse(""));
+
+		sb.append(" ").append(SELECT_GROUPBY).append(" order by a.name");
+		return template.query(sb.toString(), params, new BeanPropertyRowMapper<>(StudentListVO.class));
 	}
 
 	public StudentListVO findInfoById(int studentId) {	
-		var sql = "%s wehre s.id = :id %s".formatted(SELECT_PROJECTION, SELECT_GROUPBY);
-		return template.queryForObject(sql, Map.of("id", studentId), new BeanPropertyRowMapper<>());
+		var sql = "%s where s.id = :id %s".formatted(SELECT_PROJECTION, SELECT_GROUPBY);
+		return template.queryForObject(sql, Map.of("id", studentId), new BeanPropertyRowMapper<>(StudentListVO.class));
 	}
 
 	public Integer findStudentByEmail(String email) {
-		return template.queryForObject("""
+		return template.queryForList("""
 				select s.id from student s join account a on s.id = a.id where a.email = :email
-				""", Map.of("email", email), Integer.class);
+				""", Map.of("email", email), Integer.class).stream().findFirst().orElse(null);
 	}
 
 	@Transactional(propagation = Propagation.REQUIRED)

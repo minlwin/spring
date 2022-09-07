@@ -5,6 +5,38 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class RegistrationForm {
+	
+	public RegistrationForm() {
+	}
+	
+	public RegistrationForm(int classId, int studentId, LocalDate registDate, String studentName, String email,
+			String phone, String education) {
+		super();
+		this.classId = classId;
+		this.studentId = studentId;
+		this.registDate = registDate;
+		this.studentName = studentName;
+		this.email = email;
+		this.phone = phone;
+		this.education = education;
+	}
+	
+	public RegistrationForm(String studentName, String email, String phone, String education) {
+		super();
+		this.studentName = studentName;
+		this.email = email;
+		this.phone = phone;
+		this.education = education;
+	}
+	
+	public RegistrationForm(int studentId, String studentName, String email, String phone, String education) {
+		super();
+		this.studentId = studentId;
+		this.studentName = studentName;
+		this.email = email;
+		this.phone = phone;
+		this.education = education;
+	}
 
 	private int classId;
 	private int studentId;

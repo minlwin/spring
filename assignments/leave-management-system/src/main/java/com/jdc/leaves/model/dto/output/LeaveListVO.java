@@ -1,10 +1,26 @@
 package com.jdc.leaves.model.dto.output;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class LeaveListVO {
 
 	public LeaveListVO() {
+	}
+
+	public LeaveListVO(LocalDate applyDate, int classId, int studentId, String student, String studentPhone,
+			int teacherId, String teacher, LocalDate startDate, int days, String reason) {
+		super();
+		this.applyDate = applyDate;
+		this.classId = classId;
+		this.studentId = studentId;
+		this.student = student;
+		this.studentPhone = studentPhone;
+		this.teacherId = teacherId;
+		this.teacher = teacher;
+		this.startDate = startDate;
+		this.days = days;
+		this.reason = reason;
 	}
 
 	private LocalDate applyDate;
@@ -105,6 +121,28 @@ public class LeaveListVO {
 
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(applyDate, classId, days, reason, startDate, student, studentId, studentPhone, teacher,
+				teacherId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LeaveListVO other = (LeaveListVO) obj;
+		return Objects.equals(applyDate, other.applyDate) && classId == other.classId && days == other.days
+				&& Objects.equals(reason, other.reason) && Objects.equals(startDate, other.startDate)
+				&& Objects.equals(student, other.student) && studentId == other.studentId
+				&& Objects.equals(studentPhone, other.studentPhone) && Objects.equals(teacher, other.teacher)
+				&& teacherId == other.teacherId;
 	}
 
 }

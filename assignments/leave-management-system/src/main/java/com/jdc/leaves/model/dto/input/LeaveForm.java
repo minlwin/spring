@@ -5,6 +5,19 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class LeaveForm {
+	
+	public LeaveForm() {
+	}
+	
+	public LeaveForm(int classId, int student, LocalDate applyDate, LocalDate startDate, int days, String reason) {
+		super();
+		this.classId = classId;
+		this.student = student;
+		this.applyDate = applyDate;
+		this.startDate = startDate;
+		this.days = days;
+		this.reason = reason;
+	}
 
 	private int classId;
 

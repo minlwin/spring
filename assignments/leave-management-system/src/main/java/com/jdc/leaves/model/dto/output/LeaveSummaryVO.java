@@ -1,8 +1,19 @@
 package com.jdc.leaves.model.dto.output;
 
+import java.util.Objects;
+
 public class LeaveSummaryVO {
 
 	public LeaveSummaryVO() {
+	}
+
+	public LeaveSummaryVO(int classId, String teacher, String startDate, long students, long leaves) {
+		super();
+		this.classId = classId;
+		this.teacher = teacher;
+		this.startDate = startDate;
+		this.students = students;
+		this.leaves = leaves;
 	}
 
 	private int classId;
@@ -53,6 +64,24 @@ public class LeaveSummaryVO {
 
 	public void setLeaves(long leaves) {
 		this.leaves = leaves;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(classId, leaves, startDate, students, teacher);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		LeaveSummaryVO other = (LeaveSummaryVO) obj;
+		return classId == other.classId && leaves == other.leaves && Objects.equals(startDate, other.startDate)
+				&& students == other.students && Objects.equals(teacher, other.teacher);
 	}
 
 }

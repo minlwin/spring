@@ -5,6 +5,18 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class ClassForm {
+	
+	public ClassForm() {
+	}
+	
+	public ClassForm(int id, int teacher, LocalDate start, int months, String description) {
+		super();
+		this.id = id;
+		this.teacher = teacher;
+		this.start = start;
+		this.months = months;
+		this.description = description;
+	}
 
 	private int id;
 

@@ -6,7 +6,7 @@ public class ClassDetailsVO {
 
 	public ClassDetailsVO() {
 	}
-
+	
 	private ClassListVO classInfo;
 
 	private List<RegistrationListVO> registrations;
