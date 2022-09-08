@@ -20,23 +20,7 @@ public class RegistrationForm {
 		this.phone = phone;
 		this.education = education;
 	}
-	
-	public RegistrationForm(String studentName, String email, String phone, String education) {
-		super();
-		this.studentName = studentName;
-		this.email = email;
-		this.phone = phone;
-		this.education = education;
-	}
-	
-	public RegistrationForm(int studentId, String studentName, String email, String phone, String education) {
-		super();
-		this.studentId = studentId;
-		this.studentName = studentName;
-		this.email = email;
-		this.phone = phone;
-		this.education = education;
-	}
+
 
 	private int classId;
 	private int studentId;

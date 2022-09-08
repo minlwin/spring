@@ -32,7 +32,7 @@ public class StudentServiceTest {
 			"Bo Bo,bobo@gmail.com,0955553333,College"
 	})
 	void should_create_successfully(String name, String email, String phone, String education) {
-		var result = service.createStudent(new RegistrationForm(name, email, phone, education));
+		var result = service.createStudent(new RegistrationForm(0, 0, null, name, email, phone, education));
 		assertThat(result, equalTo(1));
 	}
 	

@@ -31,7 +31,7 @@ public class LeaveService {
 
 	public List<LeaveSummaryVO> searchSummary(Optional<LocalDate> target) {
 		// TODO implement here
-		return null;
+		return List.of();
 	}
 
 }
