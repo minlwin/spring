@@ -31,22 +31,22 @@ public class RegistrationServiceTest {
 	private RegistrationService service;
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/csv/registration/should_create_new_student.csv")
+	@CsvFileSource(resources = "/csv/registration/should_create_new_student.csv", delimiter = '\t')
 	void should_create_new_student(int classId, int studentId, LocalDate registDate, String studentName, String email,
 			String phone, String education) {
 
-		var form = new RegistrationForm(classId, studentId, registDate, studentName, email, phone, education);
+		var form = new RegistrationForm(classId, 0, registDate, studentName, email, phone, education);
 
 		service.save(form);
 
-		assertThat(form, allOf(hasProperty("studentId", is(3)), hasProperty("registDate", is(LocalDate.now()))));
+		assertThat(form, allOf(hasProperty("studentId", is(studentId)), hasProperty("registDate", is(LocalDate.now()))));
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/csv/registration/should_create_old_student.csv")
+	@CsvFileSource(resources = "/csv/registration/should_create_old_student.csv", delimiter = '\t')
 	void should_create_old_student(int classId, int studentId, LocalDate registDate, String studentName, String email,
 			String phone, String education) {
-		var form = new RegistrationForm(classId, studentId, registDate, studentName, email, phone, education);
+		var form = new RegistrationForm(classId, 0, registDate, studentName, email, phone, education);
 
 		service.save(form);
 
@@ -55,7 +55,7 @@ public class RegistrationServiceTest {
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/csv/registration/should_update.csv")
+	@CsvFileSource(resources = "/csv/registration/should_update.csv", delimiter = '\t')
 	void should_update(int classId, int studentId, LocalDate registDate, String studentName, String email, String phone,
 			String education) {
 		var form = new RegistrationForm(classId, studentId, registDate, studentName, email, phone, education);
@@ -66,7 +66,7 @@ public class RegistrationServiceTest {
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/csv/registration/should_find_form_by_id.csv")
+	@CsvFileSource(resources = "/csv/registration/should_find_form_by_id.csv", delimiter = '\t')
 	void should_find_form_by_id(int classId, int studentId, LocalDate registDate, String studentName, String email,
 			String phone, String education) {
 
@@ -77,7 +77,7 @@ public class RegistrationServiceTest {
 	}
 
 	@ParameterizedTest
-	@CsvFileSource(resources = "/csv/registration/should_find_details_by_id.csv")
+	@CsvFileSource(resources = "/csv/registration/should_find_details_by_id.csv", delimiter = '\t')
 	void should_find_details_by_id(int classId, int studentId, LocalDate registDate, int teacherId, String teacherName,
 			String teacherPhone, LocalDate startDate, int moths, String description, long studentCount, String name,
 			String phone, String email, String education, long classCount) {
@@ -97,7 +97,9 @@ public class RegistrationServiceTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {
-
+			"1,3",
+			"2,2",
+			"3,0",
 	})
 	void should_search_by_class_id(int classId, int size) {
 		var list = service.searchByClassId(classId);

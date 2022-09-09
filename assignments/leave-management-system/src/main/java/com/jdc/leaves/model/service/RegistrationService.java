@@ -86,11 +86,11 @@ public class RegistrationService {
 		return template.queryForObject(sql, Map.of(
 				"classId", classId,
 				"studentId", studentId
-				), new BeanPropertyRowMapper<>());
+				), new BeanPropertyRowMapper<>(RegistrationForm.class));
 	}
 
 	public List<RegistrationListVO> searchByClassId(int id) {
-		return template.query(SELECT_BY_CLASS, Map.of("classId", id), new BeanPropertyRowMapper<>());
+		return template.query(SELECT_BY_CLASS, Map.of("classId", id), new BeanPropertyRowMapper<>(RegistrationListVO.class));
 	}
 
 	private void create(RegistrationForm form) {
@@ -120,13 +120,21 @@ public class RegistrationService {
 				update registration 
 				set registration_date = :registDate 
 				where classes_id =:classId and student_id = :studentId
-				""", Map.of());
+				""", Map.of(
+						"registDate", Date.valueOf(form.getRegistDate()),
+						"classId", form.getClassId(),
+						"studentId", form.getStudentId()
+						));
 		
 		template.update("""
 				update student 
 				set phone = :phone, education = :education
 				where id = :id
-				""", Map.of());
+				""", Map.of(
+				"phone", form.getPhone(),
+				"education", form.getEducation(),
+				"id", form.getStudentId()
+				));
 	}
 
 
