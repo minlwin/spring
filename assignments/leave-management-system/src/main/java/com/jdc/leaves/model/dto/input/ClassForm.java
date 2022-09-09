@@ -1,6 +1,7 @@
 package com.jdc.leaves.model.dto.input;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -67,6 +68,24 @@ public class ClassForm {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description, id, months, start, teacher);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ClassForm other = (ClassForm) obj;
+		return Objects.equals(description, other.description) && id == other.id && months == other.months
+				&& Objects.equals(start, other.start) && teacher == other.teacher;
 	}
 
 }

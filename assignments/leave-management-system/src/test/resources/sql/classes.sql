@@ -9,4 +9,6 @@ insert into teacher values (2, '0972626827', '2022-09-01');
 insert into teacher values (3, '08928282711', '2022-10-01');
 
 -- classes
-insert into classes (teacher_id, start_date, months, description) values (1, '2022-08-10', 3, 'Demo Class');
+insert into classes (teacher_id, start_date, months, description) values (1, '2022-07-10', 3, 'Java Basic');
+insert into classes (teacher_id, start_date, months, description) values (2, '2022-08-10', 3, 'Spring');
+insert into classes (teacher_id, start_date, months, description) values (3, '2022-09-10', 3, 'Flutter');

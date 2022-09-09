@@ -28,7 +28,7 @@ public class RegistrationService {
 			join classes c on r.classes_id = c.id 
 			join teacher t on c.teacher_id = t.id join account ta on t.id = ta.id 
 			join student s on r.student_id = s.id join account sa on s.id = sa.id 
-			where r.class_id = :classId
+			where r.classes_id = :classId
 			""";
 	
 	private NamedParameterJdbcTemplate template;

@@ -10,7 +10,7 @@ public class ClassListVO {
 	public ClassListVO() {
 	}
 	
-	public ClassListVO(int id, int teacherId, String teacherName, String teacherPhone, LocalDate startDate, int moths,
+	public ClassListVO(int id, int teacherId, String teacherName, String teacherPhone, LocalDate startDate, int months,
 			String description, long studentCount) {
 		super();
 		this.id = id;
@@ -18,10 +18,11 @@ public class ClassListVO {
 		this.teacherName = teacherName;
 		this.teacherPhone = teacherPhone;
 		this.startDate = startDate;
-		this.moths = moths;
+		this.months = months;
 		this.description = description;
 		this.studentCount = studentCount;
 	}
+
 
 	private int id;
 
@@ -34,7 +35,7 @@ public class ClassListVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate startDate;
 
-	private int moths;
+	private int months;
 
 	private String description;
 
@@ -80,12 +81,13 @@ public class ClassListVO {
 		this.startDate = startDate;
 	}
 
-	public int getMoths() {
-		return moths;
+
+	public int getMonths() {
+		return months;
 	}
 
-	public void setMoths(int moths) {
-		this.moths = moths;
+	public void setMonths(int months) {
+		this.months = months;
 	}
 
 	public String getDescription() {
@@ -106,7 +108,7 @@ public class ClassListVO {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, id, moths, startDate, studentCount, teacherId, teacherName, teacherPhone);
+		return Objects.hash(description, id, months, startDate, studentCount, teacherId, teacherName, teacherPhone);
 	}
 
 	@Override
@@ -118,10 +120,11 @@ public class ClassListVO {
 		if (getClass() != obj.getClass())
 			return false;
 		ClassListVO other = (ClassListVO) obj;
-		return Objects.equals(description, other.description) && id == other.id && moths == other.moths
+		return Objects.equals(description, other.description) && id == other.id && months == other.months
 				&& Objects.equals(startDate, other.startDate) && studentCount == other.studentCount
 				&& teacherId == other.teacherId && Objects.equals(teacherName, other.teacherName)
 				&& Objects.equals(teacherPhone, other.teacherPhone);
 	}
+
 
 }

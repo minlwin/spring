@@ -4,7 +4,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -34,7 +34,7 @@ public class ClassServiceTest {
 	@CsvFileSource(resources = "/csv/classes/should_save_insert.csv")
 	void should_save_insert(int id, int teacher, LocalDate start, int months, String description) {
 		// Input Form
-		var form = new ClassForm(id, teacher, start, months, description);
+		var form = new ClassForm(0, teacher, start, months, description);
 
 		// Test Method Execution
 		var result = service.save(form);
@@ -58,7 +58,17 @@ public class ClassServiceTest {
 
 	@ParameterizedTest
 	@CsvSource(value = {
-
+			",,,3",
+			"Aung,,,1",
+			"Aung Naing,,,0",
+			"Aung,2022-08-10,,1",
+			"Aung,2022-08-11,,0",
+			",2022-08-10,,2",
+			",2022-09-10,,1",			
+			",2022-09-10,2022-09-11,1",			
+			",,2022-09-09,2",			
+			"Aung,,2022-08-10,1",
+			"Thidar,,2022-08-10,0",
 	})
 	void should_search(String teacher, LocalDate from, LocalDate to, int size) {
 
@@ -102,7 +112,7 @@ public class ClassServiceTest {
 
 		var result = service.findInfoById(id);
 
-		assertThat(result, is(new ClassListVO(id, teacherId, teacherName, teacherPhone, startDate, moths, description,
+		assertThat(result, equalTo(new ClassListVO(id, teacherId, teacherName, teacherPhone, startDate, moths, description,
 				studentCount)));
 	}
 }

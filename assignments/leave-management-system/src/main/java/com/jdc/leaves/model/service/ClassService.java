@@ -20,20 +20,18 @@ import org.springframework.util.StringUtils;
 import com.jdc.leaves.model.dto.input.ClassForm;
 import com.jdc.leaves.model.dto.output.ClassDetailsVO;
 import com.jdc.leaves.model.dto.output.ClassListVO;
-import com.jdc.leaves.model.service.mapper.ClassFormRowMapper;
-import com.jdc.leaves.model.service.mapper.ClassListVoRowMapper;
 
 @Service
 public class ClassService {
 	
 	private static final String SELECT_PROJECTION = """
 		select c.id id, t.id teacherId, a.name teacherName, t.phone teacherPhone, 
-		c.start_date startDate, c.months, c.description, count(r.id) studentCount
+		c.start_date startDate, c.months, c.description, count(r.classes_id) studentCount
 		from classes c join teacher t on t.id = c.teacher_id 
 		join account a on a.id = t.id
 		left join registration r on c.id = r.classes_id
 		""";
-	private static final String SELECT_GROUPBY = "group by c.id, t.id, a.name, t.phone, c.start_date, c.month, c.description";
+	private static final String SELECT_GROUPBY = " group by c.id, t.id, a.name, t.phone, c.start_date, c.months, c.description";
 	
 	private NamedParameterJdbcTemplate template;
 	private SimpleJdbcInsert insert;
@@ -49,7 +47,7 @@ public class ClassService {
 		
 		insert.setTableName("classes");
 		insert.setGeneratedKeyName("id");
-		insert.setColumnNames(List.of("teacer_id", "start_date", "months", "description"));
+		insert.setColumnNames(List.of("teacher_id", "start_date", "months", "description"));
 	}
 
 	public List<ClassListVO> search(Optional<String> teacher, Optional<LocalDate> from, Optional<LocalDate> to) {
@@ -61,47 +59,47 @@ public class ClassService {
 		
 		sb.append(teacher.filter(StringUtils::hasText).map(a -> {
 			param.put("teacher", a.toLowerCase().concat("%"));
-			return "and lower(a.name) like :teacher";
-		}));
+			return " and lower(a.name) like :teacher";
+		}).orElse(""));
 		
 		sb.append(from.map(a -> {
 			param.put("from", Date.valueOf(a));
-			return "and c.start_date >= :from";
-		}));
+			return " and c.start_date >= :from";
+		}).orElse(""));
 
 		sb.append(to.map(a -> {
 			param.put("to", Date.valueOf(a));
-			return "and c.start_date <= :to";
-		}));
+			return " and c.start_date <= :to";
+		}).orElse(""));
 
 		sb.append(SELECT_GROUPBY);
 
-		return template.query(sb.toString(), param, new ClassListVoRowMapper());
+		return template.query(sb.toString(), param, new BeanPropertyRowMapper<>(ClassListVO.class));
 	}
 
 	public ClassForm findById(int id) {
-		return template.queryForObject("select * from classes where id = :id", Map.of("id", id), new ClassFormRowMapper());
+		return template.queryForObject("select id, teacher_id teacher, start_date start, months, description from classes where id = :id", Map.of("id", id), new BeanPropertyRowMapper<>(ClassForm.class));
 	}
 
 	public ClassListVO findInfoById(int classId) {
 		var sql = "%s where c.id = :id %s".formatted(SELECT_PROJECTION, SELECT_GROUPBY);
-		return template.queryForObject(sql, Map.of("id", classId), new BeanPropertyRowMapper<>());
+		return template.queryForObject(sql, Map.of("id", classId), new BeanPropertyRowMapper<>(ClassListVO.class));
 	}
 
-	public ClassDetailsVO findDetailsById(int id) {
+	public ClassDetailsVO findDetailsById(int classId) {
 		
 		var result = new ClassDetailsVO();
 
 		// Class Info
-		var sql = "% and c.id = :id %s".formatted(SELECT_PROJECTION, SELECT_GROUPBY);
-		var classListVO = template.queryForObject(sql, Map.of("id", id), new ClassListVoRowMapper());
+		var sql = "%s where c.id = :id %s".formatted(SELECT_PROJECTION, SELECT_GROUPBY);
+		var classListVO = template.queryForObject(sql, Map.of("id", classId), new BeanPropertyRowMapper<>(ClassListVO.class));
 		result.setClassInfo(classListVO);
 		
 		// Registrations for Class
-		result.setRegistrations(regService.searchByClassId(id));
+		result.setRegistrations(regService.searchByClassId(classId));
 		
 		// Leaves for Class
-		result.setLeaves(leaService.search(Optional.of(id), Optional.empty(), Optional.empty(), Optional.empty()));
+		result.setLeaves(leaService.search(Optional.of(classId), Optional.empty(), Optional.empty(), Optional.empty()));
 		
 		return result;
 	}
@@ -132,7 +130,7 @@ public class ClassService {
 
 	private int insert(ClassForm form) {
 		var generatedId = insert.executeAndReturnKey(Map.of(
-				"teacer_id", form.getTeacher(),
+				"teacher_id", form.getTeacher(),
 				"start_date", Date.valueOf(form.getStart()),
 				"months", form.getMonths(),
 				"description", form.getDescription()
