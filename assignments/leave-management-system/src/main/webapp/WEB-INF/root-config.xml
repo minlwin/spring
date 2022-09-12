@@ -4,9 +4,11 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
 	<context:component-scan
@@ -25,9 +27,23 @@
 		>
 	</bean>
 		
+	<bean id="leaveUserService" class="com.jdc.leaves.model.security.LeaveApplicationUserService">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
+
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.support.JdbcTransactionManager" p:dataSource-ref="dataSource">
 	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<security:authentication-manager id="authManager">
+		<security:authentication-provider
+			user-service-ref="leaveUserService">
+		<security:password-encoder ref="passwordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+	
+	
+	<security:http></security:http>
 </beans>
