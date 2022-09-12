@@ -31,8 +31,9 @@
 		
 			<sf:form method="post" modelAttribute="registForm" cssClass="col-6">
 			
-				<sf:hidden path="id"/>
+				<sf:hidden path="studentId"/>
 				<sf:hidden path="classId"/>
+				<sf:hidden path="registDate"/>
 				
 				<div class="mb-3">
 					<label class="form-label">Start Date</label>
@@ -51,16 +52,19 @@
 				<div class="mb-3">
 					<label class="form-label">Student Name</label>
 					<sf:input path="studentName" placeholder="Enter Student Name" cssClass="form-control" />
+					<sf:errors path="studentName" cssClass="text-secondary"></sf:errors>
 				</div>
 
 				<div class="mb-3">
 					<label class="form-label">Email</label>
 					<sf:input path="email" type="email" placeholder="Enter Email Address" cssClass="form-control" />
+					<sf:errors path="email" cssClass="text-secondary"></sf:errors>
 				</div>
 
 				<div class="mb-3">
 					<label class="form-label">Phone</label>
 					<sf:input path="email" type="email" placeholder="Enter Email Address" cssClass="form-control" />
+					<sf:errors path="Phone" cssClass="text-secondary"></sf:errors>
 				</div>
 
 				<div class="mb-3">

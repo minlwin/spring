@@ -33,10 +33,12 @@
 					
 					<sf:hidden path="id"/>
 					
+					
 					<!-- Teacher Id -->
 					<div class="mb-3">
 						<label class="form-label">Teacher</label>
 						<sf:select path="teacher" items="${teachers}" itemLabel="name" itemValue="id" cssClass="form-select"></sf:select>
+						<sf:errors path="teacher" cssClass="text-secondary"></sf:errors>
 					</div>
 					
 					<div class="row mb-2">
@@ -44,11 +46,13 @@
 						<div class="col">
 							<label class="form-label">Start Date</label>
 							<sf:input path="start" type="date" cssClass="form-control" />
+							<sf:errors path="start" cssClass="text-secondary"></sf:errors>
 						</div>						
 						<!-- Months -->
 						<div class="col">
 							<label class="form-label">Months</label>
 							<sf:input path="months" type="number" cssClass="form-control" placeholder="Enter Months" />
+							<sf:errors path="months" cssClass="text-secondary"></sf:errors>
 						</div>						
 					
 					</div>
@@ -57,6 +61,7 @@
 					<div class="mb-3">
 						<label class="form-label">Description</label>
 						<sf:textarea path="description" cssClass="form-control"/>
+						<sf:errors path="description" cssClass="text-secondary"></sf:errors>
 					</div>
 					
 					<div>

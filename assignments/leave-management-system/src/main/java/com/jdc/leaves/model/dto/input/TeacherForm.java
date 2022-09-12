@@ -3,6 +3,7 @@ package com.jdc.leaves.model.dto.input;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -31,6 +32,7 @@ public class TeacherForm {
 	@NotEmpty(message = "Please enter email address.")
 	private String email;
 
+	@NotNull(message = "Please enter assign date.")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate assignDate;
 

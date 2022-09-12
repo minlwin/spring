@@ -34,21 +34,25 @@
 				<div class="mb-3">
 					<label class="form-label">Name</label>
 					<sf:input path="name" placeholder="Enter Teacher Name" cssClass="form-control"/>
+					<sf:errors path="name" cssClass="text-secondary"></sf:errors>
 				</div>
 			
 				<div class="mb-3">
 					<label class="form-label">Phone</label>
 					<sf:input type="tel" path="phone" placeholder="Enter Phone Number" cssClass="form-control"/>
+					<sf:errors path="phone" cssClass="text-secondary"></sf:errors>
 				</div>
 
 				<div class="mb-3">
 					<label class="form-label">Email</label>
 					<sf:input type="email" path="email" placeholder="Enter Email Address" cssClass="form-control"/>
+					<sf:errors path="email" cssClass="text-secondary"></sf:errors>
 				</div>
 
 				<div class="mb-3">
 					<label class="form-label">Assign Date</label>
 					<sf:input path="assignDate" type="date" cssClass="form-control"/>
+					<sf:errors path="assignDate" cssClass="text-secondary"></sf:errors>
 				</div>
 				
 				<div>

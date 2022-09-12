@@ -54,7 +54,8 @@ public class TeacherController {
 	
 	@ModelAttribute(name = "form")
 	TeacherForm form(@RequestParam Optional<Integer> id)  {
-		return id.map(service::findById)
+		return id.filter(a -> a > 0)
+				.map(service::findById)
 				.map(TeacherListVO::form)
 				.orElse(new TeacherForm());
 	}
