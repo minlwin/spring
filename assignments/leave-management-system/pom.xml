@@ -30,6 +30,12 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>5.7.3</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.2.3.Final</version>
+		</dependency>
 
 		<dependency>
 			<groupId>commons-dbcp</groupId>

@@ -2,9 +2,12 @@ package com.jdc.leaves.controller;
 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +42,12 @@ public class TeacherController {
 	}
 
 	@PostMapping
-	public String save(@ModelAttribute(name = "form") TeacherForm form) {
+	public String save(@Valid @ModelAttribute(name = "form") TeacherForm form, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			return "teachers-edit";
+		}
+		
 		service.save(form);
 		return "redirect:/teachers";
 	}
