@@ -52,11 +52,12 @@
 		
 		<security:form-login login-page="/signin"
 			authentication-failure-url="/signin?error=1"
-			authentication-success-forward-url="/" password-parameter="username"
-			login-processing-url="/signin" username-parameter="password" />
+			password-parameter="password" login-processing-url="/signin"
+			username-parameter="username" default-target-url="/" />
 
-		<security:logout />
-		
+		<security:logout logout-url="/signout" logout-success-url="/"
+			invalidate-session="true" />
+
 		<security:intercept-url pattern="/classes/**"
 			access="hasAnyRole('Admin', 'Teacher')" />
 		<security:intercept-url pattern="/leaves/**"

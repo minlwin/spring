@@ -37,7 +37,7 @@ public class LeaveApplicationUserService implements UserDetailsService{
 					.build();
 		}
 		
-		return null;
+		throw new UsernameNotFoundException(username);
 	}
 
 
