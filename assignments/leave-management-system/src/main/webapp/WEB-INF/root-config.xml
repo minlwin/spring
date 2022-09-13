@@ -34,6 +34,10 @@
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.support.JdbcTransactionManager" p:dataSource-ref="dataSource">
 	</bean>
+
+	<bean class="com.jdc.leaves.model.security.AdminUserInitializer">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
@@ -42,8 +46,20 @@
 			user-service-ref="leaveUserService">
 		<security:password-encoder ref="passwordEncoder" />
 		</security:authentication-provider>
-	</security:authentication-manager>
+	</security:authentication-manager>	
 	
-	
-	<security:http></security:http>
+	<security:http>
+		<security:form-login />
+		<security:logout />
+		<security:intercept-url pattern="/classes/**"
+			access="hasAnyAuthority('Admin', 'Teacher')" />
+		<security:intercept-url pattern="/leaves/**"
+			access="hasAnyAuthority('Admin', 'Teacher', 'Student')" />
+		<security:intercept-url pattern="/students/**"
+			access="hasAnyAuthority('Admin', 'Teacher')" />
+		<security:intercept-url pattern="/teachers/**"
+			access="hasAuthority('Admin')" />
+		
+	</security:http>
+
 </beans>
