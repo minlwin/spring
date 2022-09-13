@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>    
 
 <c:url var="home" value="/home" />
 <c:url var="teachers" value="/teachers" />
@@ -8,6 +9,9 @@
 <c:url var="students" value="/students" />
 <c:url var="leaves" value="/leaves" />
 <c:url var="signout" value="/signout" />
+
+<c:url var="signoutJs" value="/resources/logout.js" />
+
     
 <nav class="navbar navbar-expand-lg bg-success navbar-dark ">
 
@@ -36,7 +40,7 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a href="${ signout }" class="nav-link">
+				<a id="logoutMenu" class="nav-link">
 					<i class="bi bi-lock"></i> Sign Out
 				</a>
 			</li>
@@ -45,4 +49,8 @@
 	</div>
 	
 </nav>
+
+<sf:form action="${ signout }" id="logoutForm" method="post" cssClass="d-none"></sf:form>
+
+<script src="${ signoutJs }"></script>
    

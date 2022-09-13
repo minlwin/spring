@@ -43,8 +43,12 @@ public class LeaveController {
 	}
 	
 	@ModelAttribute("form")
-	LeaveForm form(@RequestParam int classId, @RequestParam int studentId) {
-		return new LeaveForm(classId, studentId);
+	LeaveForm form(@RequestParam(required = false) Integer classId, @RequestParam(required = false) Integer studentId) {
+		if(null != classId && null != studentId) {
+			return new LeaveForm(classId, studentId);
+		}
+		
+		return null;
 	}
 
 }

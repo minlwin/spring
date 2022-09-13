@@ -59,13 +59,13 @@
 			invalidate-session="true" />
 
 		<security:intercept-url pattern="/classes/**"
-			access="hasAnyRole('Admin', 'Teacher')" />
+			access="hasAnyAuthority('Admin', 'Teacher')" />
 		<security:intercept-url pattern="/leaves/**"
-			access="hasAnyRole('Admin', 'Teacher', 'Student')" />
+			access="hasAnyAuthority('Admin', 'Teacher', 'Student')" />
 		<security:intercept-url pattern="/students/**"
-			access="hasAnyRole('Admin', 'Teacher')" />
+			access="hasAnyAuthority('Admin', 'Teacher')" />
 		<security:intercept-url pattern="/teachers/**"
-			access="hasRole('Admin')" />
+			access="hasAuthority('Admin')" />
 
 		<security:intercept-url pattern="/home"
 			access="isAuthenticated()" />
