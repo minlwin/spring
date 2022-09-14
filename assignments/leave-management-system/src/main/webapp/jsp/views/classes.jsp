@@ -31,17 +31,17 @@
 			
 			<div class="col-auto">
 				<label class="form-label">Name</label>
-				<input type="text" name="teacher" placeholder="Search Teacher Name" class="form-control" />
+				<input type="text" name="teacher" placeholder="Search Teacher Name" value="${ param.teacher }" class="form-control" />
 			</div>
 		
 			<div class="col-auto">
 				<label class="form-label">Date From</label>
-				<input type="date" name="from" class="form-control" />
+				<input type="date" name="from" class="form-control" value="${ param.from }" />
 			</div>
 
 			<div class="col-auto">
 				<label class="form-label">Date To</label>
-				<input type="date" name="to" class="form-control" />
+				<input type="date" name="to" class="form-control" value="${ param.to }" />
 			</div>
 			
 			<div class="col btn-wrapper">
@@ -52,43 +52,60 @@
 
 		</form>
 		
-		<table class="table table-hover">
+		<c:choose>
+			
+			<c:when test="${ empty list }">
+				<div class="alert alert-info">
+					There is no data.
+				</div>
+			</c:when>
+			
+			<c:otherwise>
+				<table class="table table-hover">
+				
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Teacher</th>
+							<th>Teacher Phone</th>
+							<th>Start Date</th>
+							<th>Months</th>
+							<th>Students</th>
+							<th>Description</th>
+							<th></th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						
+						<c:forEach items="${ list }" var="item">
+							<tr>
+								<td>${ item.id }</td>
+								<td>${ item.teacherName }</td>
+								<td>${ item.teacherPhone }</td>
+								<td>${ item.startDate }</td>
+								<td>${ item.months }</td>
+								<td>${ item.studentCount }</td>
+								<td>${ item.description }</td>
+								<td>
+									<c:url var="edit" value="/classes/edit">
+										<c:param name="id" value="${ item.id }"></c:param>
+									</c:url>
+									<a href="${ edit }"><i class="bi bi-pencil me-3"></i></a>
+			
+									<c:url var="details" value="/classes/${ item.id }"></c:url>
+									<a href="${ details }"><i class="bi bi-cursor"></i></a>
+								</td>
+							</tr>
+						
+						</c:forEach>
+					</tbody>
+				</table>
+			</c:otherwise>
 		
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Teacher</th>
-					<th>Teacher Phone</th>
-					<th>Start Date</th>
-					<th>Months</th>
-					<th>Students</th>
-					<th>Description</th>
-					<th></th>
-				</tr>
-			</thead>
-			
-			<tbody>
-			
-				<tr>
-					<td>1</td>
-					<td>Min Lwin</td>
-					<td>09782003098</td>
-					<td>2022-10-03</td>
-					<td>6</td>
-					<td>43</td>
-					<td>One Stop Java Class</td>
-					<td>
-						<c:url var="edit" value="/classes/edit">
-							<c:param name="id" value="1"></c:param>
-						</c:url>
-						<a href="${ edit }"><i class="bi bi-pencil me-3"></i></a>
+		</c:choose>
+		
 
-						<c:url var="details" value="/classes/1"></c:url>
-						<a href="${ details }"><i class="bi bi-cursor"></i></a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
 	
 	</div>
 	

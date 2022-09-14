@@ -29,15 +29,15 @@
 		<form class="row mb-4">
 			<div class="col-auto">
 				<label class="form-label">Name</label>
-				<input type="text" name="name" class="form-control" placeholder="Search Name" />
+				<input type="text" name="name" class="form-control" value="${ param.name }" placeholder="Search Name" />
 			</div>
 			<div class="col-auto">
 				<label class="form-label">Phone</label>
-				<input type="tel" name="phone" class="form-control" placeholder="Search Phone" />
+				<input type="tel" name="phone" class="form-control" value="${ param.phone }" placeholder="Search Phone" />
 			</div>
 			<div class="col-auto">
 				<label class="form-label">Email</label>
-				<input type="email" name="email" class="form-control" placeholder="Search Email" />
+				<input type="email" name="email" class="form-control" value="${ param.email }" placeholder="Search Email" />
 			</div>
 			
 			<div class="col btn-wrapper">
@@ -48,39 +48,55 @@
 			</div>
 		</form>
 		
-		<!-- Table View -->
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Name</th>
-					<th>Phone</th>
-					<th>Email</th>
-					<th>Assign Date</th>
-					<th>Classes</th>
-					<th></th>
-				</tr>
-			</thead>
+		
+		<c:choose>
 			
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>Min Lwin</td>
-					<td>09782003098</td>
-					<td>lwin.zawmin@gmail.com</td>
-					<td>2022-09-01</td>
-					<td>5</td>
-					<td>
-						<c:url var="edit" value="/teachers/edit">
-							<c:param name="id" value="1"></c:param>
-						</c:url>
-						<a href="${ edit }">
-							<i class="bi bi-pencil"></i>
-						</a>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+			<c:when test="${ empty list }">
+				<div class="alert alert-info">There is no data.</div>
+			</c:when>
+			
+			<c:otherwise>
+
+				<!-- Table View -->
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Name</th>
+							<th>Phone</th>
+							<th>Email</th>
+							<th>Assign Date</th>
+							<th>Classes</th>
+							<th></th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<c:forEach items="${ list }" var="t">
+							<tr>
+								<td>${ t.id }</td>
+								<td>${ t.name }</td>
+								<td>${ t.phone }</td>
+								<td>${ t.email }</td>
+								<td>${ t.assignDate }</td>
+								<td>${ t.classCount }</td>
+								<td>
+									<c:url var="edit" value="/teachers/edit">
+										<c:param name="id" value="${ t.id }"></c:param>
+									</c:url>
+									<a href="${ edit }">
+										<i class="bi bi-pencil"></i>
+									</a>
+								</td>
+							</tr>
+						
+						</c:forEach>
+					</tbody>
+				</table>			
+			</c:otherwise>
+		
+		</c:choose>
+
 		
 	</div>
 

@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>    
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>    
 
 <c:url var="home" value="/home" />
 <c:url var="teachers" value="/teachers" />
@@ -19,21 +20,27 @@
 		<a href="${ home }" class="navbar-brand">Leave Management System</a>
 
 		<ul class="navbar-nav">
-			<li class="nav-item">
-				<a href="${ teachers }" class="nav-link ${ param.view eq 'teachers' ? 'active' : '' }">
-					<i class="bi bi-people"></i> Teachers
-				</a>
-			</li>
-			<li class="nav-item">
-				<a href="${ classes }" class="nav-link ${ param.view eq 'classes' ? 'active' : '' }">
-					<i class="bi bi-mortarboard"></i> Classes
-				</a>
-			</li>
-			<li class="nav-item">
-				<a href="${ students }" class="nav-link ${ param.view eq 'students' ? 'active' : '' }">
-					<i class="bi bi-people-fill"></i> Students
-				</a>
-			</li>
+			
+			<sec:authorize access="hasAuthority('Admin')">
+				<li class="nav-item">
+					<a href="${ teachers }" class="nav-link ${ param.view eq 'teachers' ? 'active' : '' }">
+						<i class="bi bi-people"></i> Teachers
+					</a>
+				</li>
+			</sec:authorize>
+			
+			<sec:authorize access="hasAnyAuthority('Admin', 'Teacher')">
+				<li class="nav-item">
+					<a href="${ classes }" class="nav-link ${ param.view eq 'classes' ? 'active' : '' }">
+						<i class="bi bi-mortarboard"></i> Classes
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="${ students }" class="nav-link ${ param.view eq 'students' ? 'active' : '' }">
+						<i class="bi bi-people-fill"></i> Students
+					</a>
+				</li>
+			</sec:authorize>
 			<li class="nav-item">
 				<a href="${ leaves }" class="nav-link ${ param.view eq 'leaves' ? 'active' : '' }">
 					<i class="bi bi-inbox"></i> Leaves
