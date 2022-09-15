@@ -22,8 +22,6 @@ public class LeaveController {
 
 	@GetMapping
 	public String index(
-			@RequestParam Optional<Integer> classId, 
-			@RequestParam Optional<String> studentName, 
 			@RequestParam Optional<LocalDate> from, 
 			@RequestParam Optional<LocalDate> to,
 			ModelMap model) {

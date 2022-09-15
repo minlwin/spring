@@ -99,7 +99,7 @@ public class ClassService {
 		result.setRegistrations(regService.searchByClassId(classId));
 		
 		// Leaves for Class
-		result.setLeaves(leaService.search(Optional.of(classId), Optional.empty(), Optional.empty(), Optional.empty()));
+		result.setLeaves(leaService.search(Optional.of(classId), Optional.empty(), Optional.empty()));
 		
 		return result;
 	}

@@ -18,6 +18,13 @@
 		<c:param name="view" value="students"></c:param>
 	</c:import>
 
-
+	<div class="container">
+		<h3 class="my-4">Student List</h3>
+		
+		<!-- Search Form -->
+		
+		<!-- Student Table for Search Result -->
+	</div>
+	
 </body>
 </html>

@@ -21,6 +21,17 @@
 	<div class="container">
 		
 		<h3 class="my-4">Leaves</h3>
+		
+		<!-- Search Form -->
+		<form class="row mb-4">
+			<!-- Date From -->		
+			
+			<!-- Date To -->	
+			
+			<!-- Search Button -->
+		</form>		
+		
+		<!-- Search Result -->
 	
 	</div>
 </body>

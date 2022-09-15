@@ -34,15 +34,10 @@ public class LeaveService {
 		template = new NamedParameterJdbcTemplate(dataSource);
 	}
 
-	public List<LeaveListVO> search(Optional<Integer> classId, Optional<String> studentName, Optional<LocalDate> from,
+	public List<LeaveListVO> search(Optional<Integer> classId, Optional<LocalDate> from,
 			Optional<LocalDate> to) {
 		// TODO implement here
 		return List.of();
-	}
-
-	public LeaveForm findById(LocalDate applyDate, int classId, int studentId) {
-		// TODO implement here
-		return null;
 	}
 
 	@Transactional
