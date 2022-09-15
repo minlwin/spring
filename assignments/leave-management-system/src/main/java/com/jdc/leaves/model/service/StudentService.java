@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jdc.leaves.model.dto.input.RegistrationForm;
+import com.jdc.leaves.model.dto.output.StudentDetailsVO;
 import com.jdc.leaves.model.dto.output.StudentListVO;
 
 @Service
@@ -40,6 +41,8 @@ public class StudentService {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	@Autowired
+	private RegistrationService registrationService;
 	
 	public StudentService(DataSource dataSource) {
 		template = new NamedParameterJdbcTemplate(dataSource);
@@ -109,6 +112,18 @@ public class StudentService {
 		));
 		
 		return generatedId.intValue();
+	}
+
+	public StudentDetailsVO findDetailsByLoginId(String email) {
+		
+		var result = new StudentDetailsVO();
+		
+		var studentId = findStudentByEmail(email);
+
+		result.setStudent(findInfoById(studentId));
+		result.setRegistrations(registrationService.searchByStudentId(studentId));
+		
+		return result;
 	}
 
 }

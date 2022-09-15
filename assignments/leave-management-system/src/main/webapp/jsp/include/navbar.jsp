@@ -41,11 +41,14 @@
 					</a>
 				</li>
 			</sec:authorize>
-			<li class="nav-item">
-				<a href="${ leaves }" class="nav-link ${ param.view eq 'leaves' ? 'active' : '' }">
-					<i class="bi bi-inbox"></i> Leaves
-				</a>
-			</li>
+			
+			<sec:authorize access="hasAuthority('Student')">
+				<li class="nav-item">
+					<a href="${ leaves }" class="nav-link ${ param.view eq 'leaves' ? 'active' : '' }">
+						<i class="bi bi-inbox"></i> Leaves
+					</a>
+				</li>
+			</sec:authorize>
 			<li class="nav-item">
 				<a id="logoutMenu" class="nav-link">
 					<i class="bi bi-lock"></i> Sign Out

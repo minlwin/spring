@@ -15,7 +15,6 @@
 <body>
 
 	<c:import url="/jsp/include/navbar.jsp"></c:import>
-
-
+	
 </body>
 </html>

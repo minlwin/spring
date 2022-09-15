@@ -22,7 +22,7 @@ import com.jdc.leaves.model.dto.output.RegistrationListVO;
 public class RegistrationService {
 	
 	private static final String SELECT_BY_CLASS = """
-			select r.classes_id classId, c.teacher_id teacherId, ta.name teacher, 
+			select r.classes_id classId, c.teacher_id teacherId, ta.name teacher, c.description classInfo, 
 			c.start_date startDate, r.student_id studentId, sa.name student, s.phone studentPhone, r.registration_date registrationDate 
 			from registration r 
 			join classes c on r.classes_id = c.id 
@@ -31,6 +31,16 @@ public class RegistrationService {
 			where r.classes_id = :classId
 			""";
 	
+	private static final String SELECT_BY_STUDENT = """
+			select r.classes_id classId, c.teacher_id teacherId, ta.name teacher, c.description classInfo, 
+			c.start_date startDate, r.student_id studentId, sa.name student, s.phone studentPhone, r.registration_date registrationDate 
+			from registration r 
+			join classes c on r.classes_id = c.id 
+			join teacher t on c.teacher_id = t.id join account ta on t.id = ta.id 
+			join student s on r.student_id = s.id join account sa on s.id = sa.id 
+			where r.student_id = :studentId
+			""";
+
 	private NamedParameterJdbcTemplate template;
 	private SimpleJdbcInsert regInsert;
 	
@@ -92,6 +102,11 @@ public class RegistrationService {
 	public List<RegistrationListVO> searchByClassId(int id) {
 		return template.query(SELECT_BY_CLASS, Map.of("classId", id), new BeanPropertyRowMapper<>(RegistrationListVO.class));
 	}
+	
+	public List<RegistrationListVO> searchByStudentId(int id) {
+		return template.query(SELECT_BY_STUDENT, Map.of("studentId", id), new BeanPropertyRowMapper<>(RegistrationListVO.class));
+	}
+	
 
 	private void create(RegistrationForm form) {
 		

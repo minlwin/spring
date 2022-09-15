@@ -60,12 +60,16 @@
 
 		<security:intercept-url pattern="/classes/**"
 			access="hasAnyAuthority('Admin', 'Teacher')" />
-		<security:intercept-url pattern="/leaves/**"
-			access="hasAnyAuthority('Admin', 'Teacher', 'Student')" />
+			
+			
 		<security:intercept-url pattern="/students/**"
 			access="hasAnyAuthority('Admin', 'Teacher')" />
+			
 		<security:intercept-url pattern="/teachers/**"
 			access="hasAuthority('Admin')" />
+
+		<security:intercept-url pattern="/leaves/**"
+			access="hasAuthority('Student')" />
 
 		<security:intercept-url pattern="/home"
 			access="isAuthenticated()" />

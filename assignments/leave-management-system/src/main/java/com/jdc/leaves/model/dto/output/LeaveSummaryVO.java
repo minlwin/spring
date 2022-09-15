@@ -1,30 +1,36 @@
 package com.jdc.leaves.model.dto.output;
 
+import java.time.LocalDate;
 import java.util.Objects;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class LeaveSummaryVO {
 
 	public LeaveSummaryVO() {
 	}
 
-	public LeaveSummaryVO(int classId, String teacher, String startDate, long students, long leaves) {
+	public LeaveSummaryVO(ClassListVO vo) {
 		super();
-		this.classId = classId;
-		this.teacher = teacher;
-		this.startDate = startDate;
-		this.students = students;
-		this.leaves = leaves;
+		this.classId = vo.getId();
+		this.teacher = vo.getTeacherName();
+		this.startDate = vo.getStartDate();
+		this.students = vo.getStudentCount();
+		this.details = vo.getDescription();
 	}
 
 	private int classId;
 
 	private String teacher;
 
-	private String startDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate startDate;
 
 	private long students;
 
 	private long leaves;
+	
+	private String details;
 
 	public int getClassId() {
 		return classId;
@@ -42,11 +48,11 @@ public class LeaveSummaryVO {
 		this.teacher = teacher;
 	}
 
-	public String getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
@@ -66,9 +72,17 @@ public class LeaveSummaryVO {
 		this.leaves = leaves;
 	}
 
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(classId, leaves, startDate, students, teacher);
+		return Objects.hash(classId, details, leaves, startDate, students, teacher);
 	}
 
 	@Override
@@ -80,8 +94,8 @@ public class LeaveSummaryVO {
 		if (getClass() != obj.getClass())
 			return false;
 		LeaveSummaryVO other = (LeaveSummaryVO) obj;
-		return classId == other.classId && leaves == other.leaves && Objects.equals(startDate, other.startDate)
-				&& students == other.students && Objects.equals(teacher, other.teacher);
+		return classId == other.classId && Objects.equals(details, other.details) && leaves == other.leaves
+				&& Objects.equals(startDate, other.startDate) && students == other.students
+				&& Objects.equals(teacher, other.teacher);
 	}
-
 }
