@@ -18,6 +18,10 @@
 		<c:param name="view" value="leaves"></c:param>
 	</c:import>
 
-
+	<div class="container">
+		
+		<h3 class="my-4">Leaves</h3>
+	
+	</div>
 </body>
 </html>

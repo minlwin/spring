@@ -16,5 +16,76 @@
 
 	<c:import url="/jsp/include/navbar.jsp"></c:import>
 	
+	<div class="container">
+		
+		<h3 class="my-4">Student Home</h3>
+		
+		<div class="row">
+			
+			<div class="col-3">
+				<div class="card">
+					<div class="card-header">
+						Personal Information
+					</div>
+					
+					<div class="card-body">
+					
+						<div>
+							<span class="text-secondary">Name</span>
+							<h5>${ dto.student.name }</h5>
+						</div>
+						<div class="mt-3">
+							<span class="text-secondary">Phone</span>
+							<h5>${ dto.student.phone }</h5>
+						</div>
+						<div class="mt-3">
+							<span class="text-secondary">Email</span>
+							<h5>${ dto.student.email }</h5>
+						</div>
+						<div class="mt-3">
+							<span class="text-secondary">Education</span>
+							<h5>${ dto.student.education }</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="col">
+				
+				<div class="row g-3">
+					<c:forEach items="${ dto.registrations }" var="item">
+						<div class="col-4">
+							<div class="card card-body">
+								<!-- Details -->
+								<h5>${ item.classInfo }</h5>
+								
+								<div class="d-flex justify-content-between text-secondary mb-4">
+									<span>${ item.startDate }</span>
+									<span>${ item.teacher }</span>
+								</div>
+								
+								<div>
+								
+									<c:url var="applyLeave" value="/leaves/edit">
+										<c:param name="classId" value="${ item.classId }"></c:param>
+										<c:param name="studentId" value="${ item.studentId }"></c:param>
+									</c:url>
+									<a href="${ applyLeave }" class="btn btn-outline-success">
+										<i class="bi bi-send"></i> Apply Leave
+									</a>
+								</div>
+							
+							</div>
+						</div>					
+					</c:forEach>
+				</div>
+			
+			</div>
+	
+		</div>
+		
+	
+	</div>
+	
 </body>
 </html>
