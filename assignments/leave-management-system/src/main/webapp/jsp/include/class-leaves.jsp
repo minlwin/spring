@@ -16,15 +16,16 @@
 	</thead>
 	
 	<tbody>
-	
-		<tr>
-			<td>Aung Aung</td>
-			<td>09767899998</td>
-			<td>2022-10-01</td>
-			<td>2022-10-15</td>
-			<td>3</td>
-			<td>For JLPT Exam</td>
-		</tr>
+		<c:forEach items="${ dto.leaves }" var="item">
+			<tr>
+				<td>${ item.student }</td>
+				<td>${ item.studentPhone }</td>
+				<td>${ item.applyDate }</td>
+				<td>${ item.startDate }</td>
+				<td>${ item.days } Days</td>
+				<td>${ item.reason }</td>
+			</tr>
+		</c:forEach>
 	</tbody>
 
 </table>

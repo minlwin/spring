@@ -6,7 +6,6 @@
 	
 	<thead>
 		<tr>
-			<th>Id</th>
 			<th>Registration Date</th>
 			<th>Student</th>
 			<th>Phone</th>
@@ -15,26 +14,28 @@
 	</thead>
 	
 	<tbody>
+		<c:forEach items="${ dto.registrations }" var="item">
+			<tr>
+				<td>${ item.registrationDate }</td>
+				<td>${ item.student }</td>
+				<td>${ item.studentPhone }</td>
+				<td>
+					<c:url var="edit" value="/classes/registration">
+						<c:param name="classId" value="${ item.classId }"></c:param>
+						<c:param name="studentId" value="${ item.studentId }"></c:param>
+						<c:param name="teacherName" value="${ item.teacher }"></c:param>
+						<c:param name="startDate" value="${ item.startDate }"></c:param>
+					</c:url>
+					<a href="${ edit }">
+						<i class="bi bi-pencil me-2"></i>
+					</a>			
 	
-		<tr>
-			<td>1</td>
-			<td>2022-10-01</td>
-			<td>Aung Aung</td>
-			<td>0987789999</td>
-			<td>
-				<c:url var="edit" value="/classes/registration">
-					<c:param name="classId" value="1"></c:param>
-					<c:param name="studentId" value="1"></c:param>
-				</c:url>
-				<a href="${ edit }">
-					<i class="bi bi-pencil me-2"></i>
-				</a>			
-
-				<c:url var="details" value="/classes/registration/1/1"></c:url>
-				<a href="${ details }">
-					<i class="bi bi-cursor"></i>
-				</a>			
-			</td>
-		</tr>
+					<c:url var="details" value="/classes/registration/${ item.classId }/${ item.studentId }"></c:url>
+					<a href="${ details }">
+						<i class="bi bi-cursor"></i>
+					</a>			
+				</td>
+			</tr>
+		</c:forEach>
 	</tbody>
 </table>

@@ -38,6 +38,7 @@ public class RegistrationListVO {
 
 	private String studentPhone;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate registrationDate;
 
 	public int getClassId() {

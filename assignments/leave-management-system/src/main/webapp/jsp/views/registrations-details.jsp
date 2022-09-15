@@ -36,22 +36,22 @@
 						
 						<div class="mb-3">
 							<label class="form-label">Student Name</label>
-							<span class="form-control">Aung Aung</span>
+							<span class="form-control">${ dto.student.name }</span>
 						</div>
 					
 						<div class="mb-3">
 							<label class="form-label">Phone</label>
-							<span class="form-control">09887778887</span>
+							<span class="form-control">${ dto.student.phone }</span>
 						</div>
 
 						<div class="mb-3">
 							<label class="form-label">Email</label>
-							<span class="form-control">aung@gmail.com</span>
+							<span class="form-control">${ dto.student.email }</span>
 						</div>
 						
 						<div class="mb-3">
-							<label class="form-label">Education</label>
-							<span class="form-control">College</span>
+							<label class="form-label">Registration Date</label>
+							<span class="form-control">${ dto.registDate }</span>
 						</div>
 						
 					</div>
@@ -72,22 +72,22 @@
 					
 						<div class="mb-3">
 							<label class="form-label">Teacher</label>
-							<span class="form-control">Min Lwin</span>
+							<span class="form-control">${ dto.classInfo.teacherName }</span>
 						</div>
 
 						<div class="mb-3">
 							<label class="form-label">Start Date</label>
-							<span class="form-control">2022-10-03</span>
+							<span class="form-control">${ dto.classInfo.startDate }</span>
 						</div>
 
 						<div class="mb-3">
 							<label class="form-label">Duration</label>
-							<span class="form-control">6 Months</span>
+							<span class="form-control">${ dto.classInfo.months } Months</span>
 						</div>
 
 						<div class="mb-3">
 							<label class="form-label">Description</label>
-							<span class="form-control">One Stop Java</span>
+							<span class="form-control">${ dto.classInfo.description }</span>
 						</div>
 					
 					</div>
@@ -101,13 +101,23 @@
 		
 		<div class="mt-4">
 		
+			<c:url var="classDetails" value="/classes/${ dto.classInfo.id }"></c:url>
+			
+			<a href="${ classDetails }" class="btn btn-outline-primary me-2">
+				<i class="bi bi-mortarboard"></i> Class Details
+			</a>
+
 			<c:url var="edit" value="/classes/registration">
-				<c:param name="registId" value="1"></c:param>
+				<c:param name="classId" value="${ dto.classInfo.id }"></c:param>
+				<c:param name="studentId" value="${ dto.student.id }"></c:param>
+				<c:param name="teacherName" value="${ dto.classInfo.teacherName }"></c:param>
+				<c:param name="startDate" value="${ dto.classInfo.startDate }"></c:param>
 			</c:url>
 			
 			<a href="${ edit }" class="btn btn-outline-danger">
 				<i class="bi bi-pencil"></i> Edit Registration
 			</a>
+			
 		</div>
 	
 	</div>

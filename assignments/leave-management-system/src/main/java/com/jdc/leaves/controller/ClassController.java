@@ -78,7 +78,6 @@ public class ClassController {
 	public String editRegistration(
 			@RequestParam(required = false, defaultValue = "0") int studentId, 
 			@RequestParam(required = false, defaultValue = "0") int classId) {
-		
 		return "registrations-edit";
 	}
 

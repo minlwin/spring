@@ -82,6 +82,8 @@
 			
 				<c:url var="addRegistration" value="/classes/registration">
 					<c:param name="classId" value="${ dto.classInfo.id }" />
+					<c:param name="teacherName" value="${ dto.classInfo.teacherName }" />
+					<c:param name="startDate" value="${ dto.classInfo.startDate }" />
 				</c:url>
 
 				<a href="${ addRegistration }" class="btn btn-outline-primary">
