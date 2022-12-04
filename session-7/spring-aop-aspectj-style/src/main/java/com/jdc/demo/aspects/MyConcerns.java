@@ -34,9 +34,19 @@ public class MyConcerns {
 		System.out.println(result);
 	}
 	
-	@AfterThrowing("bean(myService)")
-	void afterThrowing() {
+	@AfterThrowing(
+			pointcut = "bean(myService) && args(a,b)",
+			argNames = "ex,a,b",
+			throwing = "ex")
+	void afterThrowing(RuntimeException ex, int a, int b) {
 		System.out.println("After Throwing an exception");
+		
+		System.out.println("Argument A : %d".formatted(a));
+		System.out.println("Argument B : %d".formatted(b));
+		
+		System.out.println(ex.getClass().getSimpleName());
+		
+		System.out.println(ex.getMessage());
 	}
 	
 	@After(value = "bean(myService) && args(*,number)", argNames = "number")

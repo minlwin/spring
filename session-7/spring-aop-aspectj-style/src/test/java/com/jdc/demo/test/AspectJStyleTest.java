@@ -15,6 +15,6 @@ public class AspectJStyleTest {
 	
 	@Test
 	void test() {
-		myService.hello("AspectJ", 10);
+		myService.divided(10, 0);
 	}
 }

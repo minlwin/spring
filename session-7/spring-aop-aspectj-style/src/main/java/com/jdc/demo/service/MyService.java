@@ -11,4 +11,8 @@ public class MyService {
 		System.out.println("Hello from MyService");
 		return new Result(name, count);
 	}	
+	
+	public int divided(int a, int b) {
+		return a / b;
+	}
 }
