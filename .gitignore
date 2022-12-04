@@ -38,3 +38,5 @@ hs_err_pid*
 target/
 
 *Users/
+
+/.DS_Store
