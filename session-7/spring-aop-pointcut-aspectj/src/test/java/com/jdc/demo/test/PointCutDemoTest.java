@@ -15,6 +15,6 @@ public class PointCutDemoTest {
 
 	@Test
 	void test() {
-		dao.doOperation();
+		dao.searchSomething();
 	}
 }

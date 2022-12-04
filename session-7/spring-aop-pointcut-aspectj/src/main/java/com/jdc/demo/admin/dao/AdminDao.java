@@ -5,8 +5,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class AdminDao {
 
-	public void doOperation() {
-		System.out.println("Admin Dao Works");
+	public void searchSomething() {
+		System.out.println("Admin Dao Search");
 	}
 	
 	public void saveSomething() {

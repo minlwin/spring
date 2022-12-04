@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MemberDao {
 
-	public void doOperation() {
+	public void searchData() {
 		System.out.println("Member Dao Works");
 	}
 }
