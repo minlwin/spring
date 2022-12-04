@@ -9,18 +9,29 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.context.annotation.Configuration;
 
+import com.jdc.demo.dto.Result;
+
 @Aspect
 @Configuration
 public class MyConcerns {
 	
-	@Before("bean(myService)")
-	void beforeLog() {
+	@Before(value = "bean(myService) && args(value,*)", argNames = "value")
+	void beforeLog(String value) {
 		System.out.println("Before Execution");
+		System.out.println("Value is %s".formatted(value));
 	}
 	
-	@AfterReturning("bean(myService)")
-	void afterReturning() {
+	@AfterReturning(
+			pointcut = "bean(myService) && execution(com.jdc..Result *(..)) && args(name,count)",
+			argNames = "result,name,count",
+			returning = "result")
+	void afterReturning(Result result, String name, int count) {
 		System.out.println("Return A Value");
+		
+		System.out.println("Arg Name  : %s".formatted(name));
+		System.out.println("Arg Count : %d".formatted(count));
+		
+		System.out.println(result);
 	}
 	
 	@AfterThrowing("bean(myService)")
@@ -28,16 +39,21 @@ public class MyConcerns {
 		System.out.println("After Throwing an exception");
 	}
 	
-	@After("bean(myService)")
-	void afterAll() {
+	@After(value = "bean(myService) && args(*,number)", argNames = "number")
+	void afterAll(int number) {
 		System.out.println("After Finally");
+		System.out.println("Count is %d.".formatted(number));
 	}
 	
-	@Around("bean(myService)")
-	Object aroundInvoke(ProceedingJoinPoint joinPoint) {
+	@Around(value = "bean(myService) && args(value,count)", argNames = "value,count")
+	Object aroundInvoke(ProceedingJoinPoint joinPoint, String value, int count) {
 		
 		Object result = null;
 		System.out.println("Around before invoke");
+		
+		System.out.println("Value is %s.".formatted(value));
+		System.out.println("Count is %d.".formatted(count));
+		
 		try {
 			result = joinPoint.proceed();
 			System.out.println("Around after returning");
