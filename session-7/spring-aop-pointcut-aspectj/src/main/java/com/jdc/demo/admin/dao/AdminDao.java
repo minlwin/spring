@@ -2,6 +2,9 @@ package com.jdc.demo.admin.dao;
 
 import org.springframework.stereotype.Repository;
 
+import com.jdc.demo.utils.NeedToLogBefore;
+
+@NeedToLogBefore
 @Repository
 public class AdminDao {
 
