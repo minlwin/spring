@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 
 public record AccountHistory(
 	int id,
-	int transferId,
-	int accountId,
-	String accountName,
+	int transfer_id,
+	int account_id,
+	String account_name,
 	Type type,
-	int beforeAmount,
+	int before_amount,
 	int amount,
-	LocalDateTime issueAt) {
+	LocalDateTime issue_at) {
 
 	public enum Type {
 		Credit, Debit

@@ -4,9 +4,11 @@ import java.time.LocalDateTime;
 
 public record TransferLog(
 		int id,
-		LocalDateTime transferTime,
-		int accountFrom,
-		int accountTo,
+		LocalDateTime transfer_at,
+		int account_trom,
+		String fromName,
+		int account_to,
+		String toName,
 		int amount,
 		boolean success,
 		String message
