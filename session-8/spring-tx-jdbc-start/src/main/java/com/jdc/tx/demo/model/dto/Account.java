@@ -7,4 +7,8 @@ public record Account(
 		int amount
 		) {
 
+	public Account withAmount(int amount) {
+		return new Account(id, name, email, amount);
+	}
+
 }
