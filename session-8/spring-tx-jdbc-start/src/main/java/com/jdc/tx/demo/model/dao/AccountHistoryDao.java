@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -25,6 +25,7 @@ public class AccountHistoryDao {
 		insert.setTableName("account_history");
 		insert.setGeneratedKeyName("id");
 		insert.setColumnNames(List.of("transfer_id", "account_id", "type", "before_amount", "amount"));
+		template = new NamedParameterJdbcTemplate(dataSource);
 	}
 
 	public AccountHistory debit(int transferId, Account account, int amount) {
@@ -52,9 +53,9 @@ public class AccountHistoryDao {
 	private AccountHistory findById(int id) {
 		return template.queryForObject("""
 				select h.id, h.transfer_id, h.account_id, h.type, h.before_amount, h.amount, a.name account_name 
-				from account_history h join account a on h.account_id = a.id where id = :id
+				from account_history h join account a on h.account_id = a.id where h.id = :id
 				""", 
-				Map.of("id", id), new BeanPropertyRowMapper<>(AccountHistory.class));
+				Map.of("id", id), new DataClassRowMapper<>(AccountHistory.class));
 	}
 	
 }

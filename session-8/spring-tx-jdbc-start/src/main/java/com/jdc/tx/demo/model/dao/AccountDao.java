@@ -28,7 +28,7 @@ public class AccountDao {
 	public void save(Account account) {
 		template.update(
 				"update account set amount = :amount where id = :id", 
-				Map.of("amount", account.amount(), "id", account.amount()));
+				Map.of("amount", account.amount(), "id", account.id()));
 	}
 
 

@@ -28,8 +28,8 @@ create table account_history (
 	id int primary key auto_increment,
 	transfer_id int not null,
 	account_id int not null,
-	type varchar(20) not null,
 	before_amount int not null,
+	type varchar(20) not null,
 	amount int not null,
 	foreign key (transfer_id) references transfer_log(id),
 	foreign key (account_id) references account(id)
