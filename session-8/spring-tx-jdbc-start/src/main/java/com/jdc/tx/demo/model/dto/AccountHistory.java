@@ -1,7 +1,5 @@
 package com.jdc.tx.demo.model.dto;
 
-import java.time.LocalDateTime;
-
 public record AccountHistory(
 	int id,
 	int transfer_id,
@@ -9,8 +7,7 @@ public record AccountHistory(
 	String account_name,
 	Type type,
 	int before_amount,
-	int amount,
-	LocalDateTime issue_at) {
+	int amount) {
 
 	public enum Type {
 		Credit, Debit

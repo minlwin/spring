@@ -24,7 +24,10 @@ public class TransferServiceImpl implements TransferService{
 	@Override
 	public TransferLog transfer(TransferForm form) {
 		
-		var fromAccount = accountDao.findById(form.from());
+		var fromAccount = accountDao.findById(form.account_from());
+
+		// Create Transfer Log
+		var transferId = transferLogDao.create(form);
 		
 		if(null == fromAccount) {
 			throw new TransferServiceException("There is no valid account to transfer.");
@@ -35,30 +38,23 @@ public class TransferServiceImpl implements TransferService{
 		if(updatedAmountForFromUser < 0) {
 			throw new TransferServiceException("Account has no enough amount to transfer.");
 		}
+		// Update From Account 
+		accountDao.save(fromAccount.withAmount(updatedAmountForFromUser));
+		// Create From Account History
+		var fromHistory = accountHistoryDao.debit(transferId, fromAccount, form.amount());
 		
-		
-		var toAccount = accountDao.findById(form.to());
+		var toAccount = accountDao.findById(form.account_to());
 		
 		if(null == toAccount) {
 			throw new TransferServiceException("There is no valid account to transfer.");
 		}
 		
-		// Create Transfer Log
-		var transferId = transferLogDao.create(form);
-
-		// Create From Account History
-		var fromHistory = accountHistoryDao.debit(transferId, fromAccount, form.amount());
-		
 		// Create To Account History
 		var toHistory = accountHistoryDao.credit(transferId, toAccount, form.amount());
-
-		// Update From Account 
-		accountDao.save(fromAccount.withAmount(updatedAmountForFromUser));
-		
 		// Update To Account
 		accountDao.save(toAccount.withAmount(toAccount.amount() + form.amount()));
 		
-		return new TransferLog(transferId, form.amount(), fromHistory, toHistory, form.at());
+		return TransferLog.from(transferId, form.amount(), fromHistory, toHistory, form.transfer_at());
 	}
 
 }

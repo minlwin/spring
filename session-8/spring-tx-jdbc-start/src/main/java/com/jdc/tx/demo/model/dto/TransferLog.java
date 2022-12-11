@@ -7,7 +7,14 @@ public record TransferLog(
 		int amount,
 		AccountHistory from,
 		AccountHistory to,
-		LocalDateTime transferAt
+		LocalDateTime transferAt,
+		boolean status,
+		String message
 		) {
+
+	public static TransferLog from(int transferId, int amount, AccountHistory fromHistory, AccountHistory toHistory,
+			LocalDateTime at) {
+		return new TransferLog(transferId, amount, fromHistory, toHistory, at, true, null);
+	}
 
 }

@@ -3,10 +3,10 @@ package com.jdc.tx.demo.model.dto.form;
 import java.time.LocalDateTime;
 
 public record TransferForm(
-		int from,
-		int to,
+		int account_from,
+		int account_to,
 		int amount,
-		LocalDateTime at
+		LocalDateTime transfer_at
 		) {
 
 }
