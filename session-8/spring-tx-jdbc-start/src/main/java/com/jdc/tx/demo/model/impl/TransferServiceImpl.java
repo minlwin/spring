@@ -30,10 +30,6 @@ public class TransferServiceImpl implements TransferService{
 		// Find From Account
 		var fromAccount = accountDao.findById(form.account_from());
 
-		if(null == fromAccount) {
-			throw new TransferServiceException("There is no valid account to transfer.");
-		}
-
 		var updatedAmountForFromUser = fromAccount.amount() - form.amount();
 		
 		if(updatedAmountForFromUser < 0) {
@@ -48,10 +44,6 @@ public class TransferServiceImpl implements TransferService{
 		
 		// Find To Account
 		var toAccount = accountDao.findById(form.account_to());
-		
-		if(null == toAccount) {
-			throw new TransferServiceException("There is no valid account to transfer.");
-		}
 		
 		var updatedAmountForToUser = toAccount.amount() + form.amount();
 
