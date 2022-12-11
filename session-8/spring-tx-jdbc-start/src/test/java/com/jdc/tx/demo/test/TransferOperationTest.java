@@ -10,7 +10,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.jdc.tx.demo.model.TransferService;
-import com.jdc.tx.demo.model.dto.form.TransferForm;
+import com.jdc.tx.demo.model.dto.TransferForm;
 
 @Sql("/initialize.sql")
 @SpringJUnitConfig(locations = "classpath:/application.xml")

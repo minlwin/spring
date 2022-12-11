@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import com.jdc.tx.demo.model.dto.form.TransferForm;
+import com.jdc.tx.demo.model.dto.TransferForm;
 
 @Repository
 public class TransferLogDao {

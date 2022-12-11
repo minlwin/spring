@@ -8,8 +8,8 @@ import com.jdc.tx.demo.model.TransferServiceException;
 import com.jdc.tx.demo.model.dao.AccountDao;
 import com.jdc.tx.demo.model.dao.AccountHistoryDao;
 import com.jdc.tx.demo.model.dao.TransferLogDao;
+import com.jdc.tx.demo.model.dto.TransferForm;
 import com.jdc.tx.demo.model.dto.TransferLog;
-import com.jdc.tx.demo.model.dto.form.TransferForm;
 
 @Service
 public class TransferServiceImpl implements TransferService{
@@ -37,10 +37,10 @@ public class TransferServiceImpl implements TransferService{
 		}
 
 		// Update From Account 
-		accountDao.save(fromAccount.withAmount(form.amount()));
+		accountDao.save(fromAccount.withAmount(updatedAmountForFromUser));
 		
 		// Create From Account History
-		var fromHistory = accountHistoryDao.debit(transferId, fromAccount, updatedAmountForFromUser);
+		var fromHistory = accountHistoryDao.debit(transferId, fromAccount, form.amount());
 		
 		// Find To Account
 		var toAccount = accountDao.findById(form.account_to());

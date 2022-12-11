@@ -1,4 +1,4 @@
-package com.jdc.tx.demo.model.dto.form;
+package com.jdc.tx.demo.model.dto;
 
 import java.time.LocalDateTime;
 
