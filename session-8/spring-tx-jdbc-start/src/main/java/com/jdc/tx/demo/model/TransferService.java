@@ -7,6 +7,6 @@ import com.jdc.tx.demo.model.dto.TransferLog;
 
 public interface TransferService {
 
-	@Transactional
+	@Transactional(noRollbackFor = TransferServiceException.class)
 	TransferLog transfer(TransferForm form);
 }

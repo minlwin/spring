@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import com.jdc.tx.demo.ApplicationConfig;
 import com.jdc.tx.demo.model.TransferService;
 import com.jdc.tx.demo.model.dto.TransferForm;
 
 @Sql("/initialize.sql")
-@SpringJUnitConfig(locations = "classpath:/application.xml")
+@SpringJUnitConfig(classes = ApplicationConfig.class)
 public class TransferOperationTest {
 
 	@Autowired
@@ -21,7 +22,7 @@ public class TransferOperationTest {
 	
 	@ParameterizedTest
 	@CsvSource({
-		"1,2,50000,2022-12-10 10:00"
+		"1,2,150000,2022-12-10 10:00"
 	})
 	void test(int from, int to, int amount, String time) {
 		service.transfer(new TransferForm(from, to, amount, LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
