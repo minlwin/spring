@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<tx:advice id="saveAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<tx:advice id="repoMethodAdvices" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="create" propagation="REQUIRES_NEW"/>
+		</tx:attributes>
+	</tx:advice>
+		
+	<aop:config>
+		<aop:pointcut expression="execution(* com.jdc..*Service.save(..))" id="serviceMethods" />
+		
+		<aop:pointcut expression="within(com.jdc..repo.*)" id="allRepositories"/>
+		
+		<aop:advisor advice-ref="saveAdvice" id="saveMethodAdvisor"
+			pointcut-ref="serviceMethods" />
+			
+		<aop:advisor advice-ref="repoMethodAdvices" pointcut-ref="allRepositories"/>	
+	</aop:config>
+
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+		<constructor-arg>
+			<bean class="com.zaxxer.hikari.HikariConfig" 
+				p:jdbcUrl="jdbc:mysql://localhost:3306/prepagation"
+				p:username="prepagation" p:password="prepagation"/>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="headerRepo" class="com.jdc.demo.repo.HeaderRepository">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
+	
+	<bean id="detailsRepo" class="com.jdc.demo.repo.DeatilsRepository">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
+	
+	<bean id="propagationService" class="com.jdc.demo.PrepagationService" 
+	 	p:headerRepository-ref="headerRepo" p:detailsRepository-ref="detailsRepo"/>
+	
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
+
+
+</beans>
