@@ -2,6 +2,8 @@ package com.jdc.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.demo.repo.DeatilsRepository;
 import com.jdc.demo.repo.HeaderRepository;
@@ -15,6 +17,7 @@ public class PrepagationService {
 	@Autowired
 	private DeatilsRepository detailsRepository;
 	
+	@Transactional(isolation = Isolation.SERIALIZABLE, timeout = 5)
 	public Result save(int state, String header, String ... details) {
 		
 		// create header
