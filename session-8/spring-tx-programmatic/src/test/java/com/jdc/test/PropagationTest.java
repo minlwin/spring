@@ -25,7 +25,7 @@ public class PropagationTest {
 
 	@ParameterizedTest
 	@CsvSource({
-		"Header,Details,2,1,1"
+		"Header,Details,0,1,1"
 	})
 	void test(String header, String details, int status, int headerId, int detailsId) {
 		var result = service.save(status, header, details);
