@@ -1,7 +1,9 @@
 package com.jdc.tx.demo.model.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.tx.demo.model.TransferService;
 import com.jdc.tx.demo.model.TransferServiceException;
@@ -20,9 +22,15 @@ public class TransferServiceImpl implements TransferService{
 	private TransferLogDao transferLogDao;
 	@Autowired
 	private AccountHistoryDao accountHistoryDao;
+	
+	@Autowired
+	private ApplicationEventPublisher eventPublisher;
 
 	@Override
+	@Transactional
 	public TransferLog transfer(TransferForm form) {
+		
+		eventPublisher.publishEvent(form);
 		
 		// Create Transfer Log
 		var transferId = transferLogDao.create(form);

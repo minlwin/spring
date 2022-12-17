@@ -22,7 +22,7 @@ public class TransferOperationTest {
 	
 	@ParameterizedTest
 	@CsvSource({
-		"1,2,150000,2022-12-10 10:00"
+		"1,2,50000,2022-12-10 10:00"
 	})
 	void test(int from, int to, int amount, String time) {
 		service.transfer(new TransferForm(from, to, amount, LocalDateTime.parse(time, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))));
