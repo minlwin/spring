@@ -48,7 +48,7 @@ public class JpaConfiguration {
 	private Map<String, Object> jpaProperties() {
 		var map = new HashMap<String, Object>();
 		map.put("hibernate.hbm2ddl.auto", "create");
-		map.put("hibernate.shoq_sql", true);
+		map.put("hibernate.show_sql", true);
 		map.put("hibernate.format_sql", true);
 		return map;
 	}
