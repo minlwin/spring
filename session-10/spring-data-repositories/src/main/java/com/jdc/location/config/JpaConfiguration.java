@@ -20,9 +20,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
-@EnableJpaRepositories
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.jdc.location.model")
+@EnableJpaRepositories(basePackages = "com.jdc.location.model.repo")
 public class JpaConfiguration {
 
 	@Bean

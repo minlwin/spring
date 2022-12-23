@@ -27,15 +27,27 @@ public class State implements Serializable {
 	private String capital;
 	private int porpulation;
 
+	public State() {
+	}
+
+	public State(String name, Type type, String region, String capital, int porpulation) {
+		super();
+		this.name = name;
+		this.type = type;
+		this.region = region;
+		this.capital = capital;
+		this.porpulation = porpulation;
+	}
+
 	public enum Type {
-		State("State"), Division("Division"), Union("Union Territory");
-		
+		State("State"), Region("Region"), Union("Union Territory");
+
 		private String value;
-		
+
 		private Type(String value) {
 			this.value = value;
 		}
-		
+
 		public String getValue() {
 			return value;
 		}

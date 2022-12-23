@@ -1,0 +1,15 @@
+Ayeyarwady	Region	Lower	Pathein	6184829
+Bago	Region	Lower	Bago	4867373
+Chin	State	West	Hakha	478801
+Kachin	State	North	Myitkyina	1689441
+Kayah	State	East	Loikaw	286627
+Kayin	State	South	Hpa-an	1574079
+Magway	Region	Central	Magwe	3917055
+Mandalay	Region	Central	Mandalay	6165723
+Mon	State	South	Mawlamyine	2054393
+Naypyidaw	Union	Central	Naypyidaw	1160242
+Rakhine	State	West	Sittwe	3188807
+Sagaing	Region	North	Monywa	5325347
+Shan	State	East	Taunggyi	5824432
+Tanintharyi	Region	South	Dawei	1408401
+Yangon	Region	Lower	Yangon	7360703
