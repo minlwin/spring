@@ -1,0 +1,15 @@
+insert into state (name, type, region, capital, porpulation) values('Ayeyarwady', 'Region', 'Lower', 'Pathein', 6184829);
+insert into state (name, type, region, capital, porpulation) values('Bago', 'Region', 'Lower', 'Bago', 4867373);
+insert into state (name, type, region, capital, porpulation) values('Chin', 'State', 'West', 'Hakha', 478801);
+insert into state (name, type, region, capital, porpulation) values('Kachin', 'State', 'North', 'Myitkyina', 1689441);
+insert into state (name, type, region, capital, porpulation) values('Kayah', 'State', 'East', 'Loikaw', 286627);
+insert into state (name, type, region, capital, porpulation) values('Kayin', 'State', 'South', 'Hpa-an', 1574079);
+insert into state (name, type, region, capital, porpulation) values('Magway', 'Region', 'Central', 'Magwe', 3917055);
+insert into state (name, type, region, capital, porpulation) values('Mandalay', 'Region', 'Central', 'Mandalay', 6165723);
+insert into state (name, type, region, capital, porpulation) values('Mon', 'State', 'South', 'Mawlamyine', 2054393);
+insert into state (name, type, region, capital, porpulation) values('Naypyidaw', 'Union', 'Central', 'Naypyidaw', 1160242);
+insert into state (name, type, region, capital, porpulation) values('Rakhine', 'State', 'West', 'Sittwe', 3188807);
+insert into state (name, type, region, capital, porpulation) values('Sagaing', 'Region', 'North', 'Monywa', 5325347);
+insert into state (name, type, region, capital, porpulation) values('Shan', 'State', 'East', 'Taunggyi', 5824432);
+insert into state (name, type, region, capital, porpulation) values('Tanintharyi', 'Region', 'South', 'Dawei', 1408401);
+insert into state (name, type, region, capital, porpulation) values('Yangon', 'Region', 'Lower', 'Yangon', 7360703);
