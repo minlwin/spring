@@ -19,16 +19,16 @@
 	
 	<bean id="emfBean"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
-		<property name="packagesToScan" value="com.jdc.orm.entity" />
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
+		<property name="packagesToScan" value="com.jdc.orm.entity" />
 		<property name="jpaPropertyMap">
 			<util:map>
-				<entry key="hibernate.hbm2ddl.auto" value="create"></entry>
-				<entry key="hibernate.show_sql" value="true"></entry>
-				<entry key="hibernate.format_sql" value="true"></entry>
+				<entry key="hibernate.hbm2ddl.auto" value="create" />
+				<entry key="hibernate.show_sql" value="true" />
+				<entry key="hibernate.format_sql" value="true" />
 			</util:map>
 		</property>
 	</bean>

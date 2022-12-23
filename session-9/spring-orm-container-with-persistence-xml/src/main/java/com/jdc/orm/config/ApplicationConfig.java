@@ -22,16 +22,13 @@ public class ApplicationConfig {
 
 	@Bean
 	DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder()
-				.setType(EmbeddedDatabaseType.H2)
-				.build();
+		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();
 	}
 	
 	@Bean
 	LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource dataSource) {
 		var bean = new LocalContainerEntityManagerFactoryBean();
 		bean.setDataSource(dataSource);
-		bean.setPersistenceUnitName("demo");
 		bean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 		return bean;
 	}

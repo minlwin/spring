@@ -17,8 +17,8 @@
 	
 	<bean id="emfBean"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
-		p:dataSource-ref="dataSource" p:persistenceUnitName="demo"
-		p:persistenceProviderClass="org.hibernate.jpa.HibernatePersistenceProvider" />
+		p:persistenceProviderClass="org.hibernate.jpa.HibernatePersistenceProvider" 
+		p:dataSource-ref="dataSource" p:persistenceUnitName="demo" />
 	
 	<bean id="txManager"
 		class="org.springframework.orm.jpa.JpaTransactionManager" 

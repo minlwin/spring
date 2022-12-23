@@ -36,13 +36,13 @@ public class DataAccessConfig {
 		bean.setDataSource(dataSource);
 		
 		bean.setPackagesToScan("com.jdc.orm.entity");
-		var map = new HashMap<String, Object>();
-		
-		map.put("jakarta.persistence.schema-generation.database.action", "drop-and-create");
-		map.put("hibernate.show_sql", true);
-		map.put("hibernate.format_sql", true);
 
-		bean.setJpaPropertyMap(map);
+		var jpaProperties = new HashMap<String, Object>();
+		jpaProperties.put("jakarta.persistence.schema-generation.database.action", "drop-and-create");
+		jpaProperties.put("hibernate.show_sql", true);
+		jpaProperties.put("hibernate.format_sql", true);
+
+		bean.setJpaPropertyMap(jpaProperties);
 		
 		bean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 		return bean;
