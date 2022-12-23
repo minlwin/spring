@@ -31,7 +31,7 @@ public class SaveMethodsTest {
 		var input = new State(name, type, region, capital, porpulation);
 		
 		// Execute Test Method
-		var result = repo.save(input);
+		var result = repo.saveAndFlush(input);
 		
 		// Check Result
 		assertThat(result, hasProperty("id", is(1)));
