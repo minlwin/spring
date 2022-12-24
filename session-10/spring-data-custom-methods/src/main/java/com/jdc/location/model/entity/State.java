@@ -23,15 +23,20 @@ public class State implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
 	@Column(nullable = false, unique = true)
 	private String name;
+	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Type type;
+	
 	@Column(nullable = false)
 	private String region;
+	
 	@Column(nullable = false)
 	private String capital;
+	
 	private int porpulation;
 
 	@OneToMany(
