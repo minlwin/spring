@@ -6,7 +6,6 @@ import static org.hamcrest.Matchers.is;
 import java.util.List;
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -31,7 +30,6 @@ public class DeleteMethodTest {
 	@Autowired
 	private StateRepo repo;
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvSource(
 		delimiter = '\t',
@@ -50,7 +48,6 @@ public class DeleteMethodTest {
 		assertThat(repo.count(), is(remains));
 	}
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvSource({
 		"1,14"
@@ -63,21 +60,18 @@ public class DeleteMethodTest {
 		assertThat(repo.count(), is(remain));
 	}
 	
-	@Disabled
 	@Test
 	void test_delete_all() {
 		repo.deleteAll();
 		assertThat(repo.count(), is(0L));
 	}
 
-	@Disabled
 	@Test
 	void test_delete_all_in_batch() {
 		repo.deleteAllInBatch();
 		assertThat(repo.count(), is(0L));
 	}
 	
-	@Disabled
 	@ParameterizedTest
 	@MethodSource("idsForDelete")
 	void test_delete_all_by_ids(List<Integer> ids, long remain) {
@@ -85,7 +79,6 @@ public class DeleteMethodTest {
 		assertThat(repo.count(), is(remain));
 	}
 
-	@Disabled
 	@ParameterizedTest
 	@MethodSource("idsForDelete")
 	void test_delete_all_by_ids_in_batch(List<Integer> ids, long remain) {
@@ -100,7 +93,6 @@ public class DeleteMethodTest {
 				);
 	}
 	
-	@Disabled
 	@ParameterizedTest
 	@MethodSource("entitiesForDelete")
 	void test_delete_all_by_entities(List<State> states, long remains) {
