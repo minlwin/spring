@@ -6,6 +6,8 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,7 +26,8 @@ public class State implements Serializable {
 	@Column(nullable = false, unique = true)
 	private String name;
 	@Column(nullable = false)
-	private String type;
+	@Enumerated(EnumType.STRING)
+	private Type type;
 	@Column(nullable = false)
 	private String region;
 	@Column(nullable = false)
@@ -67,11 +70,11 @@ public class State implements Serializable {
 		this.name = name;
 	}
 
-	public String getType() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 
