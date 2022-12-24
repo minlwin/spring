@@ -29,6 +29,16 @@ public class State implements Serializable {
 
 	public State() {
 	}
+	
+	public State(int id, String name, Type type, String region, String capital, int porpulation) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.region = region;
+		this.capital = capital;
+		this.porpulation = porpulation;
+	}
 
 	public State(String name, Type type, String region, String capital, int porpulation) {
 		super();
