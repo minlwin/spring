@@ -7,11 +7,11 @@ import static org.hamcrest.Matchers.notNullValue;
 
 import java.util.stream.Stream;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.jdc.location.model.JpaConfiguration;
@@ -22,12 +22,15 @@ import com.jdc.location.model.repo.StateRepo;
 import jakarta.transaction.Transactional;
 
 @SpringJUnitConfig(classes = JpaConfiguration.class)
+@Sql(scripts = {
+		"/init-tables.sql",
+		"/load-data.sql"
+})
 public class StateRepoTest {
 
 	@Autowired
 	private StateRepo repo;
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvSource({
 		"State,7",
@@ -39,7 +42,6 @@ public class StateRepoTest {
 		assertThat(result, hasSize(size));
 	}
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvSource({
 		"State,7",
@@ -52,7 +54,6 @@ public class StateRepoTest {
 		assertThat(result.count(), is(size));
 	}
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvSource({
 		"Lower,3",
@@ -63,7 +64,6 @@ public class StateRepoTest {
 		assertThat(result, is(size));
 	}
 	
-	@Disabled
 	@ParameterizedTest
 	@CsvSource({
 		"Lower,true",
@@ -81,5 +81,37 @@ public class StateRepoTest {
 	void test_find_one(String name) {
 		var result = repo.findOneByName(name);
 		assertThat(result, notNullValue());
+	}
+	
+	@ParameterizedTest
+	@CsvSource({
+		"Region,3",
+		"State,3",
+		"Union,1"
+	})
+	void test_limit(Type type, int size) {
+		var result = repo.findTop3ByType(type);
+		assertThat(result, hasSize(size));
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+		"Region,7",
+		"State,7",
+		"Union,1"
+	})
+	void test_distinct(Type type, int size) {
+		var result = repo.findDistinctByType(type);
+		assertThat(result, hasSize(size));
+	}
+	
+	@ParameterizedTest
+	@ValueSource(strings = {
+			"Region", "State", "Union"
+	})
+	void test_remove(Type type) {
+		repo.removeByType(type);
+		var result = repo.countByType(type);
+		assertThat(result, is(0L));
 	}
 }
