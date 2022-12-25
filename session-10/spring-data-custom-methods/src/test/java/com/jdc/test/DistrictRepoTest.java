@@ -41,10 +41,18 @@ public class DistrictRepoTest {
 		assertThat(result, hasSize(size));
 	}
 	
+	@Disabled
 	@ParameterizedTest
 	@CsvSource("13,mo,3")
 	void test_find_by_state_and_name(int stateId, String name, int size) {
 		var result = repo.findByStateIdAndNameStartingWithIgnoringCaseOrderByName(stateId, name);
+		assertThat(result, hasSize(size));
+	}
+
+	@ParameterizedTest
+	@CsvSource("13,mo,3")
+	void test_find_by_named_query(int stateId, String name, int size) {
+		var result = repo.findForStateAndName(stateId, name.concat("%"));
 		assertThat(result, hasSize(size));
 	}
 }

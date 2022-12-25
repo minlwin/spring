@@ -8,10 +8,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "district")
+@NamedQuery(
+	name = "District.findForState",
+	query = """
+			select d from District d where d.state.id = :stateId 
+			and lower(d.name) like lower(:name) order by d.name""")
 public class District implements Serializable{
 
 	private static final long serialVersionUID = 1L;
