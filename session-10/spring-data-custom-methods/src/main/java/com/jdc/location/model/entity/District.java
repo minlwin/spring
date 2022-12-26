@@ -25,8 +25,10 @@ public class District implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@ManyToOne(optional = false)
 	private State state;
+	
 	@Column(nullable = false)
 	private String name;
 

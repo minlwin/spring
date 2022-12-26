@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 @Table(name = "state")
 @NamedNativeQuery(
 	name = "State.findWithNativeSql",
-	query = "select * from state where type = ?1",
+	query = "select * from state where type = :type",
 	resultClass = State.class
 )
 public class State implements Serializable {
