@@ -21,6 +21,6 @@ public class ProjectionOrNotTest {
 	@CsvSource("1,8")
 	void test(int state, int size) {
 		var result = repo.findByStateId(state);
-		assertThat(result, hasSize(size));
+ 		assertThat(result, hasSize(size));
 	}
 }
