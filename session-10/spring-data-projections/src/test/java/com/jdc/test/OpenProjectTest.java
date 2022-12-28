@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.jdc.location.model.JpaConfiguration;
-import com.jdc.location.model.repo.StateRepo;
+import com.jdc.location.model.repo.StateInfRepo;
 
 @SpringJUnitConfig(classes = JpaConfiguration.class)
 public class OpenProjectTest {
 
 	@Autowired
-	private StateRepo repo;
+	private StateInfRepo repo;
 	
 	@Test
 	void test() {
