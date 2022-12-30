@@ -9,26 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import com.jdc.location.model.JpaConfiguration;
-import com.jdc.location.model.entity.State.Type;
-import com.jdc.location.model.repo.StateRepo;
+import com.jdc.location.model.service.DistrictService;
 
 @SpringJUnitConfig(classes = JpaConfiguration.class)
-public class SpecificCustomRepositoryTest {
+public class CommonCustomRepositoryTest {
 
 	@Autowired
-	private StateRepo repo;
+	private DistrictService service;
 	
 	@ParameterizedTest
 	@CsvSource({
-		",,,15",
-		"State,,,7",
-		",West,,2",
-		",,ka,3",
-		",North,ka,1",
-		"Region,North,ka,0",
+		",,,82",
+		"West,,,9",
+		"West,3,,4",
+		"West,3,Falam,1",
+		",,Falams,0",
 	})
-	void test_search(Type type, String region, String name, int size) {
-		var result = repo.search(type, region, name);
+	void test(String region, Integer stateId, String name, int size) {
+		var result = service.search(region, stateId, name);
 		assertThat(result, hasSize(size));
 	}
 }

@@ -16,13 +16,16 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import com.jdc.location.model.repo.custom.BaseRepositoryDefault;
+
 import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
 @ComponentScan(basePackages = "com.jdc.location.model")
 @EnableJpaRepositories(
 		basePackages = "com.jdc.location.model.repo",
-		repositoryImplementationPostfix = "Default"
+		repositoryImplementationPostfix = "Default",
+		repositoryBaseClass = BaseRepositoryDefault.class
 )
 public class JpaConfiguration {
 
