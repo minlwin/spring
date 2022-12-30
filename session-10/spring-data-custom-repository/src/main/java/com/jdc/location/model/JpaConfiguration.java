@@ -20,7 +20,10 @@ import jakarta.persistence.EntityManagerFactory;
 
 @Configuration
 @ComponentScan(basePackages = "com.jdc.location.model")
-@EnableJpaRepositories(basePackages = "com.jdc.location.model.repo")
+@EnableJpaRepositories(
+		basePackages = "com.jdc.location.model.repo",
+		repositoryImplementationPostfix = "Default"
+)
 public class JpaConfiguration {
 
 	@Bean
