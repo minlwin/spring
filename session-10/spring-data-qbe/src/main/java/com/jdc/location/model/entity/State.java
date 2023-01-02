@@ -22,7 +22,7 @@ public class State implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 
 	@Column(nullable = false, unique = true)
 	private String name;
@@ -37,7 +37,7 @@ public class State implements Serializable {
 	@Column(nullable = false)
 	private String capital;
 	
-	private Integer porpulation;
+	private int porpulation;
 
 	@OneToMany(
 			mappedBy = "state", 
@@ -59,7 +59,7 @@ public class State implements Serializable {
 		}
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -99,7 +99,7 @@ public class State implements Serializable {
 		this.capital = capital;
 	}
 
-	public Integer getPorpulation() {
+	public int getPorpulation() {
 		return porpulation;
 	}
 

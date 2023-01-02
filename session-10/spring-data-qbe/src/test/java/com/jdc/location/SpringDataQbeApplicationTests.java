@@ -23,6 +23,7 @@ class SpringDataQbeApplicationTests {
 		// Build Probe for constraint
 		var probe = new State();
 		probe.setRegion("East");
+		probe.setCapital("Taunggyi");
 		
 		// Create Example with probe
 		var example = Example.of(probe);
@@ -30,7 +31,7 @@ class SpringDataQbeApplicationTests {
 		// Search
 		var list = repo.findAll(example);
 		
-		assertThat(list, hasSize(2));
+		assertThat(list, hasSize(1));
 	}
 
 }
