@@ -1,5 +1,6 @@
 package com.jdc.location.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.jdc.location.model.entity.District;
 import com.jdc.location.model.entity.State;
@@ -60,6 +62,34 @@ public class LocationService {
 		
 		return districtRepo.findBy(example, query -> 
 			query.as(DistrictDto.class).all());
+	}
+	
+	public List<DistrictDto> searchDistrict(Integer stateId, String region, String name) {
+		var state = new State();
+		var district = new District();
+		district.setState(state);
+		
+		var matcher = ExampleMatcher.matching();
+		var excludes = new ArrayList<String>(List.of("id", "state.id", "state.porpulation"));
+		
+		if(null != stateId && stateId > 0) {
+			excludes.remove("state.id");
+			state.setId(stateId);
+		}
+		
+		if(StringUtils.hasLength(region)) {
+			state.setRegion(region);
+		}
+		
+		if(StringUtils.hasLength(name)) {
+			matcher = matcher.withMatcher("name", match -> match.ignoreCase().startsWith());
+			district.setName(name);
+		}
+		
+		matcher = matcher.withIgnorePaths(excludes.toArray(size -> new String[size]));
+		
+		return districtRepo.findBy(Example.of(district, matcher), query -> 
+				query.as(DistrictDto.class).all());
 	}
 	
 }

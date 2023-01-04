@@ -41,9 +41,19 @@ public class LocationServiceTest {
 	}
 	
 	@Test
+	@Disabled
 	void test_projection() {
 		var result = service.findDistrictByState(1);
 		assertThat(result, hasSize(8));
+	}
+	
+	@Test
+	void test_dynamic_search() {
+		var result = service.searchDistrict(null, "East", "l");
+		
+		for(var dto : result) {
+			System.out.println("%s %s".formatted(dto.getState().getName(), dto.getName()));
+		}
 	}
 	
 }
