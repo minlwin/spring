@@ -26,24 +26,29 @@ public class State implements Serializable {
 
 	@Column(nullable = false, unique = true)
 	private String name;
-	
+
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Type type;
-	
+
 	@Column(nullable = false)
 	private String region;
-	
+
 	@Column(nullable = false)
 	private String capital;
-	
+
 	private int porpulation;
 
-	@OneToMany(
-			mappedBy = "state", 
-			cascade = {CascadeType.PERSIST, CascadeType.MERGE}, 
-			orphanRemoval = true)
+	@OneToMany(mappedBy = "state", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
 	private List<District> district;
+
+	public State() {
+	}
+
+	public State(String region) {
+		super();
+		this.region = region;
+	}
 
 	public enum Type {
 		State("State"), Region("Region"), Union("Union Territory");
