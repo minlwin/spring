@@ -3,7 +3,9 @@ package com.jdc.location.model.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.jdc.location.model.entity.District;
 import com.jdc.location.model.entity.State;
 
 import jakarta.persistence.EntityManager;
@@ -38,5 +40,34 @@ public class StateCriteriaService {
 		
 		// execute query
 		return entityManager.createQuery(criteriaQuery).getResultList();
+	}
+	
+	
+	@Transactional
+	public long deleteByRegion(String region) {
+		
+		// Create Criteria Builder
+		var criteriaBuilder = entityManager.getCriteriaBuilder();
+		
+		deleteDistrictByRegion(region);
+		
+		var delete = criteriaBuilder.createCriteriaDelete(State.class);
+		var root = delete.from(State.class);
+		delete.where(criteriaBuilder.equal(root.get("region"), region));
+		
+		return entityManager.createQuery(delete).executeUpdate();
+	}
+
+
+	private long deleteDistrictByRegion(String region) {
+		// Create Criteria Builder
+		var criteriaBuilder = entityManager.getCriteriaBuilder();
+		
+		var delete = criteriaBuilder.createCriteriaDelete(District.class);
+		var root = delete.from(District.class);
+		
+		delete.where(criteriaBuilder.equal(root.get("state").get("region"), region));
+		
+		return entityManager.createQuery(delete).executeUpdate();
 	}
 }
