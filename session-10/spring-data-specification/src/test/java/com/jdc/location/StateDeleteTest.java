@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.jdc.location.model.service.StateCriteriaService;
+import com.jdc.location.model.service.StateSpecService;
 
 @SpringBootTest
 public class StateDeleteTest {
 
 	@Autowired
-	private StateCriteriaService service;
+	private StateSpecService service;
 	
 	@Test
 	void test_spec_delete() {

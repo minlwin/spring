@@ -19,7 +19,7 @@ public class StateSpecService {
 
 	@Autowired
 	private StateRepo stateRepo;
-	
+
 	@Autowired
 	private DistrictRepo districtRepo;
 
@@ -31,33 +31,36 @@ public class StateSpecService {
 	public long findCountByRegion(String region) {
 		return stateRepo.count(byRegion(region));
 	}
-	
+
 	public List<StateDto> findDtoByRegion(String region) {
-		return stateRepo.findBy(byRegion(region), query -> query
-				.project("id", "name", "region")
-				.as(StateDto.class).all());
+		return stateRepo.findBy(byRegion(region),
+				query -> query.project("id", "name", "region").as(StateDto.class).all());
 	}
-	
+
 	@Transactional
 	public long deleteByRegion(String region) {
-		
+
 		// Delete District
 		deleteDistrictByRegion(region);
-		
+
 		return stateRepo.delete(byRegion(region));
 	}
-	
+
 	@Transactional
 	private long deleteDistrictByRegion(String region) {
+
+//		Specification<District> sepec = (root, query, cb) -> 
+//			cb.equal(root.get("state").get("region"), region);
 		
-		Specification<District> sepec = (root, query, cb) -> 
-			cb.equal(root.get("state").get("region"), region);
+		var districts = districtRepo.findByStateRegion(region);
 		
+		Specification<District> sepec = (root, query, cb) -> root.in(districts);
+
 		return districtRepo.delete(sepec);
 	}
 
 	private Specification<State> byRegion(String region) {
 		return (root, query, cb) -> cb.equal(root.get("region"), region);
 	}
-	
+
 }
