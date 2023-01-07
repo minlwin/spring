@@ -66,7 +66,21 @@ public class StateCriteriaService {
 		var delete = criteriaBuilder.createCriteriaDelete(District.class);
 		var root = delete.from(District.class);
 		
-		delete.where(criteriaBuilder.equal(root.get("state").get("region"), region));
+		// Sub Query for Select district where region
+		var districtByRegion = delete.subquery(District.class);
+		// select ? from District
+		var subRoot = districtByRegion.from(District.class);
+		// select District from District
+		districtByRegion.select(subRoot);
+		// join district with state
+		var join = subRoot.join("state");
+		// where state.region = region
+		districtByRegion.where(criteriaBuilder.equal(join.get("region"), region));
+		
+		// We can't create predicate from related entity because root criteria delete is single root 
+		// delete.where(criteriaBuilder.equal(root.get("state").get("region"), region));
+		
+		delete.where(root.in(districtByRegion));
 		
 		return entityManager.createQuery(delete).executeUpdate();
 	}
