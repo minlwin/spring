@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.location.model.dto.StateDto;
 import com.jdc.location.model.entity.District;
+import com.jdc.location.model.entity.District_;
 import com.jdc.location.model.entity.State;
+import com.jdc.location.model.entity.State_;
 import com.jdc.location.model.repo.DistrictRepo;
 import com.jdc.location.model.repo.StateRepo;
 
@@ -35,6 +37,17 @@ public class StateSpecService {
 	public List<StateDto> findDtoByRegion(String region) {
 		return stateRepo.findBy(byRegion(region),
 				query -> query.project("id", "name", "region").as(StateDto.class).all());
+	}
+	
+	public List<State> findByDistrictNameLike(String name) {
+		Specification<State> spec = (root, query, cb) -> {
+			// from State s join s.district d
+			var join = root.join(State_.district);
+			// lower(d.name) like :name
+			return cb.like(cb.lower(join.get(District_.name)), name.toLowerCase().concat("%"));
+		};
+		
+		return stateRepo.findAll(spec);
 	}
 
 	@Transactional

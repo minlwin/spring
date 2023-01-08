@@ -14,15 +14,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
+@Data
 @Entity
 @Table(name = "state")
-@Data
-@NoArgsConstructor
-@RequiredArgsConstructor
 public class State implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,16 +26,13 @@ public class State implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@NonNull
 	@Column(nullable = false, unique = true)
 	private String name;
 
-	@NonNull
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Type type;
 
-	@NonNull
 	@Column(nullable = false)
 	private String region;
 
@@ -51,6 +43,14 @@ public class State implements Serializable {
 
 	@OneToMany(mappedBy = "state", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, orphanRemoval = true)
 	private List<District> district;
+
+	public State() {
+	}
+
+	public State(String region) {
+		super();
+		this.region = region;
+	}
 
 	public enum Type {
 		State("State"), Region("Region"), Union("Union Territory");
@@ -66,4 +66,11 @@ public class State implements Serializable {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "State [id=" + id + ", name=" + name + ", type=" + type + ", region=" + region + ", capital=" + capital
+				+ ", porpulation=" + porpulation + "]";
+	}
+
+	
 }
