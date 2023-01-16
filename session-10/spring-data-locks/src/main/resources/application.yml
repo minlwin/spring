@@ -1,4 +1,8 @@
 spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/lockdb
+    username: lockdb
+    password: lockdb
   jpa:
     hibernate:
       ddl-auto: create
