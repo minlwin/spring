@@ -1,5 +1,8 @@
 package com.jdc.spring.demo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -22,9 +25,10 @@ class SpringDataLocksApplicationTests {
 	@Rollback(false)
 	void contextLoads() {
 		
-		var account = em.find(Account.class, 1, LockModeType.WRITE);
+		var account = em.find(Account.class, 1, LockModeType.PESSIMISTIC_WRITE);
 		
-		account.setName("Min Lwin");
+		account.setName(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")));
+		
 	}
 
 }
