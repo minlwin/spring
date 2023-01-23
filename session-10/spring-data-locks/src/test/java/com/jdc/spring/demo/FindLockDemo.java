@@ -1,9 +1,5 @@
 package com.jdc.spring.demo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -14,26 +10,19 @@ import com.jdc.spring.demo.entity.Account;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.LockModeType;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.PessimisticLockScope;
 
 @SpringBootTest
-class SpringDataLocksApplicationTests {
-	
+public class FindLockDemo {
+
 	@PersistenceContext
 	private EntityManager em;
-
+	
 	@Test
 	@Transactional
 	@Rollback(false)
-	void contextLoads() {
+	void lockDemo() {
 		
-		var account = em.find(Account.class, 1);
-		
-		em.lock(account, LockModeType.PESSIMISTIC_WRITE, Map.of(
-				"jakarta.persistence.lock.scope", PessimisticLockScope.EXTENDED));
-		
-		account.setName(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")));
-		
+		var entity = em.find(Account.class, 1, LockModeType.PESSIMISTIC_WRITE);
+		entity.setName("Update Name");
 	}
-
 }

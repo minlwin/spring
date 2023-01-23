@@ -1,16 +1,13 @@
 package com.jdc.spring.demo.entity;
 
-import java.util.Map;
-
-import com.jdc.spring.demo.entity.Address.Type;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.MapKeyColumn;
-import jakarta.persistence.MapKeyEnumerated;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Version;
@@ -45,10 +42,8 @@ public class Account {
 	@OneToOne(mappedBy = "account")
 	private Profile profile;
 	
-	@OneToMany(mappedBy = "account")
-	@MapKeyEnumerated
-	@MapKeyColumn(name = "address_type")
-	private Map<Type, Address> address;
+	@OneToMany(fetch = FetchType.EAGER)
+	private List<Address> address;
 	
 	@Version
 	private Integer version;
