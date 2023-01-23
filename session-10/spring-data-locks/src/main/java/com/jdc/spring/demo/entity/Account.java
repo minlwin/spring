@@ -8,6 +8,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.LockModeType;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Version;
@@ -20,6 +22,11 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
+@NamedQuery(
+	name = "Account.findByRole", 
+	query = "select a from Account a where a.email = ?1",
+	lockMode = LockModeType.PESSIMISTIC_WRITE
+)
 public class Account {
 
 	@Id
