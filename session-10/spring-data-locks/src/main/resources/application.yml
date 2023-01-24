@@ -4,8 +4,6 @@ spring:
     username: lockdb
     password: lockdb
   jpa:
-    hibernate:
-      ddl-auto: create
     properties:
       hibernate:
         '[show_sql]': true
