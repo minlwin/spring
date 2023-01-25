@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+	<context:component-scan base-package="com.jdc.demo.controller"></context:component-scan>
+	
+	<bean id="templateResolver"
+		class="org.thymeleaf.spring6.templateresolver.SpringResourceTemplateResolver" 
+		p:prefix="/views/" p:suffix=".html" p:cacheable="false" />
+		
+	<bean id="templateEngine"
+		class="org.thymeleaf.spring6.SpringTemplateEngine" 
+		p:templateResolver-ref="templateResolver" />
+
+
+	<bean id="viewResolver"
+		class="org.thymeleaf.spring6.view.ThymeleafViewResolver"
+		p:templateEngine-ref="templateEngine" />
+		
+</beans>
