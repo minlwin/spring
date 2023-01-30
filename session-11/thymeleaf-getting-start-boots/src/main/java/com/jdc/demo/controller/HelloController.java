@@ -13,12 +13,29 @@ public class HelloController {
 
 	@GetMapping
 	String hello(ModelMap model) {
+		
 		model.put("title", "Thymeleaf with Spring Boots");
+		
 		model.put("list", List.of(
 				"Spring Boots",
 				"Spring Web MVC",
 				"Thymeleaf View"
 				));
+		
 		return "hello";
+	}
+	
+	@GetMapping("html5")
+	String htmlStyle(ModelMap model) {
+		
+		model.put("title", "Thymeleaf with Spring Boots");
+		
+		model.put("list", List.of(
+				"Spring Boots",
+				"Spring Web MVC",
+				"Thymeleaf View"
+				));
+		
+		return "data-attr";
 	}
 }

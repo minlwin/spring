@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta charset="UTF-8">
-<title>Hello World</title>
+<title>Data Attributes</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
@@ -11,33 +11,31 @@
 <body>
 
 	<div class="container pt-4">
-		<h1 th:replace="~{fragments :: #title}">Demo</h1>
+		
+		<h1 data-th-replace="~{fragments :: #title}"></h1>
 		
 		<div class="row">
 			
-			<div th:insert="~{fragments :: nav}" class="col-3"></div>
+			<div class="col-3" data-th-insert="~{fragments :: nav}"></div>
 			
 			<div class="col">
+				
 				<div class="card">
-
 					<div class="card-header">
-						<h5 class="card-title">Using Standard Dielect</h5>
+						<h5 class="card-title">Using HTML Friendly Markup</h5>
 					</div>
-
+					
 					<div class="card-body">
-						<h4 th:text="${title}"></h4>
+						<h4 data-th-text="${title}">Demo Title</h4>
 						
 						<ul>
-							<li th:each="item : ${list}" th:text="${item}"></li>
+							<li data-th-each="item : ${list}" data-th-text="${item}"></li>
 						</ul>
 					</div>
-
 				</div>
-				
+			
 			</div>
 		</div>
 	</div>
-
-
 </body>
 </html>
