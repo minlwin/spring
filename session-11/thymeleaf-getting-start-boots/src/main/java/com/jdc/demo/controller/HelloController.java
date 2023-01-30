@@ -38,4 +38,10 @@ public class HelloController {
 		
 		return "data-attr";
 	}
+	
+	@GetMapping("out-text") 
+	String outputText(ModelMap model) {
+		model.put("message", "<b>This is output demo</b>");
+		return "outputs";
+	}
 }
