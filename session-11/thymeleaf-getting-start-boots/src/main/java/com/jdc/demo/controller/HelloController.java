@@ -44,5 +44,11 @@ public class HelloController {
 		model.put("message", "<b>This is output demo</b>");
 		return "outputs";
 	}
+	
+	@GetMapping("literals")
+	String usingLiterals(ModelMap model) {
+		model.put("message", "Message from Controller.");
+		return "literals";
+	}
 
 }
