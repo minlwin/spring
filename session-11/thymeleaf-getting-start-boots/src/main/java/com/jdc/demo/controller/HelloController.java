@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jdc.demo.dto.Account;
 import com.jdc.demo.dto.Contact;
+import com.jdc.demo.dto.Course;
 
 @Controller
 @RequestMapping("/")
@@ -58,6 +59,13 @@ public class HelloController {
 	String usingObjects(ModelMap model) {
 		model.put("account", new Account(1, "Aung Aung", new Contact("091818171", "aung@gmail.com")));
 		return "objects";
+	}
+	
+	
+	@GetMapping("records")
+	String usingRecords(ModelMap model) {
+		model.put("course", new Course(1, "Java Basic", 3, "Basic", "Entrance Course for Java."));
+		return "records";
 	}
 
 }
