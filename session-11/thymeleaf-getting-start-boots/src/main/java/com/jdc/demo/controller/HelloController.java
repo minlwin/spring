@@ -44,4 +44,5 @@ public class HelloController {
 		model.put("message", "<b>This is output demo</b>");
 		return "outputs";
 	}
+
 }
