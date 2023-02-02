@@ -7,6 +7,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.jdc.demo.dto.Account;
+import com.jdc.demo.dto.Contact;
+
 @Controller
 @RequestMapping("/")
 public class HelloController {
@@ -49,6 +52,12 @@ public class HelloController {
 	String usingLiterals(ModelMap model) {
 		model.put("message", "Message from Controller.");
 		return "literals";
+	}
+	
+	@GetMapping("objects")
+	String usingObjects(ModelMap model) {
+		model.put("account", new Account(1, "Aung Aung", new Contact("091818171", "aung@gmail.com")));
+		return "objects";
 	}
 
 }
