@@ -1,0 +1,15 @@
+.odd {
+	background-color: silver;
+}
+
+.first {
+	border-top-style: solid;
+	border-top-width: 2px;
+	border-top-color: black;
+}
+
+.last {
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+	border-bottom-color: black;
+}

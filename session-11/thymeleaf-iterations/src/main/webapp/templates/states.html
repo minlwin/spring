@@ -7,31 +7,52 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 
+<link rel="stylesheet" data-th-href="@{/resources/common.css}" />
+
 </head>
 <body>
 
 	<div class="container mt-4">
 		<h1>Iteration Demo</h1>
 		
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Name</th>
-					<th>Region</th>
-					<th>Capital</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<tr data-th-each="item : ${list}" data-th-object="${item}">
-					<td data-th-text="*{id}">1</td>
-					<td data-th-text="*{name}">Name</td>
-					<td data-th-text="*{region}">Region</td>
-					<td data-th-text="*{capital}">Capital</td>
-				</tr>
-			</tbody>
-		</table>
+		<div data-th-switch="${size}">
+		
+			<div class="alert alert-info" data-th-case="0">
+				<p>There is no data. Please upload state data.</p>
+				<a href="#" id="uploadBtn" class="btn btn-primary">Upload</a>
+				
+				<script data-th-src="@{/resources/common.js}"></script>
+				
+				<form enctype="multipart/form-data" id="uploadForm" th-data-action="@{/states}" method="post" class="d-none">
+					<input id="uploadInput" type="file" name="file" />
+				</form>
+			</div>
+
+			<table data-th-case="*" class="table">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Name</th>
+						<th>Region</th>
+						<th>Capital</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr data-th-each="item, sts : ${list}" data-th-object="${item}" data-th-class="${sts.odd} ? 'odd'" data-th-classappend="${sts.first} ? 'first' : (${sts.last} ? 'last')" >
+						<td data-th-text="*{id}">1</td>
+						<td data-th-text="*{name}">Name</td>
+						<td data-th-text="*{region}">Region</td>
+						<td data-th-text="*{capital}">Capital</td>
+						<td data-th-text="|${sts.count} / ${sts.size}|"></td>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+		
+		
 	</div>	
 
 </body>
