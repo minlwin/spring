@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Course List</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+<link rel="stylesheet" data-th-href="@{/static/styles/common.css}" />
+
+</head>
+<body>
+
+	<div class="container mt-4">
+		
+		<h1><i class="bi bi-list"></i> Course List</h1>
+		
+		<form action="#" class="row mb-4">
+			<div class="form-group col-auto">
+				<label for="level" class="form-label">Search Level</label>
+				<select name="level" id="level" class="form-select">
+					<option value="">All Level</option>
+					<option data-th-each="item : ${levels}" 
+						data-th-value="${item}" data-th-text="${item}"
+						data-th-selected="${#strings.equals(item, param.level)}"></option>
+				</select>
+			</div>
+			
+			<div class="form-group col-auto">
+				<label class="form-label" for="name">Search Name</label>
+				<input data-th-value="${param.name}" name="name" type="text" placeholder="Search Name" class="form-control" id="name" />
+			</div>
+			
+			<div class="col btn-wrapper">
+				<button type="submit" class="btn btn-outline-primary">
+					<i class="bi bi-search"></i> Search
+				</button>
+				
+				<a data-th-href="@{/course/edit}" class="btn btn-outline-secondary">
+					<i class="bi bi-plus-lg"></i> Add New
+				</a>
+			</div>
+		</form>
+		
+		<div data-th-if="${#lists.isEmpty(result)}" class="alert alert-info">
+			<i class="bi bi-alert"></i> There is no data.
+		</div>
+				
+		<table data-th-unless="${#lists.isEmpty(result)}" class="table table-striped">
+			
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Level</th>
+					<th>Months</th>
+					<th>Fees</th>
+					<th>Description</th>
+					<th></th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr data-th-each="data : ${result}" data-th-object="${data}">
+					<td data-th-text="*{id}">Course Name</td>
+					<td data-th-text="*{name}">Course Name</td>
+					<td data-th-text="*{level}">Course Name</td>
+					<td data-th-text="*{months}">Course Name</td>
+					<td data-th-text="*{fees}">Course Name</td>
+					<td data-th-text="*{remark}">Course Name</td>
+					<td>
+						<a data-th-href="@{/course/edit(id=*{id})}">
+							<i class="bi bi-pencil"></i>
+						</a>
+					</td>
+				</tr>
+			</tbody>
+		
+		</table>
+	
+	</div>
+
+</body>
+</html>
