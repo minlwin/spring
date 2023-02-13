@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div data-th-fragment="cardItem(item)" class="card">
+		
+		<img class="card-img-top card-item-image" data-th-src="@{|/images/${item.image}|}">
+		
+		<div class="card-body">
+			<h5 data-th-text="${item.name}" class="card-title">My Product</h5>
+		</div>
+		
+	</div>
+
+</body>
+</html>
