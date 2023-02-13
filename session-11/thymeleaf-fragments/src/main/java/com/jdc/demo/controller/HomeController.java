@@ -18,4 +18,14 @@ public class HomeController {
 		
 		return "home";
 	}
+	
+	@GetMapping("/page1")
+	String page1() {
+		return "view-one";
+	}
+
+	@GetMapping("/page2")
+	String page2() {
+		return "view-two";
+	}
 }
