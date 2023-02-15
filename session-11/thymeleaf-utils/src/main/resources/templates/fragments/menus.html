@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<ul>
+		<li data-th-fragment="menuItem(name, link, active)" class="nav-item">
+			<a data-th-text="${name}" data-th-href="${link}" data-th-classappend="${active ?: _}" class="nav-link"></a>
+		</li>
+	</ul>
+
+</body>
+</html>
