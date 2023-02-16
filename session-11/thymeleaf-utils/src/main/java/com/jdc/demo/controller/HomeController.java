@@ -1,6 +1,7 @@
 package com.jdc.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -19,7 +20,9 @@ public class HomeController {
 	}
 	
 	@GetMapping("data-types")
-	String dataTypes() {
+	String dataTypes(ModelMap model) {
+		model.put("nullValue", null);
+		model.put("notNullValue", "This is not null");
 		return "data-types";
 	}
 	

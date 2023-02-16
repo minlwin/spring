@@ -7,7 +7,51 @@
 <body>
 
 	<main>
-		<p>This is Collections</p>
+		
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title">Objects Utility Class</h5>
+			</div>
+			
+			<div class="card-body">
+			
+				<table class="table">
+					<thead>
+						<tr>
+							<th>About</th>
+							<th>Expression</th>
+							<th>Output</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<tr>
+							<td>NullSafe Call With Not Null Value</td>
+							<td>${#objects.nullSafe(notNullValue, 'Value is null')}</td>
+							<td>[[${#objects.nullSafe(notNullValue, 'Value is null')}]]</td>
+						</tr>
+						<tr>
+							<td>NullSafe Call With Null Value</td>
+							<td>${#objects.nullSafe(nullValue, 'Value is null')}</td>
+							<td>[[${#objects.nullSafe(nullValue, 'Value is null')}]]</td>
+						</tr>
+						
+						<tr>
+							<td>NullSafe Call With Not Null Value</td>
+							<td>${notNullValue ?: 'Value is Null'}</td>
+							<td>[[${notNullValue ?: 'Value is Null'}]]</td>
+						</tr>
+						<tr>
+							<td>NullSafe Call With Null Value</td>
+							<td>${nullValue ?: 'Value is Null'}</td>
+							<td>[[${nullValue ?: 'Value is Null'}]]</td>
+						</tr>
+					</tbody>
+				</table>
+				
+			</div>
+		</div>
+		
 	</main>
 
 </body>
