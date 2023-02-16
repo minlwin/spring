@@ -19,11 +19,26 @@ public class HomeController {
 		return "dates";
 	}
 	
-	@GetMapping("data-types")
-	String dataTypes(ModelMap model) {
+	@GetMapping("objects")
+	String objects(ModelMap model) {
 		model.put("nullValue", null);
 		model.put("notNullValue", "This is not null");
-		return "data-types";
+		return "objects";
+	}
+	
+	@GetMapping("bools")
+	String bools() {
+		return "bools";
+	}
+	
+	@GetMapping("numbers")
+	String numbers() {
+		return "numbers";
+	}
+	
+	@GetMapping("strings")
+	String strings() {
+		return "strings";
 	}
 	
 	@GetMapping("collections")
