@@ -7,7 +7,67 @@
 <body>
 
 	<main>
-		<p>This is home for Thymeleaf Utility Object Demo</p>
+		
+		<table class="table">
+			<tr>
+				<th>About</th>
+				<th>Expression</th>
+				<th>Output</th>
+			</tr>
+			
+			<tr>
+				<td>Array And</td>
+				<td>${#bools.arrayAnd({true, true})}</td>
+				<td data-th-text="${#bools.arrayAnd({true, true})}"></td>
+			</tr>
+			<tr>
+				<td>Array And</td>
+				<td>${#bools.arrayAnd({true, false})}</td>
+				<td data-th-text="${#bools.arrayAnd({true, false})}"></td>
+			</tr>
+
+			<tr>
+				<td>Array Or</td>
+				<td>${#bools.arrayOr({true, false})}</td>
+				<td data-th-text="${#bools.arrayOr({true, false})}"></td>
+			</tr>
+
+			<tr>
+				<td>Array Or</td>
+				<td>${#bools.arrayOr({false, false})}</td>
+				<td data-th-text="${#bools.arrayOr({false, false})}"></td>
+			</tr>
+			
+			<tr>
+				<td>Null Value</td>
+				<td>${#bools.isTrue(null)}</td>
+				<td data-th-text="${#bools.isTrue(null)}"></td>
+			</tr>
+
+			<tr>
+				<td>Null Value</td>
+				<td>${#bools.isFalse(null)}</td>
+				<td data-th-text="${#bools.isFalse(null)}"></td>
+			</tr>
+			
+			<tr>
+				<td>Number Value</td>
+				<td>${#bools.isTrue(10)}</td>
+				<td data-th-text="${#bools.isTrue(10)}"></td>
+			</tr>
+			
+			<tr>
+				<td>Number Value</td>
+				<td>${#bools.isTrue(0)}</td>
+				<td data-th-text="${#bools.isTrue(0)}"></td>
+			</tr>
+			
+			<tr>
+				<td>False Value Strings</td>
+				<td>${#bools.arrayOr({'off', 'OFF', 'false', 'False', 'No', 'no'})}</td>
+				<td data-th-text="${#bools.arrayOr({'off', 'OFF', 'false', 'False', 'No', 'no'})}"></td>
+			</tr>
+		</table>
 	</main>
 
 </body>

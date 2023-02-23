@@ -6,8 +6,41 @@
 </head>
 <body>
 
-	<main>
-		<p>This is Other Utils</p>
+	<main data-th-with="uri='http://www.hello.demo/path;#data=10/query?a=1 1'">
+		
+		<table class="table">
+			<tr>
+				<th>Method</th>
+				<th>Expression</th>
+				<th>Output</th>
+			</tr>
+			
+			<tr>
+				<td>Escape Path</td>
+				<td>${#uris.escapePath(uri)}</td>
+				<td data-th-text="${#uris.escapePath(uri)}"></td>
+			</tr>
+			
+			<tr>
+				<td>Escape Path Segment</td>
+				<td>${#uris.escapePathSegment(uri)}</td>
+				<td data-th-text="${#uris.escapePathSegment(uri)}"></td>
+			</tr>
+			
+			<tr>
+				<td>Escape Fragment Id</td>
+				<td>${#uris.escapeFragmentId(uri)}</td>
+				<td data-th-text="${#uris.escapeFragmentId(uri)}"></td>
+			</tr>
+
+			<tr>
+				<td>Escape Query Param</td>
+				<td>${#uris.escapeQueryParam(uri)}</td>
+				<td data-th-text="${#uris.escapeQueryParam(uri)}"></td>
+			</tr>
+
+		</table>	
+	
 	</main>
 
 </body>
