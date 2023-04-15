@@ -7,7 +7,61 @@
 <body>
 
 	<main>
-		<p>This is home for Thymeleaf Utility Object Demo</p>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>About</th>
+					<th>Expression</th>
+					<th>Output</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr data-th-with="array = ${#numbers.sequence(1, 5)}">
+					<td>Generate Sequence</td>
+					<td>${#numbers.sequence(1, 5)}</td>
+					<td data-th-text="${#strings.arrayJoin(array, ',')}"></td>
+				</tr>
+				
+				<tr data-th-with="array = ${#numbers.sequence(1, 100, 20)}">
+					<td>Generate Sequence With Step</td>
+					<td>${#numbers.sequence(1, 100, 20)}</td>
+					<td data-th-text="${#strings.arrayJoin(array, ',')}"></td>
+				</tr>
+				
+				<tr>
+					<td>Format Integer</td>
+					<td>${#numbers.formatInteger(1500000, 3, 'COMMA')}</td>
+					<td data-th-text="${#numbers.formatInteger(1500000, 3, 'COMMA')}"></td>
+				</tr>
+				
+				<tr>
+					<td>Format Integer</td>
+					<td>${#numbers.formatInteger(30, 3, 'COMMA')}</td>
+					<td data-th-text="${#numbers.formatInteger(30, 3, 'COMMA')}"></td>
+				</tr>
+
+				<tr>
+					<td>Format Decimal</td>
+					<td>${#numbers.formatDecimal(30018.12335, 1, 3)}</td>
+					<td data-th-text="${#numbers.formatDecimal(30018.12335, 1, 'COMMA', 3, 'POINT')}"></td>
+				</tr>
+
+				<tr>
+					<td>Format Currency</td>
+					<td>${#numbers.formatCurrency(30018.12335)}</td>
+					<td data-th-text="${#numbers.formatCurrency(30018.12335)}"></td>
+				</tr>
+
+				<tr>
+					<td>Format Percent</td>
+					<td>${#numbers.formatPercent(0.12335, 1, 3)}</td>
+					<td data-th-text="${#numbers.formatPercent(0.12335, 1, 3)}"></td>
+				</tr>
+			</tbody>
+		</table>
+		
 	</main>
 
 </body>
