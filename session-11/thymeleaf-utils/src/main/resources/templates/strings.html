@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-th-replace="~{/fragments/layout :: common('Strings Utility', ~{:: main}, 'basic,strings')}">
+<html xmlns:th="http://www.thymeleaf.org" data-th-replace="~{/fragments/layout :: common('Strings Utility', ~{:: main}, 'basic,strings')}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -7,7 +7,52 @@
 <body>
 
 	<main>
-		<p>This is home for Thymeleaf Utility Object Demo</p>
+		
+		<table class="table">
+		
+			<thead>
+				<tr>
+					<th>About</th>
+					<th>Expression</th>
+					<th>Arg Values</th>
+					<th>Output</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:with="message='Hello Thymeleaf'" >
+					<td rowspan="2">Is Empty String</td>
+					<td rowspan="2">${#strings.isEmpty(message)}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.isEmpty(message)}"></td>
+				</tr>
+				
+				<tr th:with="message=''">
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.isEmpty(message)}"></td>
+				</tr>
+				
+				<tr th:with="message='Hello Thymeleaf'">
+					<td>Length of String</td>
+					<td>${#strings.length(message)}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.length(message)}"></td>
+				</tr>
+				
+				<tr th:with="message='Hello Thymeleaf',search='hello'">
+					<td>Contains</td>
+					<td>${#strings.contains(message, search)}</td>
+					<td th:text="|message=${message}, search=${search}|"></td>
+					<td th:text="${#strings.contains(message, search)}"></td>
+				</tr>
+				<tr th:with="message='Hello Thymeleaf',search='hello'">
+					<td>Contains</td>
+					<td>${#strings.containsIgnoreCase(message, search)}</td>
+					<td th:text="|message=${message}, search=${search}|"></td>
+					<td th:text="${#strings.containsIgnoreCase(message, search)}"></td>
+				</tr>
+			</tbody>
+		</table>
 	</main>
 
 </body>
