@@ -85,6 +85,34 @@
 					<td th:text="${escapeString}"></td>
 					<td th:text="${#strings.escapeJavaScript(escapeString)}"></td>
 				</tr>
+				
+				<tr th:with="message='Hello We are JDC!'">
+					<td>Abbreviate String</td>
+					<td>${#strings.abbreviate(message, 15)}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.abbreviate(message, 15)}"></td>
+				</tr>
+				
+				<tr th:with="message='hello thymeleaf spring-mvc'">
+					<td>Capitalize</td>
+					<td>${#strings.capitalize(message)}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.capitalize(message)}"></td>
+				</tr>
+
+				<tr th:with="message='hello thymeleaf spring-mvc'">
+					<td>Capitalize Words</td>
+					<td>${#strings.capitalizeWords(message)}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.capitalizeWords(message)}"></td>
+				</tr>
+
+				<tr th:with="message='hello thymeleaf spring-mvc'">
+					<td>Capitalize Words</td>
+					<td>${#strings.capitalizeWords(#strings.capitalizeWords(message, '-'))}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.capitalizeWords(#strings.capitalizeWords(message, '-'))}"></td>
+				</tr>
 			</tbody>
 		</table>
 	</main>
