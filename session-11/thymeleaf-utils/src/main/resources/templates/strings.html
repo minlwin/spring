@@ -51,6 +51,40 @@
 					<td th:text="|message=${message}, search=${search}|"></td>
 					<td th:text="${#strings.containsIgnoreCase(message, search)}"></td>
 				</tr>
+				
+				<tr th:with="message=''">
+					<td rowspan="2">Default String</td>
+					<td>${#strings.defaultString(message, 'There is no message.')}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.defaultString(message, 'There is no message.')}"></td>
+				</tr>
+				
+				<tr th:with="message='Hello Thymeleaf'">
+					<td>${#strings.defaultString(message, 'There is no message.')}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.defaultString(message, 'There is no message.')}"></td>
+				</tr>
+				
+				<tr>
+					<td>Escape XML</td>
+					<td>${#strings.escapeXml(escapeXML)}</td>
+					<td th:text="${escapeXML}"></td>
+					<td th:text="${#strings.escapeXml(escapeXML)}"></td>
+				</tr>
+				
+				<tr>
+					<td>Escape Java</td>
+					<td>${#strings.escapeJava(escapeString)}</td>
+					<td th:text="${escapeString}"></td>
+					<td th:text="${#strings.escapeJava(escapeString)}"></td>
+				</tr>
+
+				<tr>
+					<td>Escape Javascript</td>
+					<td>${#strings.escapeJavaScript(escapeString)}</td>
+					<td th:text="${escapeString}"></td>
+					<td th:text="${#strings.escapeJavaScript(escapeString)}"></td>
+				</tr>
 			</tbody>
 		</table>
 	</main>

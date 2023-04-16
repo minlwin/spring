@@ -37,7 +37,9 @@ public class HomeController {
 	}
 	
 	@GetMapping("strings")
-	String strings() {
+	String strings(ModelMap model) {
+		model.put("escapeXML", "<hello />");
+		model.put("escapeString", "\"Hello\' \t \r \\ Java\"");
 		return "strings";
 	}
 	
