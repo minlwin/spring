@@ -113,6 +113,13 @@
 					<td th:text="${message}"></td>
 					<td th:text="${#strings.capitalizeWords(#strings.capitalizeWords(message, '-'))}"></td>
 				</tr>
+				
+				<tr th:with="folder='/resources/images/',image='product1.png'">
+					<td>Prepand</td>
+					<td>${#strings.prepend(image, folder)}</td>
+					<td th:text="|folder=${folder},image=${image}|"></td>
+					<td th:text="${#strings.prepend(image, folder)}"></td>
+				</tr>
 			</tbody>
 		</table>
 	</main>
