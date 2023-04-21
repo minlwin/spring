@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-th-replace="~{/fragments/layout :: common('Other Utils', ~{:: main}, 'others')}">
+<html xmlns:th="http://www.thymeleaf.org" data-th-replace="~{/fragments/layout :: common('Other Utils', ~{:: main}, 'others')}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -40,6 +40,30 @@
 			</tr>
 
 		</table>	
+		
+		<div class="card mt-4">
+			<div class="card-body">
+				<h4 class="card-title">Using IDS</h4>
+				
+				<div class="d-flex">
+					<div class="me-2 form-check form-check-inline" th:each="item : ${subjects}" >
+						<input th:id="${#ids.seq('subject')}" type="checkbox"  />
+						<label th:for="${#ids.prev('subject')}" class="form-check-label" th:text="${item}"></label>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="card mt-4">
+			<div class="card-body">
+				<h4 class="card-title">Base Expression Objects</h4>
+				
+				<p th:text="${#ctx.hello}"></p>
+				
+				<p th:text="${#locale}"></p>
+			</div>
+		</div>
 	
 	</main>
 
