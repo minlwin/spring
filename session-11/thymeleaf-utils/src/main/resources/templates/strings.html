@@ -120,6 +120,53 @@
 					<td th:text="|folder=${folder},image=${image}|"></td>
 					<td th:text="${#strings.prepend(image, folder)}"></td>
 				</tr>
+				
+				<tr th:with="message='0123456789'">
+					<td>Sub String</td>
+					<td>${#strings.substring(message, 3, 7)}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.substring(message, 3, 7)}"></td>
+				</tr>
+				
+				<tr th:with="message='0123456789'">
+					<td>Sub String Before</td>
+					<td>${#strings.substringBefore(message, '8')}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.substringBefore(message, '8')}"></td>
+				</tr>
+				
+				<tr th:with="message='0123456789'">
+					<td>Sub String After</td>
+					<td>${#strings.substringAfter(message, '8')}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.substringAfter(message, '8')}"></td>
+				</tr>
+
+				<tr th:with="message='hello java and jdc'">
+					<td>Replacing</td>
+					<td>${#strings.replace(message, 'j', 'J')}</td>
+					<td th:text="${message}"></td>
+					<td th:text="${#strings.replace(message, 'j', 'J')}"></td>
+				</tr>
+				
+				<tr th:with="list=${#strings.listSplit('Java Spring Thymeleaf Angular', ' ')}">
+					<td>Split And Join</td>
+					<td>${#strings.listJoin(list, ', ')}</td>
+					<td>
+						<ul>
+							<li th:each="item: ${list}" th:text="${item}"></li>
+						</ul>
+					</td>
+					<td th:text="${#strings.listJoin(list, ', ')}"></td>
+				</tr>
+				
+				<tr>
+					<td>Generate String</td>
+					<td></td>
+					<td></td>
+					<td th:text="${#strings.randomAlphanumeric(8)}"></td>
+				</tr>
+				
 			</tbody>
 		</table>
 	</main>
