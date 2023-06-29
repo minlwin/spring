@@ -8,19 +8,27 @@
 	<packaging>pom</packaging>
 	<name>Template Project for Sping Module One</name>
 	<description>Spring MVC, JSP View, Spring JDBC, Spring Security, MySQL</description>
+	
+	<properties>
+		<spring.version>6.0.10</spring.version>
+		<spring.security.version>6.1.1</spring.security.version>
+		<servlet.version>6.0.0</servlet.version>
+		<jsp.version>3.1.1</jsp.version>
+		<jstl.version>3.0.0</jstl.version>
+	</properties>
 
 	<dependencies>
 		<!-- For Spring MVC -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>6.0.9</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>jakarta.servlet</groupId>
 			<artifactId>jakarta.servlet-api</artifactId>
-			<version>6.0.0</version>
+			<version>${servlet.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -28,20 +36,20 @@
 		<dependency>
 			<groupId>jakarta.servlet.jsp</groupId>
 			<artifactId>jakarta.servlet.jsp-api</artifactId>
-			<version>3.1.1</version>
+			<version>${jsp.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>jakarta.servlet.jsp.jstl</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-			<version>3.0.0</version>
+			<version>${jstl.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
-			<version>3.0.1</version>
+			<version>${jstl.version}</version>
 		</dependency>
 
 		<!-- For Spring Security -->
@@ -50,7 +58,7 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>6.1.0</version>
+			<version>${spring.security.version}</version>
 		</dependency>
 
 		<!--
@@ -58,9 +66,8 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>6.1.0</version>
+			<version>${spring.security.version}</version>
 		</dependency>
-
 
 	</dependencies>
 
