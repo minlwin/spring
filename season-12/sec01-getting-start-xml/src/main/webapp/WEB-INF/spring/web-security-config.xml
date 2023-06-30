@@ -49,6 +49,7 @@
 				users-by-username-query="select email username, password, true from MEMBERS where email = ?"
 				authorities-by-username-query="select email username, role from MEMBERS where email = ?"/>    		
     	</security:authentication-provider>
+    	
     </security:authentication-manager>
 
 </beans>
