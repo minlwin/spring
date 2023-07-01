@@ -21,12 +21,17 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.jdc.spring.demo.service.security.CustomerUserDetailsService;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration {
 	
 	@Autowired
 	private DataSource dataSource;
+	
+	@Autowired
+	private CustomerUserDetailsService customerUserDetailsService;
 
 	@Bean
 	SecurityFilterChain homeFilter(HttpSecurity http) throws Exception {
@@ -52,6 +57,7 @@ public class WebSecurityConfiguration {
 		http.authorizeHttpRequests(request -> {
 				request.requestMatchers("/admin/**").hasAuthority("Admin");
 				request.requestMatchers("/member/**").hasAnyAuthority("Admin", "Member");
+				request.requestMatchers("/customer/**").hasAuthority("Customer");
 				request.anyRequest().denyAll();
 			});
 		
@@ -77,6 +83,9 @@ public class WebSecurityConfiguration {
 		// Add Authentication Provider with JdbcUserDetailsManager
 		builder.authenticationProvider(getMemberProvider(passwordEncoder));
 		
+		// Add Authentication Provider with custom user details service
+		builder.authenticationProvider(getCustomerProvider(passwordEncoder));
+		
 		return builder.build();
 	}
 	
@@ -97,6 +106,15 @@ public class WebSecurityConfiguration {
 		userDetailsService.setAuthoritiesByUsernameQuery("select email username, role from MEMBERS where email = ?");
 		var provider = new DaoAuthenticationProvider(passwordEncoder);
 		provider.setUserDetailsService(userDetailsService);
+		
+		return provider;
+	}
+	
+	private AuthenticationProvider getCustomerProvider(PasswordEncoder passwordEncoder) {
+		
+		var provider = new DaoAuthenticationProvider();
+		provider.setPasswordEncoder(passwordEncoder);
+		provider.setUserDetailsService(customerUserDetailsService);
 		
 		return provider;
 	}

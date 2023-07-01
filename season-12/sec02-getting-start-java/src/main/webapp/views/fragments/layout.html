@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="common">
+<head>
+<meta charset="UTF-8">
+
+<title>Security Demo</title>
+
+<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}" />
+<script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+
+</head>
+<body>
+
+	<div class="container mt-4">
+	
+		<h3>Security Demo with Java Configuration</h3>
+		
+		<div class="mt-3" th:insert="${main}">
+		
+		</div>
+	
+	</div>
+
+</body>
+</html>

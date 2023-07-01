@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/fragments/layout :: common(main=~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		<p>This is Customer Home</p>
+		
+		<div>
+			<a th:href="@{/}" class="btn btn-primary">Public Home</a>
+			
+			<div th:replace="~{/fragments/security :: signout}"></div>
+		</div>
+	</main>
+
+</body>
+</html>

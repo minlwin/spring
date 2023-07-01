@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<form th:fragment="signout" class="d-inline-block" 
+		th:action="@{/logout}" method="post">
+		<button type="submit" class="btn btn-primary">Logout</button>	
+	</form>
+
+</body>
+</html>
