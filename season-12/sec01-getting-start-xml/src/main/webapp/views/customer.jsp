@@ -8,8 +8,10 @@
 <meta charset="UTF-8">
 <title>Security Demo</title>
 
-<link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
-<script src="../resources/js/bootstrap.bundle.min.js"></script>
+<c:url value="/resources/css/bootstrap.min.css" var="bootCss"></c:url>
+<link rel="stylesheet" href="${bootCss}" />
+<c:url value="/resources/js/bootstrap.bundle.min.js" var="bootJs"></c:url>
+<script src="${bootJs}"></script>
 
 </head>
 <body>
@@ -29,7 +31,13 @@
 		</div>
 		
 		<div>
-			<a href="/" class="btn btn-primary">Public Home</a>
+			
+			<c:url value="/" var="homeLink"></c:url>
+			<a href="${homeLink}" class="btn btn-primary">Public Home</a>
+			
+			<c:url value="/customer/address/edit" var="addressEditLink"></c:url>
+			<a href="${addressEditLink}" class="btn btn-primary">Create Address</a>
+			
 			<sf:form class="d-inline-block" action="/logout" method="post">
 				<button type="submit" class="btn btn-danger">Logout</button>
 			</sf:form>
@@ -50,6 +58,7 @@
 							<th>Street</th>
 							<th>Township</th>
 							<th>Division</th>
+							<th></th>
 						</tr>
 					</thead>
 					
@@ -63,6 +72,12 @@
 							<td>${dto.street}</td>
 							<td>${dto.township}</td>
 							<td>${dto.division}</td>
+							<td>
+								<c:url value="/customer/address/edit" var="editLink">
+									<c:param name="id" value="${dto.id}"></c:param>
+								</c:url>
+								<a href="${editLink}" >Edit</a>
+							</td>
 						</tr>
 						</c:forEach>
 					</tbody>

@@ -17,6 +17,8 @@
 		<jstl.version>3.0.0</jstl.version>
 		<dbcp2.version>2.9.0</dbcp2.version>
 		<mysql.version>8.0.33</mysql.version>
+		<lombok.version>1.18.28</lombok.version>
+		<hibernate.validator.version>8.0.0.Final</hibernate.validator.version>
 	</properties>
 
 	<dependencies>
@@ -96,7 +98,14 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.28</version>
+			<version>${lombok.version}</version>
+		</dependency>
+		
+		<!-- For Validation -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator.version}</version>
 		</dependency>
 
 	</dependencies>

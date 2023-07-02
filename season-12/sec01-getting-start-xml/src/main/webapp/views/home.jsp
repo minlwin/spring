@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Security Demo</title>
 
-<link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
-<script src="../resources/js/bootstrap.bundle.min.js"></script>
+<c:url value="/resources/css/bootstrap.min.css" var="bootCss"></c:url>
+<link rel="stylesheet" href="${bootCss}" />
+<c:url value="/resources/js/bootstrap.bundle.min.js" var="bootJs"></c:url>
+<script src="${bootJs}"></script>
 
 </head>
 <body>
