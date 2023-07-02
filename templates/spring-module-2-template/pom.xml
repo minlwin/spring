@@ -17,6 +17,7 @@
 		<dbcp2.version>2.9.0</dbcp2.version>
 		<mysql.version>8.0.33</mysql.version>
 		<lombok.version>1.18.28</lombok.version>
+		<hibernate.validator.version>8.0.0.Final</hibernate.validator.version>
 	</properties>
 	
 	<dependencies>
@@ -84,6 +85,11 @@
 			<version>${spring.security.version}</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator.version}</version>
+		</dependency>
 		
 	</dependencies>
 	
