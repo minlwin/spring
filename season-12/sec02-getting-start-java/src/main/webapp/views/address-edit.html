@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/fragments/layout :: common(main=~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		<h5>[[${form.id == 0 ? 'Add New' : 'Edit'}]] Address</h5>
+		
+		<form th:action="@{/customer/address/edit}" method="post" th:object="${form}" class="mb-4 w-75">
+			
+			<input type="hidden" th:field="*{id}" />
+			
+			<div th:replace="~{/fragments/widgets :: formGroup(label='Address Name', input = ~{::nameInput}, error = ~{::nameError})}">
+				<input th:fragment="nameInput" th:field="*{name}" class="form-control" placeholder="Enter Address Name" />
+				<span th:fragment="nameError" th:errors="*{name}"></span>
+			</div>
+			
+			<div class="row">
+				<div class="col">
+					<div th:replace="~{/fragments/widgets :: formGroup(label='Building Address', input = ~{::buildingInput}, error = ~{::buildingError})}">
+						<input th:fragment="buildingInput" th:field="*{building}" class="form-control" placeholder="Enter Building Address" />
+						<span th:fragment="buildingError" th:errors="*{building}"></span>
+					</div>
+				</div>
+				<div class="col">
+					<div th:replace="~{/fragments/widgets :: formGroup(label='Street Address', input = ~{::streetInput}, error = ~{::streetError})}">
+						<input th:fragment="streetInput" th:field="*{street}" class="form-control" placeholder="Enter Street Address" />
+						<span th:fragment="streetError" th:errors="*{street}"></span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col">
+					<div th:replace="~{/fragments/widgets :: formGroup(label='Township', input = ~{::townshipInput}, error = ~{::townshipError})}">
+						<input th:fragment="townshipInput" th:field="*{township}" class="form-control" placeholder="Enter Township Name" />
+						<span th:fragment="townshipError" th:errors="*{township}"></span>
+					</div>
+				</div>
+				<div class="col">
+					<div th:replace="~{/fragments/widgets :: formGroup(label='Division Name', input = ~{::divisionInput}, error = ~{::divisionError})}">
+						<input th:fragment="divisionInput" th:field="*{division}" class="form-control" placeholder="Enter Division Name" />
+						<span th:fragment="divisionError" th:errors="*{division}"></span>
+					</div>
+				</div>
+			</div>
+			
+			<button type="submit" class="btn btn-primary">Save Address</button>
+
+		</form>
+		
+		<div>
+			<a th:href="@{/}" class="btn btn-primary">Public Home</a>
+			
+			<div th:replace="~{/fragments/security :: signout}"></div>
+		</div>
+	</main>
+
+</body>
+</html>

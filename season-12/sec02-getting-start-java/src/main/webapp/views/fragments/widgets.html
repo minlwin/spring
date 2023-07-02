@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div th:fragment="formGroup" class="mb-3">
+		<label class="form-label" th:text="${label}"></label>
+		
+		<section th:replace="${input}"></section>
+		
+		<section th:replace="${error}"></section>
+	</div>
+
+</body>
+</html>

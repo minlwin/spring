@@ -10,7 +10,59 @@
 	<main>
 		<p>This is Customer Home</p>
 		
+		<div class="card mb-4">
+			<div class="card-body">
+				<h4 class="card-title">Login Information</h4>
+				
+				<div class="row">
+					<div class="col-1">Login Id</div>
+					<div class="col-2">[[${loginId}]]</div>
+					<div class="col-1">Roles</div>
+					<div class="col d-fles">
+						<div th:each="auth : ${authorities}" th:text="${auth}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<h4>Addresses</h4>
+		
+		<div th:if="${#lists.size(addresses) == 0}" class="alert alert-info">
+			There is no data
+		</div>
+		
+		<table th:unless="${#lists.size(addresses) == 0}" class="table table-striped mb-4">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Building</th>
+					<th>Street</th>
+					<th>Township</th>
+					<th>Division</th>
+					<th></th>
+				</tr>
+			</thead>	
+			
+			<tbody>
+				<tr th:each="dto : ${addresses}">
+					<td th:text="${dto.id}"></td>
+					<td th:text="${dto.name}"></td>
+					<td th:text="${dto.building}"></td>
+					<td th:text="${dto.street}"></td>
+					<td th:text="${dto.township}"></td>
+					<td th:text="${dto.division}"></td>
+					<td>
+						<a th:href="@{/customer/address/edit(id=${dto.id})}">Edit</a>
+					</td>
+				</tr>
+			</tbody>		
+		
+		</table>
+		
 		<div>
+			<a th:href="@{/customer/address/edit}" class="btn btn-primary">Add New Address</a>
+		
 			<a th:href="@{/}" class="btn btn-primary">Public Home</a>
 			
 			<div th:replace="~{/fragments/security :: signout}"></div>
