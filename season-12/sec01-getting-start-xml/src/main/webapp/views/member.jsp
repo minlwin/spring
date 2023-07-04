@@ -22,10 +22,12 @@
 		
 		<div>
 			<a href="/" class="btn btn-primary">Public Home</a>
-			<sf:form class="d-inline-block" action="/logout" method="post">
-				<button type="submit" class="btn btn-danger">Logout</button>
-			</sf:form>
+
+			<a href="#" class="btn btn-primary" id="logoutBtn">Logout</a>
 		</div>
+
+		<c:url value="/resources/js/client-logout.js" var="clientLogoutJs"></c:url>
+		<script src="${clientLogoutJs}"></script>
 	</div>
 
 </body>

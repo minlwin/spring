@@ -13,8 +13,11 @@
 		<div>
 			<a th:href="@{/}" class="btn btn-primary">Public Home</a>
 			
-			<div th:replace="~{/fragments/security :: signout}"></div>
+			<a href="#" class="btn btn-primary" id="logoutBtn">Logout</a>
 		</div>
+
+		<script th:src="@{/resources/js/client-logout.js}"></script>
+
 	</main>
 
 </body>

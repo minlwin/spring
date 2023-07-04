@@ -22,6 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint;
+import org.springframework.security.web.authentication.www.DigestAuthenticationFilter;
 
 import com.jdc.spring.demo.service.security.CustomerUserDetailsService;
 
@@ -70,11 +72,55 @@ public class WebSecurityConfiguration {
 	}
 	
 	@Bean
+	SecurityFilterChain memberFilter(HttpSecurity http, 
+			DigestAuthenticationEntryPoint digestAuthenticationEntryPoint,
+			DigestAuthenticationFilter digestAuthenticationFilter) throws Exception {
+		
+		http.securityMatcher("/member/**")
+			.authorizeHttpRequests(request -> request.anyRequest().hasAuthority("Member"));
+		
+		http.exceptionHandling(exception -> {
+			exception.authenticationEntryPoint(digestAuthenticationEntryPoint);
+		});
+		
+		http.addFilterAt(digestAuthenticationFilter, DigestAuthenticationFilter.class);
+		
+		return http.build();
+	}
+	
+	@Bean
+	DigestAuthenticationEntryPoint digestAuthenticationEntryPoint() {
+		var bean = new DigestAuthenticationEntryPoint();
+		bean.setKey("MY_SECRET_KEY");
+		bean.setRealmName("DIGEST_REALM");
+		return bean;
+	}
+	
+	@Bean
+	DigestAuthenticationFilter digestAuthenticationFilter(
+			DigestAuthenticationEntryPoint digestAuthenticationEntryPoint, 
+			JdbcUserDetailsManager memberUserDetailsService) {
+		var bean = new DigestAuthenticationFilter();
+		bean.setAuthenticationEntryPoint(digestAuthenticationEntryPoint);
+		bean.setUserDetailsService(memberUserDetailsService);
+		bean.setCreateAuthenticatedToken(true);
+		return bean;
+	}
+	
+	@Bean
+	JdbcUserDetailsManager memberUserDetailsService() {
+		
+		var userDetailsService = new JdbcUserDetailsManager(dataSource);
+		userDetailsService.setUsersByUsernameQuery("select email username, password, true from MEMBERS where email = ?");
+		userDetailsService.setAuthoritiesByUsernameQuery("select email username, role from MEMBERS where email = ?");
+		
+		return userDetailsService;
+	}	
+	
+	@Bean
 	SecurityFilterChain httpFilter(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests(request -> {
-				request.requestMatchers("/admin/**").hasAuthority("Admin");
-				request.requestMatchers("/member/**").hasAnyAuthority("Admin", "Member");
 				request.requestMatchers("/customer/**").hasAuthority("Customer");
 				request.anyRequest().denyAll();
 			});
@@ -95,9 +141,6 @@ public class WebSecurityConfiguration {
 	AuthenticationManager configure(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
 		var builder = http.getSharedObject(AuthenticationManagerBuilder.class);
 		
-		// Add Authentication Provider with JdbcUserDetailsManager
-		builder.authenticationProvider(getMemberProvider(passwordEncoder));
-		
 		// Add Authentication Provider with custom user details service
 		builder.authenticationProvider(getCustomerProvider(passwordEncoder));
 		
@@ -114,16 +157,7 @@ public class WebSecurityConfiguration {
 		return provider;
 	}
 	
-	private AuthenticationProvider getMemberProvider(PasswordEncoder passwordEncoder) {
-		
-		var userDetailsService = new JdbcUserDetailsManager(dataSource);
-		userDetailsService.setUsersByUsernameQuery("select email username, password, true from MEMBERS where email = ?");
-		userDetailsService.setAuthoritiesByUsernameQuery("select email username, role from MEMBERS where email = ?");
-		var provider = new DaoAuthenticationProvider(passwordEncoder);
-		provider.setUserDetailsService(userDetailsService);
-		
-		return provider;
-	}
+
 	
 	private AuthenticationProvider getCustomerProvider(PasswordEncoder passwordEncoder) {
 		
