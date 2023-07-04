@@ -1,5 +1,7 @@
 package com.jdc.spring.demo;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -9,8 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,6 +37,7 @@ public class WebSecurityConfiguration {
 
 	@Bean
 	SecurityFilterChain homeFilter(HttpSecurity http) throws Exception {
+		
 		http.securityMatcher("/")
 			.authorizeHttpRequests(request -> {
 				request.anyRequest().permitAll();
@@ -52,6 +55,21 @@ public class WebSecurityConfiguration {
 	}
 	
 	@Bean
+	SecurityFilterChain adminResources(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
+		http.securityMatcher("/admin/**")
+			.authorizeHttpRequests(request -> {
+				request.anyRequest().hasAuthority("Admin");
+			});
+		
+		http.httpBasic(withDefaults());
+		
+		var authenticationManager = new ProviderManager(getAdminUserProvider(passwordEncoder));
+		http.authenticationManager(authenticationManager);
+		
+		return http.build();
+	}
+	
+	@Bean
 	SecurityFilterChain httpFilter(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests(request -> {
@@ -61,9 +79,9 @@ public class WebSecurityConfiguration {
 				request.anyRequest().denyAll();
 			});
 		
-		http.formLogin(Customizer.withDefaults());
+		http.formLogin(withDefaults());
 		
-		http.logout(Customizer.withDefaults());
+		http.logout(withDefaults());
 		
 		return http.build();
 	}
@@ -76,9 +94,6 @@ public class WebSecurityConfiguration {
 	@Bean
 	AuthenticationManager configure(HttpSecurity http, PasswordEncoder passwordEncoder) throws Exception {
 		var builder = http.getSharedObject(AuthenticationManagerBuilder.class);
-		
-		// Add Authentication Provider with InMemoryUserDetailsManager
-		builder.authenticationProvider(getAdminUserProvider(passwordEncoder));
 		
 		// Add Authentication Provider with JdbcUserDetailsManager
 		builder.authenticationProvider(getMemberProvider(passwordEncoder));
