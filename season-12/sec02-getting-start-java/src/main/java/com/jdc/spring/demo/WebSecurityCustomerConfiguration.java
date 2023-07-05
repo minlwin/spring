@@ -29,7 +29,7 @@ public class WebSecurityCustomerConfiguration {
 		
 		http.formLogin(form -> {
 			form.loginPage("/authentication");
-			form.defaultSuccessUrl("/customer", true);
+			form.defaultSuccessUrl("/customer");
 		});
 		
 		http.logout(withDefaults());

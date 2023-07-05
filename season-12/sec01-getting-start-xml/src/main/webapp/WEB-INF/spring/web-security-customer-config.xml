@@ -16,7 +16,8 @@
 		<security:intercept-url pattern="/login" method="POST" access="permitAll"/>
     	<security:intercept-url pattern="/customer/**" access="hasAuthority('Customer')"/>
     	
-    	<security:form-login login-page="/authentication" default-target-url="/customer" always-use-default-target="true" />
+    	<security:form-login login-page="/authentication" 
+    		default-target-url="/customer" />
     	    	
     	<security:logout />
 
