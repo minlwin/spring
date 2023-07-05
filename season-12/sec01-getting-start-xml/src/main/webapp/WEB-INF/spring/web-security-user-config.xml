@@ -9,27 +9,22 @@
         http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <security:http pattern="/" security="none" />
-    
-    <security:http pattern="/resources/**" security="none" />
+    <!-- Customer Security Filter Chain with Form Login -->
+    <security:http>
 
-    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+    	<security:intercept-url pattern="/customer/**" access="hasAuthority('Customer')"/>
+    	
+    	<security:form-login />    	
+    	<security:logout/>
 
-
-    <!-- Admin Security Filter Chain with Http Basic Login -->
-    <security:http pattern="/admin/**" authentication-manager-ref="adminAuthenticationManager">
-    	<security:intercept-url pattern="/admin/**" access="hasAuthority('Admin')"/>
-		<security:http-basic />  
     </security:http>
     
-    <security:authentication-manager id="adminAuthenticationManager">
-    	<security:authentication-provider>
+    <security:authentication-manager>
+    	    	
+    	<security:authentication-provider user-service-ref="customerUserDetailsService">
 			<security:password-encoder ref="passwordEncoder"/>    	
-		    <security:user-service>
-		    	<security:user name="admin@gmail.com" authorities="Admin" password="$2a$10$oXE.lfp2mdzcYBdyZdyHkOI4yK4RvsEVEvm1r9xij8GissVsOpj7S" />
-		    </security:user-service>
     	</security:authentication-provider>
+    	
     </security:authentication-manager>
-    
     
 </beans>

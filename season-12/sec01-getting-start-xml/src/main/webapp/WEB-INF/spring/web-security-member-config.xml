@@ -9,22 +9,28 @@
         http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <!-- Customer Security Filter Chain with Form Login -->
-    <security:http>
-
-    	<security:intercept-url pattern="/customer/**" access="hasAuthority('Customer')"/>
-    	
-    	<security:form-login/>
-    	<security:logout/>
-
+    <!-- Member Security Filter Chain with Digest Login -->
+    <security:http pattern="/member/**" entry-point-ref="digestAuthenticationEntryPoint">
+    	<security:intercept-url pattern="/member/**" access="hasAuthority('Member')"/>
+    	<security:custom-filter ref="digestAuthenticationFilter" position="DIGEST_AUTH_FILTER"/>
     </security:http>
     
-    <security:authentication-manager>
-    	    	
-    	<security:authentication-provider user-service-ref="customerUserDetailsService">
-			<security:password-encoder ref="passwordEncoder"/>    	
-    	</security:authentication-provider>
-    	
-    </security:authentication-manager>
+    <!-- Authentication Entry Point -->
+    <bean id="digestAuthenticationEntryPoint" class="org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint">
+    	<property name="key" value="MY-SECRET-KEY"></property>
+    	<property name="realmName" value="DIGEST-REALM"></property>
+    </bean>
+    
+    <!-- Authentication Filter -->
+    <bean id="digestAuthenticationFilter" class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
+    	<property name="authenticationEntryPoint" ref="digestAuthenticationEntryPoint"></property>
+    	<property name="userDetailsService" ref="memberUserDetailsService"></property>
+    	<property name="createAuthenticatedToken" value="true"></property>
+    </bean>
+
+	<security:jdbc-user-service id="memberUserDetailsService"
+		data-source-ref="dataSource" 
+		users-by-username-query="select email username, password, true from MEMBERS where email = ?"
+		authorities-by-username-query="select email username, role from MEMBERS where email = ?"/>    		
 
 </beans>
