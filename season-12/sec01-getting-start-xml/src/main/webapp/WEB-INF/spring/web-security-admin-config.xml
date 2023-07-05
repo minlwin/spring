@@ -9,12 +9,11 @@
         http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+
     <security:http pattern="/" security="none" />
     
     <security:http pattern="/resources/**" security="none" />
-
-    <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
-
 
     <!-- Admin Security Filter Chain with Http Basic Login -->
     <security:http pattern="/admin/**" authentication-manager-ref="adminAuthenticationManager">
