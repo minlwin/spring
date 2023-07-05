@@ -19,6 +19,7 @@
 	<mvc:view-controller path="/" view-name="home"/>
 	<mvc:view-controller path="/admin" view-name="admin"/>
 	<mvc:view-controller path="/member" view-name="member"/>
+	<mvc:view-controller path="/authentication" view-name="signin"/>
 	
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 

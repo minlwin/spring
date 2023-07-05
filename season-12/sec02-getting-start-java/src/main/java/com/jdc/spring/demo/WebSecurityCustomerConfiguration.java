@@ -22,11 +22,15 @@ public class WebSecurityCustomerConfiguration {
 	SecurityFilterChain httpFilter(HttpSecurity http) throws Exception {
 		
 		http.authorizeHttpRequests(request -> {
+				request.requestMatchers("/authentication").permitAll();
 				request.requestMatchers("/customer/**").hasAuthority("Customer");
 				request.anyRequest().denyAll();
 			});
 		
-		http.formLogin(withDefaults());
+		http.formLogin(form -> {
+			form.loginPage("/authentication");
+			form.defaultSuccessUrl("/customer", true);
+		});
 		
 		http.logout(withDefaults());
 		
