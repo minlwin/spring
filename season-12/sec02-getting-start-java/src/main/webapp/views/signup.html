@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	th:replace="~{/fragments/layout :: common(main=~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<main>
+		<p>Customer Sign Up</p>
+		
+		<form th:action="@{/signup}" th:object="${form}" method="post" class="w-50">
+			
+			<div class="mb-3">
+				<label class="form-label">Customer Name</label>		
+				<input type="text" th:field="*{name}" placeholder="Enter Customer Name" class="form-control" />	
+				<span class="text-secondary" th:errors="*{name}"></span>	
+			</div>
+
+			<div class="mb-3">
+				<label class="form-label">Email</label>		
+				<input type="email" th:field="*{email}" placeholder="Enter Login Email" class="form-control" />		
+				<span class="text-secondary" th:errors="*{email}"></span>	
+			</div>
+			
+			<div class="mb-3">
+				<label class="form-label">Password</label>		
+				<input type="password" th:field="*{password}" placeholder="Enter Password" class="form-control" />		
+				<span class="text-secondary" th:errors="*{password}"></span>	
+			</div>
+			
+			<div>
+				<button class="btn btn-primary" type="submit">Login</button>
+				<a th:href="@{/}" class="btn btn-primary">Public Home</a>
+			</div>
+		</form>
+		
+	</main>
+
+</body>
+</html>
