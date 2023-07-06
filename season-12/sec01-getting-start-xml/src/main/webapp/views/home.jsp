@@ -25,6 +25,7 @@
 			<a href="/customer" class="btn btn-success">Customer home</a>
 			<a href="/customer/address/edit" class="btn btn-success">Customer Address Edit</a>
 			<a href="/authentication" class="btn btn-info">Customer Login</a>
+			<a href="/signup" class="btn btn-info">Customer Signup</a>
 		</div>
 	</div>
 

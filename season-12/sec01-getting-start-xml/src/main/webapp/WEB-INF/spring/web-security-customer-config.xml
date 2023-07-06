@@ -10,8 +10,9 @@
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
     <!-- Customer Security Filter Chain with Form Login -->
-    <security:http>
-
+    <security:http authentication-manager-ref="authenticationManager" security-context-repository-ref="securityContextRepository">
+		
+		<security:intercept-url pattern="/signup" access="permitAll"/>
 		<security:intercept-url pattern="/authentication" method="GET" access="permitAll"/>
 		<security:intercept-url pattern="/login" method="POST" access="permitAll"/>
     	<security:intercept-url pattern="/customer/**" access="hasAuthority('Customer')"/>
@@ -23,12 +24,14 @@
 
     </security:http>
     
-    <security:authentication-manager>
+    <security:authentication-manager id="authenticationManager">
     	    	
     	<security:authentication-provider user-service-ref="customerUserDetailsService">
 			<security:password-encoder ref="passwordEncoder"/>    	
     	</security:authentication-provider>
     	
     </security:authentication-manager>
+    
+    <bean id="securityContextRepository" class="org.springframework.security.web.context.HttpSessionSecurityContextRepository"></bean>
     
 </beans>

@@ -18,24 +18,31 @@
 
 	<div class="container mt-4">
 		
-		<h1>Customer Login</h1>
+		<h1>Customer Sign Up</h1>
 		
-		<c:url value="/login" var="loginUrl"></c:url>
-		<sf:form action="${loginUrl}" method="post" cssClass="w-50">
+		<c:url value="/signup" var="signUpAction"></c:url>
+		<sf:form action="${signUpAction}" method="post" modelAttribute="form" cssClass="w-50">
 			
 			<div class="mb-3">
+				<label class="form-label">Name</label>
+				<sf:input path="name" placeholder="Enter Customer Name" cssClass="form-control" />
+				<sf:errors path="name" cssClass="text-secondary"></sf:errors>
+			</div>
+
+			<div class="mb-3">
 				<label class="form-label">Email</label>
-				<input type="text" name="username" placeholder="Enter Login Email" class="form-control" />
+				<sf:input path="email" type="email" placeholder="Enter Login Email" cssClass="form-control"/>
+				<sf:errors path="email" cssClass="text-secondary"></sf:errors>
 			</div>
 		
 			<div class="mb-3">
 				<label class="form-label">Password</label>
-				<input type="password" name="password" placeholder="Enter Password" class="form-control" />
+				<sf:input path="password" type="password" placeholder="Enter Password" cssClass="form-control"/>
+				<sf:errors path="password" cssClass="text-secondary"></sf:errors>
 			</div>
 			
 			<div>
-				<button type="submit" class="btn btn-primary">Login</button>				
-				<a href="/signup" class="btn btn-primary">Sign Up</a>
+				<button type="submit" class="btn btn-primary">Sign Up</button>				
 				<a href="/" class="btn btn-primary">Public Home</a>
 			</div>
 
