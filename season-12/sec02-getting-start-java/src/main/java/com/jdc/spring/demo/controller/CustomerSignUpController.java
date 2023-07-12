@@ -72,6 +72,11 @@ public class CustomerSignUpController {
 		return "redirect:%s".formatted(rediredtUrl);
 	}
 	
+	@ModelAttribute("form")
+	SignUpForm form() {
+		return new SignUpForm();
+	}
+	
 	private Optional<SavedRequest> getSavedRequest(HttpServletRequest request, HttpServletResponse response) {
 		return Optional.ofNullable(requestCache.getRequest(request, response));
 	}

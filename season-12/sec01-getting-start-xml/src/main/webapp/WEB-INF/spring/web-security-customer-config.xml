@@ -19,6 +19,8 @@
     	
     	<security:form-login login-page="/authentication" 
     		default-target-url="/customer" />
+    		
+    	<security:remember-me user-service-ref="customerUserDetailsService"/>
     	    	
     	<security:logout />
 

@@ -21,7 +21,7 @@ public class WebSecurityCustomerConfiguration {
 
 	
 	@Bean
-	SecurityFilterChain httpFilter(HttpSecurity http) throws Exception {
+	SecurityFilterChain httpFilter(HttpSecurity http, CustomerUserDetailsService customerUserDetailsService) throws Exception {
 		
 		http.authorizeHttpRequests(request -> {
 				request.requestMatchers("/authentication", "/signup").permitAll();
@@ -32,6 +32,10 @@ public class WebSecurityCustomerConfiguration {
 		http.formLogin(form -> {
 			form.loginPage("/authentication");
 			form.defaultSuccessUrl("/customer");
+		});
+		
+		http.rememberMe(rememberMe -> {
+			rememberMe.userDetailsService(customerUserDetailsService);
 		});
 		
 		http.logout(withDefaults());

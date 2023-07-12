@@ -33,6 +33,11 @@
 				<input type="password" name="password" placeholder="Enter Password" class="form-control" />
 			</div>
 			
+			<div class="mb-3">
+				<input type="checkbox" name="remember-me" id="rememberMe" class="form-check-input" />
+				<label for="rememberMe" class="form-check-label">Remember Me</label>
+			</div>
+			
 			<div>
 				<button type="submit" class="btn btn-primary">Login</button>				
 				<a href="/signup" class="btn btn-primary">Sign Up</a>
