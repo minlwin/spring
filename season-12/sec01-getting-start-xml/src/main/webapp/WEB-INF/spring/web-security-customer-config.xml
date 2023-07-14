@@ -20,7 +20,9 @@
     	<security:form-login login-page="/authentication" 
     		default-target-url="/customer" />
     		
-    	<security:remember-me user-service-ref="customerUserDetailsService"/>
+    	<security:remember-me key="SGVsbG8gSmF2YQ==" 
+    		user-service-ref="customerUserDetailsService" 
+    		token-repository-ref="jdbcTokenRepository"/>
     	    	
     	<security:logout />
 
@@ -33,6 +35,11 @@
     	</security:authentication-provider>
     	
     </security:authentication-manager>
+    
+    
+    <bean id="jdbcTokenRepository" class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+    	<property name="dataSource" ref="dataSource"></property>
+    </bean>
     
     <bean id="securityContextRepository" class="org.springframework.security.web.context.HttpSessionSecurityContextRepository"></bean>
     

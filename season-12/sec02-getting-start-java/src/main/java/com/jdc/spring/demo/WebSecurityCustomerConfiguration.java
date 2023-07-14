@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.rememberme.InMemoryTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 
@@ -21,7 +23,7 @@ public class WebSecurityCustomerConfiguration {
 
 	
 	@Bean
-	SecurityFilterChain httpFilter(HttpSecurity http, CustomerUserDetailsService customerUserDetailsService) throws Exception {
+	SecurityFilterChain httpFilter(HttpSecurity http, PersistentTokenBasedRememberMeServices rememberMeServices) throws Exception {
 		
 		http.authorizeHttpRequests(request -> {
 				request.requestMatchers("/authentication", "/signup").permitAll();
@@ -35,12 +37,17 @@ public class WebSecurityCustomerConfiguration {
 		});
 		
 		http.rememberMe(rememberMe -> {
-			rememberMe.userDetailsService(customerUserDetailsService);
+			rememberMe.rememberMeServices(rememberMeServices);
 		});
 		
 		http.logout(withDefaults());
 		
 		return http.build();
+	}
+	
+	@Bean
+	PersistentTokenBasedRememberMeServices rememberMeServices(CustomerUserDetailsService userDetailsService) {
+		return new PersistentTokenBasedRememberMeServices("SGVsbG8gSmF2YQ==", userDetailsService, new InMemoryTokenRepositoryImpl());
 	}
 	
 	@Bean(name = "authenticationManager")
