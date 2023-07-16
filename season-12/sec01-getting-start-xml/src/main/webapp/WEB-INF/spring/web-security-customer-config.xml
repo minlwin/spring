@@ -24,7 +24,7 @@
     		user-service-ref="customerUserDetailsService" 
     		token-repository-ref="jdbcTokenRepository"/>
     	    	
-    	<security:logout />
+    	<security:logout logout-success-url="/" />
 
     </security:http>
     

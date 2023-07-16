@@ -1,7 +1,5 @@
 package com.jdc.spring.demo;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,7 +38,7 @@ public class WebSecurityCustomerConfiguration {
 			rememberMe.rememberMeServices(rememberMeServices);
 		});
 		
-		http.logout(withDefaults());
+		http.logout(logout -> logout.logoutSuccessUrl("/"));
 		
 		return http.build();
 	}
