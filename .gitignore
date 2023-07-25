@@ -25,18 +25,23 @@ hs_err_pid*
 .classpath
 .project
 .springBeans
+.factorypath
 
 /.classpath
 /.project
 /.springBeans
+/.factorypath
 
 /*.classpath
 /*.project
 /*.springBeans
 *.settings
+/*.factorypath
+*/*/.factorypath
 
 target/
 
 *Users/
 
 /.DS_Store
+
