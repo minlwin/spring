@@ -16,5 +16,7 @@
 	</mvc:view-resolvers>
 	
 	<mvc:view-controller path="/" view-name="home"/>
+	
+	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 
 </beans>
