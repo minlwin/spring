@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<mvc:annotation-driven />
+	
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/views/" suffix=".jsp"/>
+	</mvc:view-resolvers>
+	
+	<mvc:redirect-view-controller redirect-url="/home" path="/"/>
+	<mvc:view-controller path="/home" view-name="public"/>
+	<mvc:view-controller path="/member" view-name="member"/>
+	
+</beans>
