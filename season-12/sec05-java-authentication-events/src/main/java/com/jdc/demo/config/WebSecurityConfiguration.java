@@ -28,8 +28,7 @@ public class WebSecurityConfiguration {
 			request.anyRequest().fullyAuthenticated();
 		});
 
-		security.formLogin(config -> {
-		});
+		security.formLogin(config -> {});
 
 		return security.build();
 	}
