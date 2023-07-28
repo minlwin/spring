@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jdc.spring.template</groupId>
 	<artifactId>spring-module-2-template</artifactId>
-	<version>1.0 Final</version>
+	<version>1.1 Final</version>
 	<packaging>pom</packaging>
 	
 	<properties>
 		<spring.version>6.0.11</spring.version>
-		<spring.security.version>6.1.1</spring.security.version>
+		<spring.security.version>6.1.2</spring.security.version>
 		<servlet.version>6.0.0</servlet.version>
 		<thymeleaf.version>3.1.1.RELEASE</thymeleaf.version>
 		<spring.data.jpa.version>3.1.1</spring.data.jpa.version>
