@@ -17,6 +17,5 @@
 	<mvc:redirect-view-controller redirect-url="/home" path="/"/>
 	<mvc:view-controller path="/home" view-name="public"/>
 	<mvc:view-controller path="/member" view-name="member"/>
-	<mvc:view-controller path="/login" view-name="login"/>
 	
 </beans>

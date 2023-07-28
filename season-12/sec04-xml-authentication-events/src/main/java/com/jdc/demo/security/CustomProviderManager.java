@@ -18,7 +18,6 @@ public class CustomProviderManager extends ProviderManager{
 		for(var provider : getProviders()) {
 			if(provider instanceof DaoAuthenticationProvider daoProvider) {
 				daoProvider.setUserDetailsService(userDetailsService);
-				daoProvider.setHideUserNotFoundExceptions(false);
 			}
 		}
 		
