@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
@@ -14,13 +15,30 @@
 
 	<div class="container mt-4">
 	
-		<h1>Member Home</h1>
+		<h1>Member Login</h1>
 		
-		<div class="mt-4">
-			<form:form method="post" action="/logout">
-				<button class="btn btn-primary">Logout</button>
-			</form:form>
-		</div>
+		<form:form action="/login" method="post" cssClass="w-50">
+		
+			<c:if test="${null ne param.error}">
+			<div class="alert alert-info">
+				${param.error}
+			</div>	
+			</c:if>
+			
+			<div class="mb-3">
+				<label class="form-label">Login ID</label>
+				<input name="username" value="${param.username}" type="text" placeholder="Enter Login ID" class="form-control" />
+			</div>
+		
+			<div class="mb-3">
+				<label class="form-label">Password</label>
+				<input name="password" type="password" placeholder="Enter Password" class="form-control" />
+			</div>
+			
+			<button class="btn btn-primary">Login</button>
+
+		</form:form>
+
 	</div>
 
 </body>
